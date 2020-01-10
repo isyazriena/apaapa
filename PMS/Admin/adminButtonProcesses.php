@@ -18,4 +18,5 @@
 		echo '<script type="text/javascript"> document.location="logListPageAdmin.php"; </script>';
 	}
 	//test hehe
+	//pfffttt
 ?>
