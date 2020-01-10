@@ -37,7 +37,7 @@
   *ada tempat nak search*<br><br>
 
   <?php
-  session_start();
+  //session_start();
   $logOverview = getOverviewOfLog();
 
   function getOverviewOfLog(){

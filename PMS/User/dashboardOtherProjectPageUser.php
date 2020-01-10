@@ -39,7 +39,7 @@
   <?php
     $projectDetails = getDetailsOfProject();
     $projectMembers = getDetailsOfMembers();
-    $projectToView=$_SESSION['projectToView'];
+    //$projectToView=$_SESSION['projectToView'];
 
     function getDetailsOfProject(){
       //create connection
