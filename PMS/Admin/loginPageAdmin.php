@@ -19,9 +19,10 @@
         <input type='submit' value='Login'><br><br>
     </form>
 
-    <form action='' method=''>
+    <!-- <form action='' method=''>
         <input type='submit' value='User Login'>
-    </form><br><br>
+    </form><br><br> -->
+    <a href="../User/loginPageUser.php">User Login</a>
 
     *tutup container*<br><br>
 

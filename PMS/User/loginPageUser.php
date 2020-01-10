@@ -15,13 +15,13 @@
 
         Password:
         <input type='password' name='userPassword'><br><br>
-        <input type='hidden' name='' value=''> <!--stopped here-->
         <input type='submit' value='Login'><br><br>
     </form>
     
-    <form action='' method=''>
-        <input type='submit' value='Admin Login'> <!--ni belum settle-->
-    </form><br><br>
+    <!-- <form action='' method=''>
+        <input type='submit' value='Admin Login'>
+    </form><br><br> -->
+    <a href="../User/loginPageAdmin.php">User Login</a>
 
     *tutup container*<br><br>
 

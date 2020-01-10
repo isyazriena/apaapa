@@ -138,15 +138,12 @@
 					$dbh = new PDO("mysql:host=localhost;dbname=mispms", "web2", "web2");
 					$name = $_FILES['myfile']['name'];
 					$type = $_FILES['myfile']['type'];
-					$data = file_get_contents($_FILES['myfile']['tmp_name']);				}
+					$data = file_get_contents($_FILES['myfile']['tmp_name']);				
 					$stmt = $dbh->prepare("insert into attachmentproject values('',?,?,?, '$last_id')");
 					$stmt->bindParam(1,$name);
 					$stmt->bindParam(2,$type);
 					$stmt->bindParam(3,$data);
-					if ($data = null){
-						continue;
-					}
-					else{
+					if($data != null){
 						$stmt->execute();
 					}
 					$sql3= "insert into created(adminId, projectId) values ('$adminId', '$last_id')";

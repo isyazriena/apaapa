@@ -153,6 +153,11 @@
       }
       $projectToDelete= $_POST['projectToDelete'];
       $sql="delete from project where projectId='".$projectToDelete."'";
+      //delete log of $projectToDelete thru table projectlog
+      //delete project of $projectToDelete from projectlog
+      //delete attachment project of $projectToDelete from attachmentproject
+      //delete attachment log of $projectToDelete from attachmentproject using logid from table log
+      //mende sia
       echo $sql;
       $qry = mysqli_query($con,$sql);  //run query
     } 

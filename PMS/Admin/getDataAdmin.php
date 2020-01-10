@@ -14,7 +14,7 @@
         }
         else if ($status == '1'){
             $sql = "SELECT * FROM created where adminId = '".$_SESSION['adminId'] ."'";
-            //$sql2 = "select * from project where "
+            //SINI HAA JOIN FIRST YG KENA SETTLE
         }
         else { 
             $sql="select * from project where projectCategoryValue = '".$status."'"; 
