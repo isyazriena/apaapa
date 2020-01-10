@@ -5,7 +5,7 @@
 
   <p>Management Information System</p><br><br>
 
-  <form action='projectPageAdmin.php' method='post'>
+  <form action='projectPageUser.php' method='post'>
     <input type='submit' value='back'>
   </form><br><br>
 
@@ -13,23 +13,32 @@
 
   *Ada 3 tab dashboard and log*<br>
 
-  <form action='dashboardProjectPageAdmin.php' method='post'>
+  <?php
+    session_start();
+    $projectToView=$_SESSION['projectToView'];
+    echo $projectToView;
+  ?>
+
+  <form action='dashboardProjectPageUser.php' method='post'>
     <input type='submit' value='Dashboard'>
+    <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
   </form><br><br>
 
-  <form action='logListPageAdmin.php' method='post'>
+  <form action='logListPageUser.php' method='post'>
     <input type='submit' value='Log'>
+    <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
   </form><br><br>
 
-  <form action='.php' method='post'>
+  <form action='datePageUser.php' method='post'>
     <input type='submit' value='Dates'>
+    <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
   </form><br><br>
 
   *ada tempat nak search*<br><br>
 
   <?php
-    session_start();
-    $projectToView=$_POST['projectToView'];
+    //session_start();
+    //$projectToView=$_POST['projectToView'];
     $dateOverview = getOverviewOfDate();
 
     function getOverviewOfDate()

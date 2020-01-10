@@ -1,10 +1,27 @@
 <html lang="en">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+    .header img {
+      float: left;
+      /* width: 100px;
+      height: 100px;
+      background: #555; */
+    }
+
+    .header h1 {
+      position: relative;
+      top: 18px;
+      left: 10px;
+    }
+  </style>
   </head>
-  <img src='logosahaja.png'>
-  <h3>Project Monitoring System</h3><br>
-  <p>Management Information System</p><br><br>
+  
+  <div class='header'>
+    <img src='logosahaja.png'>
+    <h3>Project Monitoring System</h3><br>
+    <p>Management Information System</p><br><br>
+  </div>
 
 <?php
     include 'getDataAdmin.php';

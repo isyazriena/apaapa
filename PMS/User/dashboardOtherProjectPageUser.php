@@ -12,20 +12,22 @@
   <hr><br>
 
   *Ada 3 tab dashboard and log*<br>
-  
-  <form action='dashboardOtherProjectPageUser.php' method='post'>
-    <input type='submit' value='Dashboard'>
-  </form><br><br>
-
-  <form action='logListPageUser.php' method='post'>
-    <input type='submit' value='Log'>
-  </form><br><br>
 
   <?php
     session_start();
     $projectToView=$_SESSION['projectToView'];
     echo $projectToView;
   ?>
+  
+  <form action='dashboardOtherProjectPageUser.php' method='post'>
+    <input type='submit' value='Dashboard'>
+    <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
+  </form><br><br>
+
+  <form action='logListPageUser.php' method='post'>
+    <input type='submit' value='Log'>
+    <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
+  </form><br><br>
 
   <form action='datePageUser.php' method='post'>
     <input type='submit' value='Dates'>

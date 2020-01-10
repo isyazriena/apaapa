@@ -13,23 +13,32 @@
 
   *Ada 3 tab dashboard and log*<br>
 
+  <?php
+    session_start();
+    $projectToView=$_POST['projectToView'];
+    echo $projectToView;
+  ?>
+
   <form action='dashboardProjectPageAdmin.php' method='post'>
     <input type='submit' value='Dashboard'>
+    <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
   </form><br><br>
 
   <form action='logListPageAdmin.php' method='post'>
     <input type='submit' value='Log'>
+    <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
   </form><br><br>
 
-  <form action='.php' method='post'>
+  <form action='datePageAdmin.php' method='post'>
     <input type='submit' value='Dates'>
+    <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
   </form><br><br>
 
   *ada tempat nak search*<br><br>
 
   <?php
-    session_start();
-    $projectToView=$_POST['projectToView'];
+    //session_start();
+    //$projectToView=$_POST['projectToView'];
     $dateOverview = getOverviewOfDate();
 
     function getOverviewOfDate()

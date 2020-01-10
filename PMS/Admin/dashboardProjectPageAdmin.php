@@ -13,15 +13,18 @@
 
   *Ada 3 tab dashboard, log, dates*<br>
 
-  <form action='dashboardProjectPageAdmin.php' method='post'>
-    <input type='submit' value='Dashboard'>
-  </form><br><br>
-
   <?php
     session_start();
     $projectToView=$_POST['projectToView'];
     echo $projectToView;
   ?>
+
+  <form action='dashboardProjectPageAdmin.php' method='post'>
+    <input type='submit' value='Dashboard'>
+    <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
+  </form><br><br>
+
+
 
   <form action='logListPageAdmin.php' method='post'>
     <input type='submit' value='Log'>
