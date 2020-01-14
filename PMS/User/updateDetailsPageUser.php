@@ -1,31 +1,99 @@
 <html>
-	<img src='logosahaja.png'><br>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box;}
 
-	<h1>Project Monitoring System</h1><br>
+body { 
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-	<p>Management Information System</p><br><br>
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+}
 
-	<form action='dashboardProjectPageUser.php' method='post'>
-		<input type='submit' value='back'>
-	</form><br><br>
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
 
-	<hr><br>
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
 
-	<h1>Enter New Project Details: </h1>
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
 
-	*ada css container*<br><br>
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
 
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .header-right {
+    float: none;
+  }
+}
+
+.container{
+  background-color: lightgrey;
+  /* width: 300px; */
+  border: 3px solid green;
+  padding: 50px;
+  margin: 50px;
+}
+</style>
+  </head>
+  <div class="header">
+  <a href="projectPageUser.php" class="logo"><img src='logosahaja.png'>
+    <h4>Project Monitoring System</h4>
+	<h5>Management Information System</h5></a>
+	<div class="header-right">
+    <!-- <a class="active" href="#home">Home</a> -->
+    <!-- <a href="#home">Home</a> -->
+    <!--<a href="#contact">Add Project</a> dia pakai href pergi page lain -->
+    <a href="projectPageUser.php">Back</a>
+  </div>
+</div>
+
+	<br><pre><h1>	Enter Update Details: </h1></pre>
+
+	<div class="container">
+	<div class="grid-container">
 	<form action='userButtonProcesses.php' method='post' enctype='multipart/form-data'>
 
-		Date of Initiation:<br>
+		Date of Initiation:
 		<input type="date" name="dateOfInitiation"><br><br>
 		
-		Estimated Date End:<br>
+		Estimated Date End:
 		<input type="date" name="estimatedDateEnd"><br><br>
 
-		isi dia<br>Project Status *drop down input* <br><br>
+		<br>Project Status *drop down input* <br><br>
 
-		Remarks:<br>
+		Remarks:
 		<input type="text" name="remarks"><br><br>
 
 		Category: <br>
@@ -33,8 +101,8 @@
 		<input type="radio" name="category" <?php if (isset($category) && $category=="completed") echo "checked";?> value="completed">Completed <br>
 		<input type="radio" name="category" <?php if (isset($category) && $category=="terminated") echo "checked";?> value="terminated">Terminated <br><br>
 
-		Attachment:<br>
-		<input type="file" name="myfile"/>
+		Attachment:
+		<input type="file" name="myfile"/><br>
 		
 		<?php
 			$projectId=$_POST['projectId'];
@@ -111,7 +179,6 @@
 		} 
 	}
 	?>
-	<?php
-
-	?>
+	</div>
+	</div>
 </html>

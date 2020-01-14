@@ -1,47 +1,114 @@
 <html lang="en">
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box;}
+
+body { 
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+}
+
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .header-right {
+    float: none;
+  }
+}
+
+.container{
+  background-color: lightgrey;
+  /* width: 300px; */
+  border: 3px solid green;
+  padding: 50px;
+  margin: 50px;
+}
+</style>
   </head>
-	<img src='logosahaja.png'><br>
-	<h1>Project Monitoring System</h1><br>
-	<p>Management Information System</p><br><br>
+  <div class="header">
+  <a href="projectPageUser.php" class="logo"><img src='logosahaja.png'>
+    <h4>Project Monitoring System</h4>
+	<h5>Management Information System</h5></a>
+	<div class="header-right">
+    <!-- <a class="active" href="#home">Home</a> -->
+    <!-- <a href="#home">Home</a> -->
+    <!--<a href="#contact">Add Project</a> dia pakai href pergi page lain -->
+    <a href="projectPageAdmin.php">Back</a>
+  </div>
+</div>
 
 	<?php
 		include 'getDataAdmin2.php';
 		include 'getDataAdmin3.php';
 	?>
 
-	<form action='projectPageAdmin.php' method='post'>
-		<input type='submit' value='back'>
-	</form><br><br>
+	<br><pre><h1>	Enter New Project Details: </h1></pre>
 
-	<hr><br>
-
-	<h1>Enter New Project Details: </h1>
-
-	*ada css container*<br>
-
+	<div class="container">
+	<div class="grid-container">
 	<form action='adminButtonProcesses.php' method='post' enctype='multipart/form-data'>
 
-		Project Name:<br>
+		Project Name:
 		<input type='text' name='projectName'><br><br>
 
-		Report Owner:<br>
+		Report Owner:
 		<input type='text' name='reportOwner'><br><br>
 
-		System Custodian:<br>
+		System Custodian:
 		<input type='text' name='systemCustodian'><br><br>
 
-		Date of Initiation:<br>
+		Date of Initiation:
 		<input type='date' name='dateOfInitiation'><br><br>
 
-		Estimated Date End:<br>
+		Estimated Date End:
 		<input type='date' name='estimatedDateEnd'><br><br>
 
-		Project Description:<br>
+		Project Description:
 		<input type='text' name='projectDescription'><br><br>
 
-		Person In Charge:<br>
+		Person In Charge:
 		<div>
 			<select name="pic" id="pic">
 				<?php 
@@ -53,20 +120,20 @@
 			</select>
 
 		</div>
-		
-		
-		<!-- <div>
-			<select name="members" id="members">
-				
-					/*$list = getNameMembers();
-					while ($row = mysqli_fetch_assoc($list)){
-						echo '<option value="'.$row['userId'].'">'.$row['userName'].'</option>';
-					}*/
-				
-			</select>
 
-		</div> -->
-		Members:<br>
+		<br>Members:
+		<?php $list = getNameMembers(); ?>
+		<button type="button" id="buttonAdd">Add</button>
+		<div id="list">
+			<?php
+				echo "<select name='members[]' id='members1' style='display:block;'>";						
+						while ($row = mysqli_fetch_assoc($list)){
+							echo '<option value="'.$row['userId'].'">'.$row['userName'].'</option>';
+						}
+
+				echo "</select>";
+			?>
+		</div>
 		<script>
 			$(document).ready(function(){
 				$('#buttonAdd').click(function(){
@@ -79,21 +146,8 @@
 			});
     	</script>
 
-		<?php $list = getNameMembers(); ?>
-		<button type="button" id="buttonAdd">add</button>
-		<div id="list">
-			<?php
-				echo "<select name='members[]' id='members1' style='display:block;'>";						
-						while ($row = mysqli_fetch_assoc($list)){
-							echo '<option value="'.$row['userId'].'">'.$row['userName'].'</option>';
-						}
-
-				echo "</select>";
-			?>
-		</div>
-
-		Attachment:<br>
-		<input type="file" name="myfile"/>
+		<br>Attachment:
+		<input type="file" name="myfile"/><br><br>
 
 		<input type='submit' value='Done' name='addProjectButton'>
 	</form>
@@ -171,10 +225,6 @@
 			}
 		}
 	?>
-	<?php
-
-	?>
-	<?php
-		
-	?>
+	</div>
+	</div>
 </html>

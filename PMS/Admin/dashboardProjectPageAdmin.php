@@ -1,17 +1,83 @@
 <html>
-  <img src='logosahaja.png'><br>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box;}
 
-  <h1>Project Monitoring System</h1><br>
+body { 
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  <p>Management Information System</p><br><br>
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+}
 
-  <form action='projectPageAdmin.php' method='post'>
-    <input type='submit' value='back'>
-  </form><br><br>
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
 
-  <hr><br>
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
 
-  *Ada 3 tab dashboard, log, dates*<br>
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .header-right {
+    float: none;
+  }
+}
+
+.container{
+  background-color: lightgrey;
+  /* width: 300px; */
+  border: 3px solid green;
+  padding: 50px;
+  margin: 50px;
+}
+</style>
+</head>
+
+<div class="header">
+  <a href="projectPageAdmin.php" class="logo"><img src='logosahaja.png'>
+    <h4>Project Monitoring System</h4>
+    <h5>Management Information System</h5></a>
+  <div class="header-right">
+    <!-- <a class="active" href="#home">Home</a> -->
+    <!-- <a href="#home">Home</a> -->
+    <!--<a href="#contact">Add Project</a> dia pakai href pergi page lain -->
+    <a href="projectPageAdmin.php">Back</a>
+  </div>
+</div>
 
   <?php
     session_start();
@@ -19,24 +85,24 @@
     echo $projectToView;
   ?>
 
+<div style="margin:25px">
   <form action='dashboardProjectPageAdmin.php' method='post'>
     <input type='submit' value='Dashboard'>
     <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
-  </form><br><br>
-
-
+  </form>
 
   <form action='logListPageAdmin.php' method='post'>
     <input type='submit' value='Log'>
     <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
-  </form><br><br>
+  </form>
 
   <form action='datePageAdmin.php' method='post'>
     <input type='submit' value='Dates'>
     <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
-  </form><br><br>
+  </form>
+</div>
 
-  *ada css container*
+  <div class="container">
 
   <?php
     $projectDetails = getDetailsOfProject();
@@ -78,31 +144,31 @@
     echo "<br>Project Code: ";
     echo "  " . $projectToView . " ";
 
-    echo '<br>Project Name: ';
+    echo '<br><br>Project Name: ';
     echo "  " . $row['projectName'] . " ";
 
-    echo '<br>Report Owner: ';
+    echo '<br><br>Report Owner: ';
     echo "  " . $row['reportOwner'] . " ";
 
-    echo '<br>System Custodian: ';
+    echo '<br><br>System Custodian: ';
     echo "  " . $row['systemCustodian'] . " ";
 
-    echo '<br>Date of Initiation: ';
+    echo '<br><br>Date of Initiation: ';
     echo "  " . $row['dateOfInitiation'] . " ";
 
-    echo '<br>Estimated Date End: ';
+    echo '<br><br>Estimated Date End: ';
     echo "  " . $row['estimatedDateEnd'] . " ";
 
-    echo '<br>Person In Charge: ';
+    echo '<br><br>Person In Charge: ';
     echo "  " . $row['personInCharge'] . " ";
 
-    echo '<br>Members: ';
+    echo '<br><br>Members: ';
     echo "  " . $row2['userId'] . " ";
 
-    echo '<br>Project Description: ';
+    echo '<br><br>Project Description: ';
     echo "  " . $row['projectDescription'] . " ";
 
-    echo '<br>Attachment: ';
+    echo '<br><br>Attachment: ';
     echo '<p></p>';
     echo '<ol>';
 
@@ -116,5 +182,5 @@
   
   </ol>
 
-
+  </div>
 </html>

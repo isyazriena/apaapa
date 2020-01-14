@@ -1,15 +1,125 @@
 <html lang="en">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  * {box-sizing: border-box;}
+
+  body { 
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .header {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+  }
+
+  .header a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px; 
+    line-height: 25px;
+    border-radius: 4px;
+  }
+
+  .header a.logo {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .header a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .header a.active {
+    background-color: dodgerblue;
+    color: white;
+  }
+
+  .header-right {
+    float: right;
+  }
+
+  @media screen and (max-width: 500px) {
+    .header a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    
+    .header-right {
+      float: none;
+    }
+  }
+
+  .container{
+    background-color: lightgrey;
+    /* width: 300px; */
+    border: 3px solid green;
+    padding: 50px;
+    margin: 50px;
+  }
+
+  .topnav {
+  overflow: hidden;
+}
+
+.topnav input[type=text] {
+  float: center;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  border: none;
+  font-size: 17px;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav input[type=text] {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  
+  .topnav input[type=text] {
+    border: 1px solid #ccc;  
+  }
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color:#f5f5f5;}
+  </style>
   </head>
 
-  <img src='logosahaja.png'><br>
-  <h1>Project Monitoring System</h1><br>
-  <p>Management Information System</p><br><br>
+  <div class='header'>
+  <a href="projectPageUser.php" class="logo"><img src='logosahaja.png'>
+    <h4>Project Monitoring System</h4>
+    <h5>Management Information System</h5></a> <!--boleh bawa pergi page lain-->
 
   <?php
     session_start();
     include 'getDataUser.php';
+    /* if (!(isset($_SESSION['userId']) && $_SESSION['userId'] != '')) {
+      header ("loginPageUser.php");
+    } */
   ?>
 
 <div>
@@ -38,19 +148,30 @@
 
 </div>
 
-  <form action='logoutPageUser.php' method='post'>
+  <!-- <form action='logoutPageUser.php' method='post'>
     <input type='submit' value='logout'>
-  </form><br>
+  </form><br> -->
 
-  <hr>
+  <div class="header-right">
+    <a class="active" href="projectPageAdmin.php">Home</a>
+    <a href="logoutPageAdmin.php">Logout</a>
+  </div>
+  </div>
 
-  <h3>Welcome to Management Information System</h3><br><br>
+  <div style="padding-left:20px; text-align:center;">
+    <br><br>
+    <p><b>Welcome to Management Information System</b></p>
+  </div>
 
-  *ada css container*<br>
+  <div class="container">
 
-  <img src='logopenuh.png'><br>
+  <div style="text-align:center">
+    <img src='logopenuh.png'><br>
+  </div>
 
-  *ada tempat nak search*<br><br>
+  <div class="topnav">
+    <input type="text" placeholder="Search..">
+  </div><br><br>
 
   <?php
   
@@ -104,4 +225,5 @@
       }
     echo '</table>';
   ?>
+  </div>
 </html>

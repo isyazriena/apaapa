@@ -9,7 +9,7 @@
             exit;
         }
         else {
-            echo "database connected";
+            //echo "database connected";
             $sql="select * from user"; 
             $qry = mysqli_query($con,$sql);
             return $qry;

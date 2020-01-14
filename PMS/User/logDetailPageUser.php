@@ -1,19 +1,86 @@
 <html>
-  <img src='logosahaja.png'><br>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box;}
 
-  <h1>Project Monitoring System</h1><br>
+body { 
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  <p>Management Information System</p><br><br>
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+}
 
-  <form action='logListPageUser.php' method='post'>
-    <input type='submit' value='back'>
-  </form><br><br>
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
 
-  <hr><br>
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
 
-  <h1>Log Details: </h1>
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
 
-  *ada css container*<br>
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .header-right {
+    float: none;
+  }
+}
+
+.container{
+  background-color: lightgrey;
+  /* width: 300px; */
+  border: 3px solid green;
+  padding: 50px;
+  margin: 50px;
+}
+</style>
+</head>
+<div class="header">
+  <a href="projectPageUser.php" class="logo"><img src='logosahaja.png'>
+    <h4>Project Monitoring System</h4>
+    <h5>Management Information System</h5></a>
+  <div class="header-right">
+    <!-- <a class="active" href="#home">Home</a> -->
+    <!-- <a href="#home">Home</a> -->
+    <!--<a href="#contact">Add Project</a> dia pakai href pergi page lain -->
+    <a href="logListPageUser.php">Back</a>
+  </div>
+</div>
+
+<br><pre><h1>   Log Details: </h1></pre>
+
+<div class="container">
 
   <?php
     session_start();
@@ -38,25 +105,25 @@
     echo "<br>Project Code: ";
     echo "  " . $logToView . " ";
 
-    echo '<br>Project Name: ';
+    echo '<br><br>Project Name: ';
     echo 'ni from different table';
 
-    echo '<br>Date of Initiation: ';
+    echo '<br><br>Date of Initiation: ';
     echo "  " . $row['dateOfInitiation'] . " ";
 
-    echo '<br>Estimated Date End: ';
+    echo '<br><br>Estimated Date End: ';
     echo "  " . $row['estimatedDateEnd'] . " ";
 
-    echo '<br>Remarks: ';
+    echo '<br><br>Remarks: ';
     echo "  " . $row['remarks'] . " ";
 
-    echo '<br>Project Status: ';
+    echo '<br><br>Project Status: ';
     echo 'ni from drop down';
 
-    echo '<br>Date of Update: ';
+    echo '<br><br>Date of Update: ';
     echo "  " . $row['dateOfUpdate'] . " ";
 
-    echo '<br>Attachment: ';
+    echo '<br><br>Attachment: ';
     echo '<p></p>';
     echo '<ol>';
 
@@ -71,4 +138,5 @@
     echo '<br>Update Date: ';
     echo 'LATER COME BACK TO THIS';
   ?>
+  </div>
 </html>

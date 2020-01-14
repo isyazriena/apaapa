@@ -1,17 +1,117 @@
 <html>
-  <img src='logosahaja.png'><br>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box;}
 
-  <h1>Project Monitoring System</h1><br>
+body { 
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  <p>Management Information System</p><br><br>
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+}
 
-  <form action='projectPageUser.php' method='post'>
-    <input type='submit' value='back'>
-  </form><br><br>
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
 
-  <hr><br>
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
 
-  *Ada tiga tab dashboard and log*<br>
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .header-right {
+    float: none;
+  }
+}
+
+.topnav {
+  overflow: hidden;
+  
+}
+
+.topnav input[type=text] {
+  float: center;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  /*border: none;*/
+  border-color:black;
+  font-size: 17px;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav input[type=text] {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  
+  .topnav input[type=text] {
+    border: 1px solid #ccc;  
+  }
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color:#f5f5f5;}
+</style>
+</head>
+<div class="header">
+  <a href="projectPageUser.php" class="logo"><img src='logosahaja.png'>
+    <h4>Project Monitoring System</h4>
+    <h5>Management Information System</h5></a>
+  <div class="header-right">
+    <!-- <a class="active" href="#home">Home</a> -->
+    <!-- <a href="#home">Home</a> -->
+    <!--<a href="#contact">Add Project</a> dia pakai href pergi page lain -->
+    <a href="projectPageUser.php">Back</a>
+  </div>
+</div>
 
   <?php
     session_start();
@@ -22,22 +122,25 @@
   <form action='dashboardProjectPageUser.php' method='post'>
     <input type='submit' value='Dashboard'>
     <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
-  </form><br><br>
+  </form>
 
   <form action='logListPageUser.php' method='post'>
     <input type='submit' value='Log'>
     <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
-  </form><br><br>
+  </form>
 
   <form action='datePageUser.php' method='post'>
     <input type='submit' value='Dates'>
     <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
-  </form><br><br>
+  </form>
 
-  *ada tempat nak search*<br><br>
+  <div style="text-align:center; margin:50px;">
+
+  <div class="topnav">
+    <input type="text" placeholder="Search..">
+  </div><br><br>
 
   <?php
-  //session_start();
   $logOverview = getOverviewOfLog();
 
   function getOverviewOfLog(){
@@ -74,7 +177,6 @@
       echo '<td> Later </td>';
       echo '<td>' . $row['remarks'] . "</td>";
       echo '<td>';
-      //$logToView=$row['logId'];
       echo '<form action="logDetailPageUser.php" method="post" >';
       echo "<input type='hidden' value=" . $row['logId'] . " name='logToView'>";
       echo '<input type="submit" name="viewLogButton" value="Details">';
@@ -84,4 +186,5 @@
     }
   echo '</table>';
   ?>
+  </div>
 </html>
