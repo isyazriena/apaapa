@@ -1,9 +1,22 @@
 <html>
+    <head>
+        <style>
+            .container{
+            background-color: lightgrey;
+            /* width: 300px; */
+            border: 3px solid green;
+            padding: 50px;
+            margin: 50px;
+            }
+        </style>
+    </head>
+    <div style="text-align:center">
     <img style='' src='logopenuh.png'><br>
-
     <h1>Project Monitoring System</h1><br><br>
+    </div>
 
-    *ada css container*<br><br>
+    <div class="container">
+  <div style="text-align:center">
 
     Admin Login<br><br>
 
@@ -24,15 +37,18 @@
     </form><br><br> -->
     <a href="../User/loginPageUser.php">User Login</a>
 
-    *tutup container*<br><br>
+    </div>
+        </div>
 
+        <div style="text-align:center">
     <form action='' method='post'>
         <input type='submit' value='Admin Manual'>
-    </form><br><br>
+    </form>
 
     <form action='' method='post'>
         <input type='submit' value='PhpMyAdmin Manual'>
     </form><br><br>
+        </div>
 
     <?php
         session_start();

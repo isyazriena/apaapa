@@ -1,9 +1,22 @@
 <html>
-    <img src='logopenuh.png'><br>
+<head>
+        <style>
+            .container{
+            background-color: lightgrey;
+            /* width: 300px; */
+            border: 3px solid green;
+            padding: 50px;
+            margin: 50px;
+            }
+        </style>
+    </head>
+    <div style="text-align:center">
+    <img style='' src='logopenuh.png'><br>
+    <h1>Project Monitoring System</h1><br><br>
+    </div>
 
-    Project Monitoring System<br><br>
-
-    *ada css container*<br><br>
+    <div class="container">
+  <div style="text-align:center">
 
     User Login<br><br>
     
@@ -21,13 +34,16 @@
     <!-- <form action='' method=''>
         <input type='submit' value='Admin Login'>
     </form><br><br> -->
-    <a href="../User/loginPageAdmin.php">User Login</a>
+    <a href="../Admin/loginPageAdmin.php">Admin Login</a>
 
-    *tutup container*<br><br>
+    </div>
+        </div>
 
+        <div style="text-align:center">
     <form action='' method='post'>
         <input type='submit' value='User Manual'>
     </form><br><br>
+    </div>
     
     <?php
     session_start();
