@@ -61,7 +61,7 @@
   .container{
     background-color: lightgrey;
     /* width: 300px; */
-    border: 3px solid green;
+    border: 1px solid white;
     padding: 50px;
     margin: 50px;
   }
@@ -119,36 +119,6 @@ tr:hover {background-color:#f5f5f5;}
     include 'getDataAdmin.php';
   ?>
 
-<div>
-        <script>
-            $(document).ready(function(){ /* PREPARE THE SCRIPT */
-                $("#projects").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */
-                    document.getElementById('jsform').submit();
-                });
-            });
-        </script>
-
-        <form id="jsform" action="" method="POST">
-            <select name="projects" id="projects">
-                <?php 
-                    $list = ['Projects', 'My Projects', 'Running Projects', 'Completed Projects', 'Terminated Projects'];
-                    $val = ['0', '1', '2', '3', '4'];
-
-                    for ($i=0; $i < count($list); $i++) {
-                        if ($val[$i] == $_POST['projects']) { 
-                          $select = 'selected="selected"'; 
-                        }
-                        else { 
-                          $select = ''; 
-                        }
-                        echo '<option value="'.$i.'" '.$select.'>'.$list[$i].'</option>';
-                    }
-                ?>
-            </select>
-        </form>
-
-</div>
-
   <!-- <form action='newProjectPageAdmin.php' method='post'>
     <input type='submit' value='add project'>
   </form>
@@ -178,6 +148,34 @@ tr:hover {background-color:#f5f5f5;}
 
   <div class="topnav">
     <input type="text" placeholder="Search..">
+    <div style="float: right">
+      <script>
+          $(document).ready(function(){ /* PREPARE THE SCRIPT */
+              $("#projects").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */
+                  document.getElementById('jsform').submit();
+              });
+          });
+      </script>
+
+      <form id="jsform" action="" method="POST">
+          <select name="projects" id="projects">
+              <?php 
+                  $list = ['Projects', 'My Projects', 'Running Projects', 'Completed Projects', 'Terminated Projects'];
+                  $val = ['0', '1', '2', '3', '4'];
+
+                  for ($i=0; $i < count($list); $i++) {
+                      if ($val[$i] == $_POST['projects']) { 
+                        $select = 'selected="selected"'; 
+                      }
+                      else { 
+                        $select = ''; 
+                      }
+                      echo '<option value="'.$i.'" '.$select.'>'.$list[$i].'</option>';
+                  }
+              ?>
+          </select>
+      </form>
+  </div>
   </div><br><br>
 
   <?php
