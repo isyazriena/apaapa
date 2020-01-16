@@ -13,7 +13,7 @@
             $sql="select * from project";
         }
         else if ($status == '1'){
-            $sql = "SELECT * FROM project LEFT JOIN created ON created.adminId="admin2" AND created.projectId=project.projectId";
+            $sql = "SELECT * FROM project LEFT JOIN created ON created.adminId='admin2' AND created.projectId=project.projectId";
             //SINI HAA JOIN FIRST YG KENA SETTLE
         }
         else { 
