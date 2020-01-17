@@ -13,7 +13,9 @@
             $sql="select * from project";
         }
         else if ($status == '1'){
+<<<<<<< HEAD
             $sql = "SELECT * FROM project INNER JOIN created ON created.adminId='".$_SESSION['adminId'] ."' AND created.projectId=project.projectId";
+>>>>>>> eec435729a1dbdc756b907ad82360229c5cda3ca
         }
         else { 
             $sql="select * from project where projectCategoryValue = '".$status."'"; 
