@@ -4,6 +4,6 @@
 	
 	if(isset($_POST["updateDetailsButton"])){
 		updateDetails();
-		//header('Location: logListPageUser.php');
+		header('Location: logListPageUser.php');
 	}
 ?>

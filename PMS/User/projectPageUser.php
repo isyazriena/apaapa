@@ -154,7 +154,7 @@ tr:hover {background-color:#f5f5f5;}
 
   <div class="header-right">
     <a class="active" href="projectPageAdmin.php">Home</a>
-    <a href="logoutPageAdmin.php">Logout</a>
+    <a href="logoutPageUser.php">Logout</a>
   </div>
   </div>
 
@@ -212,8 +212,8 @@ tr:hover {background-color:#f5f5f5;}
       echo '<tr>';
       echo '<td>'.$count."</td>";
       echo '<td>' . $row['projectName'] . "</td>"; //display regNumber
-      echo '<td>' . $row['projectName'] . "</td>";
-      echo '<td>' . $row['projectName'] . "</td>";
+      echo '<td>' . $row['personInCharge'] . "</td>";
+      echo '<td>' . $row['projectCategory'] . "</td>";
       echo '<td>' . $row['estimatedDateEnd'] . "</td>";
       echo '<td>';
       echo '<form action="differentDestinationPageUser.php" method="post" >';

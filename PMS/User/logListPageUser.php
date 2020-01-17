@@ -151,8 +151,8 @@ tr:hover {background-color:#f5f5f5;}
       echo "Failed to connect to MySQL: " . mysqli_connect_error();
       exit;   //terminate the script
     }
-
-    $sql="select * from log";
+    $projectToView=$_SESSION['projectToView'];
+    $sql = "SELECT * FROM log INNER JOIN projectlog ON projectlog.logId=log.logId AND projectlog.projectId='".$projectToView."'";
     $qry = mysqli_query($con,$sql);  //run query
     return $qry;
   } 

@@ -155,7 +155,8 @@ tr:hover {background-color:#f5f5f5;}
         exit;   //terminate the script
       }
       $projectToView=$_POST['projectToView'];
-      $sql='select * from projectlog where projectId ="'.$projectToView.'"';
+      //$sql='select * from projectlog where projectId ="'.$projectToView.'"';
+      $sql = "SELECT * FROM log INNER JOIN projectlog ON projectlog.logId=log.logId AND projectlog.projectId='".$projectToView."'";
       
       $qry = mysqli_query($con,$sql);  //run query
       return $qry;
@@ -208,9 +209,17 @@ tr:hover {background-color:#f5f5f5;}
         exit;   //terminate the script
       }
       $logToDelete= $_POST['logToDelete'];
+
+
       $sql="delete from log where logId='".$logToDelete."'";
-      echo $sql;
+      $sql1="delete from projectlog where logId='".$logToDelete."'";
+      $sql2="delete from attachmentlog where logId='".$logToDelete."'";
+      $sql3="delete from dates where logId='".$logToDelete."'";
+      
       $qry = mysqli_query($con,$sql);  //run query
+      $qry = mysqli_query($con,$sql1);
+      $qry = mysqli_query($con,$sql2);
+      $qry = mysqli_query($con,$sql3);
     } 
   ?>
   </div>

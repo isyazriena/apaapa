@@ -126,7 +126,6 @@ body {
     echo '<br><br>Attachment: ';
     echo '<p></p>';
     echo '<ol>';
-
     $dbh = new PDO("mysql:host=localhost;dbname=mispms", "web2", "web2");
     $stat = $dbh->prepare('select * from attachmentlog where logId ="'.$logToView.'"');
     $stat->execute();
@@ -134,9 +133,6 @@ body {
         echo "<li><a target='_blank' href='viewLogAttachmentAdmin.php?attachmentId=".$row['attachmentId']."'>".$row['attachmentName']."</a></li>";
     }    
     echo "</ol>";
-
-    echo '<br>Update Date: ';
-    echo 'LATER COME BACK TO THIS';
   ?>
 
   </div>

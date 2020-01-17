@@ -72,9 +72,6 @@ body {
     <h4>Project Monitoring System</h4>
 	<h5>Management Information System</h5></a>
 	<div class="header-right">
-    <!-- <a class="active" href="#home">Home</a> -->
-    <!-- <a href="#home">Home</a> -->
-    <!--<a href="#contact">Add Project</a> dia pakai href pergi page lain -->
     <a href="projectPageAdmin.php">Back</a>
   </div>
 </div>
@@ -192,7 +189,7 @@ body {
 					$dbh = new PDO("mysql:host=localhost;dbname=mispms", "web2", "web2");
 					$name = $_FILES['myfile']['name'];
 					$type = $_FILES['myfile']['type'];
-					$data = file_get_contents($_FILES['myfile']['tmp_name']);				
+					$data = file_get_contents($_FILES['myfile']['tmp_name']);
 					$stmt = $dbh->prepare("insert into attachmentproject values('',?,?,?, '$last_id')");
 					$stmt->bindParam(1,$name);
 					$stmt->bindParam(2,$type);
@@ -201,9 +198,11 @@ body {
 						$stmt->execute();
 					}
 					$sql3= "insert into created(adminId, projectId) values ('$adminId', '$last_id')";
+					$sql5= "INSERT INTO assigned(projectId, userId, position) VALUES('$last_id','$personInCharge', 'person in charge')";
 					$qry = mysqli_query($con,$sql3);
+					$qry = mysqli_query($con,$sql5);
 					foreach ($_POST['members'] as $key=>$value) {
-						$sql = "INSERT INTO assigned(projectId, userId) VALUES('$last_id','$value')";
+						$sql = "INSERT INTO assigned(projectId, userId, position) VALUES('$last_id','$value', 'members')";
 						$con->query($con);
 					}
 				}

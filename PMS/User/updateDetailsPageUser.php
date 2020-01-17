@@ -165,7 +165,9 @@ body {
 				$stmt->bindParam(1,$name);
 				$stmt->bindParam(2,$type);
 				$stmt->bindParam(3,$data);
-				$stmt->execute();
+				if($data != null){
+					$stmt->execute();
+				}
 				$sql2 = "insert into projectlog(projectId, logId) values('$projectId', '$last_id')";
 				$sql4= "insert into dates(projectId, logId, dateOfInitiation, estimatedDateEnd, dateOfUpdate, nameId) 
 						values('$projectId', '$last_id', '$dateOfInitiation', '$estimatedDateEnd', CURDATE(), '$userId')";

@@ -110,7 +110,7 @@ tr:hover {background-color:#f5f5f5;}
   </head>
   
   <div class='header'>
-  <a href="projectPageUser.php" class="logo"><img src='logosahaja.png'>
+  <a href="projectPageAdmin.php" class="logo"><img src='logosahaja.png'>
     <h4>Project Monitoring System</h4>
     <h5>Management Information System</h5></a> <!--boleh bawa pergi page lain-->
   
@@ -221,8 +221,8 @@ tr:hover {background-color:#f5f5f5;}
         echo '<tr>';
         echo '<td>'.$count."</td>";
         echo '<td>' . $row['projectName'] . "</td>"; //display regNumber
-        echo '<td>' . $row['projectName'] . "</td>";
-        echo '<td>' . $row['projectName'] . "</td>";
+        echo '<td>' . $row['personInCharge'] . "</td>";
+        echo '<td>' . $row['projectCategory'] . "</td>";
         echo '<td>' . $row['estimatedDateEnd'] . "</td>";
         echo '<td>';
           echo '<form action="dashboardProjectPageAdmin.php" method="post" >';
@@ -260,13 +260,22 @@ tr:hover {background-color:#f5f5f5;}
       }
       $projectToDelete= $_POST['projectToDelete'];
       $sql="delete from project where projectId='".$projectToDelete."'";
-      //delete log of $projectToDelete thru table projectlog
-      //delete project of $projectToDelete from projectlog
-      //delete attachment project of $projectToDelete from attachmentproject
-      //delete attachment log of $projectToDelete from attachmentproject using logid from table log
-      //mende sia
-      echo $sql;
+      $sql1="delete from attachmentproject where projectId='".$projectToDelete."'";
+      $sql2 = "DELETE FROM log INNER JOIN projectlog ON projectlog.logId=log.logId AND projectlog.projectId='".$projectToDelete."'";
+      $sql3 = "DELETE attachmentlog FROM attachmentlog INNER JOIN projectlog ON projectlog.logId=attachmentlog.logId AND projectlog.projectId='".$projectToDelete."'";
+      $sql4="delete from projectlog where projectId='".$projectToDelete."'";
+      $sql5="delete from created where projectId='".$projectToDelete."'";
+      $sql6="delete from assigned where projectId='".$projectToDelete."'";
+      $sql7="delete from dates where projectId='".$projectToDelete."'";
+
       $qry = mysqli_query($con,$sql);  //run query
+      $qry = mysqli_query($con,$sql1); 
+      $qry = mysqli_query($con,$sql2);
+      $qry = mysqli_query($con,$sql3);
+      $qry = mysqli_query($con,$sql4);
+      $qry = mysqli_query($con,$sql5);
+      $qry = mysqli_query($con,$sql6);
+      $qry = mysqli_query($con,$sql7);
     } 
   ?>
 </html>
