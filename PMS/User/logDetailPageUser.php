@@ -1,142 +1,155 @@
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {box-sizing: border-box;}
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style>
+        * {box-sizing: border-box;}
 
-body { 
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
+        body { 
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+        }
 
-.header {
-  overflow: hidden;
-  background-color: #f1f1f1;
-  padding: 20px 10px;
-}
+        .header {
+          overflow: hidden;
+          background-color: #f1f1f1;
+          padding: 20px 10px;
+        }
 
-.header a {
-  float: left;
-  color: black;
-  text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px; 
-  line-height: 25px;
-  border-radius: 4px;
-}
+        .header a {
+          float: left;
+          color: black;
+          text-align: center;
+          padding: 12px;
+          text-decoration: none;
+          font-size: 18px; 
+          line-height: 25px;
+          border-radius: 4px;
+        }
 
-.header a.logo {
-  font-size: 25px;
-  font-weight: bold;
-}
+        .header a.logo {
+          font-size: 25px;
+          font-weight: bold;
+        }
 
-.header a:hover {
-  background-color: #ddd;
-  color: black;
-}
+        .header a:hover {
+          background-color: #ddd;
+          color: black;
+        }
 
-.header a.active {
-  background-color: dodgerblue;
-  color: white;
-}
+        .header a.active {
+          background-color: dodgerblue;
+          color: white;
+        }
 
-.header-right {
-  float: right;
-}
+        .header-right {
+          float: right;
+        }
 
-@media screen and (max-width: 500px) {
-  .header a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-  
-  .header-right {
-    float: none;
-  }
-}
+        @media screen and (max-width: 500px) {
+          .header a {
+            float: none;
+            display: block;
+            text-align: left;
+          }
+          
+          .header-right {
+            float: none;
+          }
+        }
 
-.container{
-  background-color: lightgrey;
-  /* width: 300px; */
-  border: 3px solid green;
-  padding: 50px;
-  margin: 50px;
-}
-</style>
-</head>
-<div class="header">
-  <a href="projectPageUser.php" class="logo"><img src='logosahaja.png'>
+        .container{
+          background-color: lightgrey;
+          /* width: 300px; */
+          border: 3px solid green;
+          padding: 50px;
+          margin: 50px;
+        }
+      </style>
+  </head>
+
+  <div class="header">
+    <a href="projectPageUser.php" class="logo"><img src='logosahaja.png'>
     <h4>Project Monitoring System</h4>
     <h5>Management Information System</h5></a>
-  <div class="header-right">
-    <!-- <a class="active" href="#home">Home</a> -->
-    <!-- <a href="#home">Home</a> -->
-    <!--<a href="#contact">Add Project</a> dia pakai href pergi page lain -->
-    <a href="logListPageUser.php">Back</a>
+
+    <div class="header-right">
+      <a href="logListPageUser.php">Back</a>
+    </div>
   </div>
-</div>
 
-<br><pre><h1>   Log Details: </h1></pre>
+  <br><pre><h1>   Log Details: </h1></pre>
 
-<div class="container">
+  <div class="container">
 
-  <?php
-    session_start();
-    $logDetails = getDetailsOfLog();
-    $logToView=$_POST["logToView"];
+    <?php
+      session_start();
+      $logDetails = getDetailsOfLog();
+      $projectName = getProjectName();
+      $logToView=$_POST["logToView"];
 
-    function getDetailsOfLog(){
-      //create connection
-      $con = mysqli_connect('localhost','web2','web2','mispms');
-      if (mysqli_connect_errno()){     //check connection is establish
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        exit;   //terminate the script
+      function getDetailsOfLog(){
+        //create connection
+        $con = mysqli_connect('localhost','web2','web2','mispms');
+        if (mysqli_connect_errno()){     //check connection is establish
+          echo "Failed to connect to MySQL: " . mysqli_connect_error();
+          exit;   //terminate the script
+        }
+
+        $logToView=$_POST["logToView"];
+        $sql="select * from log where logId ='".$logToView."'";
+        $qry = mysqli_query($con,$sql);  //run query
+        return $qry;
       }
 
-      $logToView=$_POST["logToView"];
-      $sql="select * from log where logId ='".$logToView."'";
-      $qry = mysqli_query($con,$sql);  //run query
-      return $qry;
-    }
-    
-    $row=mysqli_fetch_assoc($logDetails);
-    echo "<br>Project Code: ";
-    echo "  " . $logToView . " ";
+      function getProjectName(){
+        //create connection
+        $con = mysqli_connect('localhost','web2','web2','mispms');
+        if (mysqli_connect_errno()){     //check connection is establish
+          echo "Failed to connect to MySQL: " . mysqli_connect_error();
+          exit;   //terminate the script
+        }
 
-    echo '<br><br>Project Name: ';
-    echo 'ni from different table';
+        $logToView=$_POST["logToView"];
+        //$sql="select * from log where logId ='".$logToView."'";
+        $sql="SELECT * FROM project INNER JOIN projectlog ON projectlog.logId='".$logToView."' AND projectlog.projectId=project.projectId";
+        $qry = mysqli_query($con,$sql);  //run query
+        return $qry;
+      }
+      
+      $row=mysqli_fetch_assoc($logDetails);
+      $row2=mysqli_fetch_assoc($projectName);
 
-    echo '<br><br>Date of Initiation: ';
-    echo "  " . $row['dateOfInitiation'] . " ";
+      echo "<br>Project Code: ";
+      echo "  " . $logToView . " ";
 
-    echo '<br><br>Estimated Date End: ';
-    echo "  " . $row['estimatedDateEnd'] . " ";
+      echo '<br><br>Project Name: ';
+      echo "  " . $row2['projectName'] . " ";
 
-    echo '<br><br>Remarks: ';
-    echo "  " . $row['remarks'] . " ";
+      echo '<br><br>Date of Initiation: ';
+      echo "  " . $row['dateOfInitiation'] . " ";
 
-    echo '<br><br>Project Status: ';
-    echo 'ni from drop down';
+      echo '<br><br>Estimated Date End: ';
+      echo "  " . $row['estimatedDateEnd'] . " ";
 
-    echo '<br><br>Date of Update: ';
-    echo "  " . $row['dateOfUpdate'] . " ";
+      echo '<br><br>Remarks: ';
+      echo "  " . $row['remarks'] . " ";
 
-    echo '<br><br>Attachment: ';
-    echo '<p></p>';
-    echo '<ol>';
+      echo '<br><br>Project Status: ';
+      echo 'ni from drop down';
 
-    $dbh = new PDO("mysql:host=localhost;dbname=mispms", "web2", "web2");
-    $stat = $dbh->prepare('select * from attachmentlog where logId ="'.$logToView.'"');
-    $stat->execute();
-    while($row = $stat->fetch()){
-        echo "<li><a target='_blank' href='viewLogAttachmentUser.php?attachmentId=".$row['attachmentId']."'>".$row['attachmentName']."</a></li>";
-    }    
-    echo "</ol>";
+      echo '<br><br>Date of Update: ';
+      echo "  " . $row['dateOfUpdate'] . " ";
 
-    echo '<br>Update Date: ';
-    echo 'LATER COME BACK TO THIS';
-  ?>
+      echo '<br><br>Attachment: ';
+      echo '<p></p>';
+      echo '<ol>';
+      $dbh = new PDO("mysql:host=localhost;dbname=mispms", "web2", "web2");
+      $stat = $dbh->prepare('select * from attachmentlog where logId ="'.$logToView.'"');
+      $stat->execute();
+      while($row = $stat->fetch()){
+          echo "<li><a target='_blank' href='viewLogAttachmentUser.php?attachmentId=".$row['attachmentId']."'>".$row['attachmentName']."</a></li>";
+      }    
+      echo "</ol>";
+    ?>
   </div>
 </html>

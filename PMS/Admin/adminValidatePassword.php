@@ -7,6 +7,7 @@
 	validatePassword($adminId,$adminPassword);
 
 	function validatePassword($adminId,$adminPassword){
+
 		$con=mysqli_connect("localhost","web2","web2","mispms");
 		
 		if(!$con){
@@ -18,14 +19,12 @@
 		$result=mysqli_query($con,$sql);
 		$count=mysqli_num_rows($result); //check how many matching record - should be 1 if correct
 		
-		
 		if($count == 1){
 			$_SESSION['adminId'] = $adminId;
 			header('Location: projectPageAdmin.php');
 			return true;//username and password is valid
 		}
 		else{
-			//echo 'wrong';
 			header('Location: loginPageAdmin.php');
 			echo 'Wrong Password. Try Again';
 			return false; //invalid password

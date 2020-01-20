@@ -5,7 +5,6 @@
 	include "logListPageAdmin.php";
 
 	if(isset($_POST["addProjectButton"])){
-		//echo 'to add project';
 		addNewProject();
 		echo '<script type="text/javascript"> document.location="projectPageAdmin.php"; </script>';
 	}

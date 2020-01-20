@@ -13,7 +13,7 @@
             $sql="select * from project";
         }
         else if ($status == '1'){
-            $sql = "SELECT * FROM project LEFT JOIN created ON created.adminId='".$_SESSION['adminId'] ."' AND created.projectId=project.projectId";
+            $sql = "SELECT * FROM project INNER JOIN created ON created.adminId='".$_SESSION['adminId'] ."' AND created.projectId=project.projectId";
         }
         else { 
             $sql="select * from project where projectCategoryValue = '".$status."'"; 
