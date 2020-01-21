@@ -163,6 +163,7 @@
               <th>Date of Update</th>
               <th>Edited By</th>
               <th>Log Id</th>
+              <th>Delete</th>
               </tr></h2>';
       $count=1;
       //display data
@@ -174,10 +175,34 @@
           echo '<td>' . $row['estimatedDateEnd'] . "</td>";
           echo '<td>' . $row['dateOfUpdate'] . "</td>";
           echo '<td>' . $row['nameId'] . "</td>";
-          echo '<td>' . $row['logId'] . "</td>"; //not sure perlu ke tak
+          echo '<td>' . $row['logId'] . "</td>";
+          echo '<td>';
+          echo '<form action="adminButtonProcesses.php" method="post">';
+          echo "<input type='hidden' value=" . $row['logId'] . " name='dateToDelete'>";
+          echo '<input type="submit" name="deleteDateButton" value="X">';
+          echo '</form>';
+        echo '</td>';
           $count++;
         }
       echo '</table>';
+    ?>
+    <?php
+    //function delete log
+    function deleteDate()
+    {
+      //create connection
+      $con = mysqli_connect('localhost','web2','web2','mispms');
+      if (mysqli_connect_errno())     //check connection is establish
+        {
+          echo "Failed to connect to MySQL: " . mysqli_connect_error();
+          exit;   //terminate the script
+        }
+        $dateToDelete= $_POST['dateToDelete'];
+
+        $sql="delete from dates where logId='".$dateToDelete."'";
+        $qry = mysqli_query($con,$sql);  //run query
+        return $qry;
+      } 
     ?>
   </div>
 </html>
