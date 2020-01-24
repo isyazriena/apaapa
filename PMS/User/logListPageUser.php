@@ -177,6 +177,7 @@
         echo '<td>';
           echo '<form action="logDetailPageUser.php" method="post" >';
           echo "<input type='hidden' value=" . $row['logId'] . " name='logToView'>";
+          echo "<input type='hidden' value=" . $projectToView . " name='projectToView'>";
           echo '<input type="submit" name="viewLogButton" value="Details">';
           echo '</form>';
         echo '</td>';

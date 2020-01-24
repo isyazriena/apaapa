@@ -98,6 +98,14 @@
 				<input type="radio" name="category" <?php if (isset($category) && $category=="completed") echo "checked";?> value="completed">Completed <br>
 				<input type="radio" name="category" <?php if (isset($category) && $category=="terminated") echo "checked";?> value="terminated">Terminated <br><br>
 
+				Status: <br>
+				<!--ada lagi satu-->
+				<input type="radio" name="status" <?php if (isset($status) && $status=="ur") echo "checked";?> value="ur">User Requirement <br>
+				<input type="radio" name="status" <?php if (isset($status) && $status=="dev") echo "checked";?> value="dev">Development <br>
+				<input type="radio" name="status" <?php if (isset($status) && $status=="uat") echo "checked";?> value="uat">UAT <br>
+				<input type="radio" name="status" <?php if (isset($status) && $status=="sit") echo "checked";?> value="sit">SIT <br>
+				<input type="radio" name="status" <?php if (isset($status) && $status=="dep") echo "checked";?> value="dep">Deployment <br>
+
 				Attachment:
 				<input type="file" name="myfile"/><br>
 				
@@ -117,6 +125,8 @@
 				$remarks=$_POST['remarks'];
 				$category=$_POST['category'];
 				$projectCategoryValue = '0';
+				$status=$_POST['status'];
+				$projectStatusValue = '0';
 
 				if($category == 'running'){
 					$projectCategoryValue = '2';
@@ -126,6 +136,22 @@
 				}
 				else{
 					$projectCategoryValue ='4';
+				}
+
+				if($status == 'ur'){
+					$projectStatusValue = '1';
+				}
+				else if($status == 'dev'){
+					$projectStatusValue = '2';
+				}
+				else if($status == 'uat'){
+					$projectStatusValue = '3';
+				}
+				else if($status == 'sit'){
+					$projectStatusValue = '4';
+				}
+				else{
+					$projectStatusValue = '5';
 				}
 
 				$con = mysqli_connect("localhost","web2","web2","mispms");
@@ -139,10 +165,10 @@
 					$projectId=$_POST['projectId'];
 
 					$sql= 'update project SET dateOfInitiation = "'.$dateOfInitiation.'", estimatedDateEnd = "'.$estimatedDateEnd.'", 
-					projectCategory = "'.$category.'", projectCategoryValue = "'.$projectCategoryValue.'"
+					projectCategory = "'.$category.'", projectCategoryValue = "'.$projectCategoryValue.'", status = "'.$status.'", projectStatusValue = "'.$projectStatusValue.'"
 						WHERE projectId ="'.$projectId.'"';
-					$sql1= "insert into log(dateOfInitiation, estimatedDateEnd, remarks, projectCategory, projectCategoryValue, dateOfUpdate)
-						values ('$dateOfInitiation','$estimatedDateEnd','$remarks', '$category', '$projectCategoryValue', CURDATE())";
+					$sql1= "insert into log(dateOfInitiation, estimatedDateEnd, remarks, projectCategory, projectCategoryValue, dateOfUpdate, status, projectStatusValue)
+						values ('$dateOfInitiation','$estimatedDateEnd','$remarks', '$category', '$projectCategoryValue', CURDATE(), '$status', '$projectStatusValue')";
 					
 					echo $sql;
 					echo $sql1;

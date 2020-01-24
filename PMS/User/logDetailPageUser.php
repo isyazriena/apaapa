@@ -73,7 +73,14 @@
     <h5>Management Information System</h5></a>
 
     <div class="header-right">
-      <a href="logListPageUser.php">Back</a>
+      <?php
+        session_start();
+        $projectToView = $_POST['projectToView'];
+        echo '<form action="differentDestinationPageUser.php" method="post" >';
+        echo "<input type='hidden' value=" . $projectToView . " name='projectToView'>";
+        echo '<input type="submit" name="backButton" value="Back">';
+        echo '</form>';
+      ?>
     </div>
   </div>
 
@@ -110,7 +117,6 @@
         }
 
         $logToView=$_POST["logToView"];
-        //$sql="select * from log where logId ='".$logToView."'";
         $sql="SELECT * FROM project INNER JOIN projectlog ON projectlog.logId='".$logToView."' AND projectlog.projectId=project.projectId";
         $qry = mysqli_query($con,$sql);  //run query
         return $qry;
@@ -119,7 +125,7 @@
       $row=mysqli_fetch_assoc($logDetails);
       $row2=mysqli_fetch_assoc($projectName);
 
-      echo "<br>Project Code: ";
+      echo "<br>Log Code: ";
       echo "  " . $logToView . " ";
 
       echo '<br><br>Project Name: ';
@@ -135,7 +141,7 @@
       echo "  " . $row['remarks'] . " ";
 
       echo '<br><br>Project Status: ';
-      echo 'ni from drop down';
+      echo "  " . $row['projectStatus'] . " ";
 
       echo '<br><br>Date of Update: ';
       echo "  " . $row['dateOfUpdate'] . " ";

@@ -4,6 +4,7 @@
 	include "projectPageAdmin.php";
 	include "logListPageAdmin.php";
 	include "datePageAdmin.php";
+	include "updateProjectPageAdmin.php";
 
 	if(isset($_POST["addProjectButton"])){
 		addNewProject();
@@ -20,5 +21,9 @@
 	else if(isset($_POST['deleteDateButton'])){
 		deleteDate();
 		header('Location: datePageAdmin.php');
+	}
+	else if(isset($_POST['updateProjectButton'])){
+		updateProject();
+		header('Location: dashboardProjectPageAdmin.php');
 	}
 ?>

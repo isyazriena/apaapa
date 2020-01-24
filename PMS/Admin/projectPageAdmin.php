@@ -115,6 +115,7 @@
     <h5>Management Information System</h5></a>
     
     <?php
+      session_start(); 
       include 'getDataAdmin.php';
     ?>
 
@@ -169,7 +170,7 @@
     </div><br><br>
 
   <?php
-    session_start(); 
+    
 
     $projectOverview = getOverviewOfProject();
     function getOverviewOfProject(){
@@ -213,7 +214,7 @@
         echo '<td>' . $row['projectCategory'] . "</td>";
         echo '<td>' . $row['estimatedDateEnd'] . "</td>";
         echo '<td>';
-          echo '<form action="dashboardProjectPageAdmin.php" method="post" >';
+          echo '<form action="differentDestinationPageAdmin.php" method="post" >';
           echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToView'>";
           echo $row['projectId'];
           echo '<input type="submit" name="viewProjectButton" value="Details">';
@@ -234,7 +235,6 @@
   ?>
   </div>
   <?php
-    session_start();
     //function delete project
 
     function deleteProject()

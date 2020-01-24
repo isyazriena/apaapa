@@ -79,7 +79,7 @@
 
   <?php
     session_start();
-    $projectToView=$_POST['projectToView'];
+    $projectToView=$_SESSION['projectToView'];
     echo $projectToView;
   ?>
 
@@ -114,7 +114,7 @@
           echo "Failed to connect to MySQL: " . mysqli_connect_error();
           exit;   //terminate the script
         }
-        $projectToView=$_POST['projectToView'];
+        $projectToView=$_SESSION['projectToView'];
         $sql="select * from project where projectId ='".$projectToView."'";
         $qry = mysqli_query($con,$sql);  //run query
         return $qry;
@@ -129,8 +129,8 @@
           echo "Failed to connect to MySQL: " . mysqli_connect_error();
           exit;   //terminate the script
         }
-        $projectToView=$_POST['projectToView'];
-        $sql1="select * from assigned where projectId ='".$projectToView."'";
+        $projectToView=$_SESSION['projectToView'];
+        $sql1="select * from assigned where projectId ='".$projectToView."' AND not position = 'person in charge'";
         $qry = mysqli_query($con,$sql1);
         return $qry;
       }
@@ -138,7 +138,7 @@
       echo $projectToView;
       
       $row=mysqli_fetch_assoc($projectDetails);
-      $row2=mysqli_fetch_assoc($projectMembers);
+      //$row2=mysqli_fetch_assoc($projectMembers);
 
       echo "<br>Project Code: ";
       echo "  " . $projectToView . " ";
@@ -162,7 +162,16 @@
       echo "  " . $row['personInCharge'] . " ";
 
       echo '<br><br>Members: ';
-      echo "  " . $row2['userId'] . " ";
+      while($row2=mysqli_fetch_assoc($projectMembers))//repeat for each record
+      {
+        echo "<br> - " . $row2['userId'] . " ";
+      }
+
+      echo '<br><br>Project Category: ';
+      echo "  " . $row['projectCategory'] . " ";
+
+      echo '<br><br>Project Status: ';
+      echo "  " . $row['projectStatus'] . " ";
 
       echo '<br><br>Project Description: ';
       echo "  " . $row['projectDescription'] . " ";
@@ -176,7 +185,12 @@
       while($row = $stat->fetch()){
           echo "<li><a target='_blank' href='viewProjectAttachmentAdmin.php?attachmentId=".$row['attachmentId']."'>".$row['attachmentName']."</a></li>";
       }
+      echo "</ol>";
+
+      echo "<form action='updateProjectPageAdmin.php' method='post'>";
+      echo "<input type='hidden' value=" . $projectToView . " name='projectId'>";
+      echo "<input type='submit' value='Update'>";
     ?>
-    </ol>
+    </form>
   </div>
 </html>

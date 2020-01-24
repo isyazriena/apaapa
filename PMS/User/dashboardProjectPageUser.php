@@ -163,6 +163,12 @@
       echo '<br><br>Members: ';
       echo "  " . $row2['userId'] . " ";
 
+      echo '<br><br>Project Category: ';
+      echo "  " . $row['projectCategory'] . " ";
+
+      echo '<br><br>Project Status: ';
+      echo "  " . $row['projectStatus'] . " ";
+
       echo '<br><br>Project Description: ';
       echo "  " . $row['projectDescription'] . " ";
 

@@ -159,7 +159,7 @@
 				$estimatedDateEnd=$_POST['estimatedDateEnd'];
 				$projectDescription=$_POST['projectDescription'];
 				$personInCharge=$_POST['pic'];
-				$members=$_POST['members']; //sql untuk members buat baru masukkan dalam table assigned settled but untuk ramai belum
+				$members=$_POST['members'];
 
 				//1.create connection
 				$con = mysqli_connect("localhost","web2","web2","mispms");
@@ -198,8 +198,8 @@
 						$qry = mysqli_query($con,$sql3);
 						$qry = mysqli_query($con,$sql5);
 						foreach ($_POST['members'] as $key=>$value) {
-							$sql = "INSERT INTO assigned(projectId, userId, position) VALUES('$last_id','$value', 'members')";
-							$con->query($con);
+							$sqlmembers = "INSERT INTO assigned(projectId, userId, position) VALUES('$last_id','$value', 'members')";
+							$con->multi_query($sqlmembers);
 						}
 					}
 					else{

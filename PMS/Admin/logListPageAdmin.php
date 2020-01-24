@@ -179,6 +179,7 @@
         echo '<td>';
           echo '<form action="logDetailPageAdmin.php" method="post" >';
           echo "<input type='hidden' value=" . $row['logId'] . " name='logToView'>";
+          echo "<input type='hidden' value=" . $projectToView . " name='projectToView'>";
           echo '<input type="submit" name="viewLogButton" value="Details">';
           echo '</form>';
         echo '</td>';
@@ -187,10 +188,12 @@
           echo "<input type='hidden' value=" . $row['logId'] . " name='logToDelete'>";
           echo '<input type="submit" name="deleteLogButton" value="X">';
           echo '</form>';
+          echo "$projectToView";
         echo '</td>';
         $count++;
       }
       echo '</table>';
+
   ?>
   <?php
     //function delete log
