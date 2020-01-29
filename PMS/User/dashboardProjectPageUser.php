@@ -130,14 +130,14 @@
           echo "Failed to connect to MySQL: " . mysqli_connect_error();
           exit;   //terminate the script
         }
-        $projectToView=$_POST['projectToView'];
-        $sql1="select * from assigned where projectId ='".$projectToView."'";
+        $projectToView=$_SESSION['projectToView'];
+        $sql1="select * from assigned where projectId ='".$projectToView."' AND not position = 'person in charge'";
         $qry = mysqli_query($con,$sql1);
         return $qry;
       }
       
       $row=mysqli_fetch_assoc($projectDetails);
-      $row2=mysqli_fetch_assoc($projectMembers);
+      //$row2=mysqli_fetch_assoc($projectMembers);
 
       echo "<br>Project Code: ";
       echo "  " . $projectToView . " ";
@@ -161,8 +161,10 @@
       echo "  " . $row['personInCharge'] . " ";
 
       echo '<br><br>Members: ';
-      echo "  " . $row2['userId'] . " ";
-
+      while($row2=mysqli_fetch_assoc($projectMembers))//repeat for each record
+      {
+        echo "<br> - " . $row2['userId'] . " ";
+      }
       echo '<br><br>Project Category: ';
       echo "  " . $row['projectCategory'] . " ";
 

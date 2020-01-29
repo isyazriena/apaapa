@@ -170,11 +170,11 @@
 				else{
 					echo "database connected";
 
-					$sql= "insert into project(projectName,reportOwner,systemCustodian,dateOfInitiation,estimatedDateEnd,projectDescription,personInCharge, projectCategory, projectCategoryValue)
+					$sql= "insert into project(projectName,reportOwner,systemCustodian,dateOfInitiation,estimatedDateEnd,projectDescription,personInCharge, projectStatus, projectStatusValue, projectCategory, projectCategoryValue)
 						values('$projectName','$reportOwner','$systemCustodian','$dateOfInitiation','$estimatedDateEnd','$projectDescription',
-						'$personInCharge', 'running', '2')";
+						'$personInCharge', 'seacapp', '1', 'running', '2')";
 					$sql1= "insert into log(dateOfInitiation, estimatedDateEnd, remarks, projectCategory, projectCategoryValue, dateOfUpdate)
-						values ('$dateOfInitiation','$estimatedDateEnd',' ', 'running', '2', CURDATE())";
+						values ('$dateOfInitiation','$estimatedDateEnd',' ', 'seacapp', '1', 'running', '2', CURDATE())";
 
 					echo $sql;
 					echo $sql1;

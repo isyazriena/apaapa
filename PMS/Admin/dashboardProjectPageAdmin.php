@@ -64,6 +64,18 @@
           padding: 50px;
           margin: 50px;
         }
+
+        .btn-link {
+          border: none;
+          outline: none;
+          background: none;
+          cursor: pointer;
+          color: #0000EE;
+          padding: 0;
+          text-decoration: underline;
+          font-family: inherit;
+          font-size: inherit;
+        }
       </style>
   </head>
 
@@ -161,10 +173,13 @@
       echo '<br><br>Person In Charge: ';
       echo "  " . $row['personInCharge'] . " ";
 
-      echo '<br><br>Members: ';
+      echo '<form action="adminButtonProcesses.php" method="post">';
+      echo '<br><br><input type="submit" name="viewMembersButton" class="btn-link" value="Members:">';
+      echo "<input type='hidden' value=" . $projectToView . " name='projectToView'>";
+      echo '</form>';
       while($row2=mysqli_fetch_assoc($projectMembers))//repeat for each record
       {
-        echo "<br> - " . $row2['userId'] . " ";
+        echo " - " . $row2['userId'] . " <br>";
       }
 
       echo '<br><br>Project Category: ';
