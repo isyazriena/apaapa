@@ -10,7 +10,7 @@ function getNameMembersOthers(){
         }
         else {
             $projectToView=$_SESSION['projectToView'];
-            $sql="SELECT * FROM user INNER JOIN assigned ON NOT assigned.userId=user.userId AND not assigned.projectId='".$projectToView."'";
+            $sql="SELECT * FROM user INNER JOIN assigned ON not assigned.userId=user.userId AND not assigned.projectId='".$projectToView."'";
             $qry = mysqli_query($con,$sql);
             return $qry;
         }

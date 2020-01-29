@@ -145,7 +145,7 @@
 					<?php
 						echo "<select name='members[]' id='members1' style='display:block;'>";						
 								while ($row = mysqli_fetch_assoc($list)){
-									echo '<option value="'.$row['userId'].'">'.$row['userName'].'</option>';
+									echo '<option value="'.$row['user.userId'].'">'.$row['user.userName'].'</option>';
 								}
 						echo "</select>";
 					?>
@@ -194,10 +194,9 @@
         }
         $projectToView=$_SESSION['projectToView'];
         foreach ($_POST['members'] as $key=>$value) {
-          $sqlmembers = "INSERT INTO assigned(projectId, userId, position) VALUES('$projectToView','$value', 'members')";
+          $sqlmembers = "INSERT INTO assigned(projectId, userId, position) VALUES('$projectToView','".$value."', 'members');";
           $con->multi_query($sqlmembers);
         }
-        $qry = mysqli_query($con,$sql);  //run query
         return $qry;
       } 
       
