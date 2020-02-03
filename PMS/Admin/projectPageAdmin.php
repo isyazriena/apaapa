@@ -239,6 +239,7 @@
 
     function deleteProject()
     {
+      confirm("Are u sure?");
       //create connection
       $con = mysqli_connect('localhost','web2','web2','mispms');
       if (mysqli_connect_errno())     //check connection is establish

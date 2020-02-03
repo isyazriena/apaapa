@@ -76,6 +76,36 @@
 		</div>
 	</div>
 
+	<?php
+		session_start();
+		$getOldData = getOldData();
+
+		function getOldData(){
+			$con = mysqli_connect('localhost','web2','web2','mispms');
+			if (mysqli_connect_errno())     //check connection is establish
+			{
+			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			exit;   //terminate the script
+			}
+			$projectId=$_POST['projectId'];
+			$sql5="select * from log inner join projectlog on log.logId=projectlog.logId and projectlog.projectId='".$projectId."' order by log.logId desc limit 1";
+			$qry = mysqli_query($con,$sql5);
+			return $qry;
+		}
+
+		$row=mysqli_fetch_assoc(getOldData());
+
+		function passValueCategory($value) {
+			
+			if ($row['projectStatus'] == $value){
+				return 'checked="true"';
+			} 
+			else 
+			return '';
+		}
+
+	?>
+
 	<br><pre><h1>	Enter Update Details: </h1></pre>
 
 	<div class="container">
@@ -83,30 +113,30 @@
 			<form action='userButtonProcesses.php' method='post' enctype='multipart/form-data'>
 
 				Date of Initiation:
-				<input type="date" name="dateOfInitiation"><br><br>
+				<input  type="date" name="dateOfInitiation"><br><br>
 				
 				Estimated Date End:
-				<input type="date" name="estimatedDateEnd"><br><br>
+				<input  type="date" name="estimatedDateEnd"><br><br>
 
 				Remarks:
-				<input type="text" name="remarks"><br><br>
+				<input <?php echo 'value="'.$row['remarks'].'"'; ?> type="text" name="remarks"><br><br>
 
 				Category: <br>
-				<input type="radio" name="category" <?php if (isset($category) && $category=="running") echo "checked";?> value="running">Running <br>
-				<input type="radio" name="category" <?php if (isset($category) && $category=="completed") echo "checked";?> value="completed">Completed <br>
-				<input type="radio" name="category" <?php if (isset($category) && $category=="terminated") echo "checked";?> value="terminated">Terminated <br><br>
+				<input  type="radio" name="category" <?php if (isset($category) && $category=="running") echo "checked";?> value="running">Running <br>
+				<input  type="radio" name="category" <?php if (isset($category) && $category=="completed") echo "checked";?> value="completed">Completed <br>
+				<input  type="radio" name="category" <?php if (isset($category) && $category=="terminated") echo "checked";?> value="terminated">Terminated <br><br>
 
 				Status: <br>
-				<input type="radio" name="status" <?php if (isset($status) && $status=="seacapp") echo "checked";?> value="seacapp">SEAC Approve <br>
-				<input type="radio" name="status" <?php if (isset($status) && $status=="ur") echo "checked";?> value="ur">User Requirement <br>
-				<input type="radio" name="status" <?php if (isset($status) && $status=="dev") echo "checked";?> value="dev">Development <br>
-				<input type="radio" name="status" <?php if (isset($status) && $status=="uat") echo "checked";?> value="uat">UAT <br>
-				<input type="radio" name="status" <?php if (isset($status) && $status=="sit") echo "checked";?> value="sit">SIT <br>
-				<input type="radio" name="status" <?php if (isset($status) && $status=="dep") echo "checked";?> value="dep">Deployment <br>
+				<input  type="radio" name="status" <?php echo passValueCategory(1); if (isset($status) && $status=="seacapp") echo "checked";?> value="seacapp">SEAC Approve <br>
+				<input  type="radio" name="status" <?php echo passValueCategory(2); ?> <?php if (isset($status) && $status=="ur") echo "checked";?> value="ur">User Requirement <br>
+				<input  type="radio" name="status" <?php echo passValueCategory(3); ?> <?php if (isset($status) && $status=="dev") echo "checked";?> value="dev">Development <br>
+				<input  type="radio" name="status" <?php echo passValueCategory(4); ?> <?php if (isset($status) && $status=="uat") echo "checked";?> value="uat">UAT <br>
+				<input  type="radio" name="status" <?php echo passValueCategory(5); ?> <?php if (isset($status) && $status=="sit") echo "checked";?> value="sit">SIT <br>
+				<input  type="radio" name="status" <?php echo passValueCategory(6); ?> <?php if (isset($status) && $status=="dep") echo "checked";?> value="dep">Deployment <br>
 
 				Attachment:
 				<input type="file" name="myfile"/><br>
-				
+
 				<?php
 					$projectId=$_POST['projectId'];
 					echo "<input type='submit' value='Done' name='updateDetailsButton'>";
@@ -115,11 +145,10 @@
 			</form>
 
 			<?php
-			session_start();
+			
 			function updateDetails(){
 				$dateOfInitiation=$_POST['dateOfInitiation'];
 				$estimatedDateEnd=$_POST['estimatedDateEnd'];
-				//$systemCustodian=$_POST['systemCustodian']; //drop down project status
 				$remarks=$_POST['remarks'];
 				$category=$_POST['category'];
 				$projectCategoryValue = '0';
