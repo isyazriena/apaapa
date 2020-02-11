@@ -117,6 +117,8 @@
     <?php
       session_start(); 
       include 'getDataAdmin.php';
+      include 'getDataAdmin5.php';
+      //include 'getDataAdmin6.php';
     ?>
 
     <div class="header-right">
@@ -138,7 +140,54 @@
     </div>
 
     <div class="topnav">
-      <input type="text" placeholder="Search..">
+      <input type="text" onkeyup="myFunction()" placeholder="Search.." id="myInput">
+
+      <div style="float: right">
+        <script>
+            $(document).ready(function(){ /* PREPARE THE SCRIPT */
+                $("#month").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */
+                    document.getElementById('jsform1').submit();
+                });
+            });
+        </script>
+
+        <form id="jsform1" action="" method="POST">
+            <select name="month" id="month">
+                <?php 
+                    $list = ['Month', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                    $val = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+
+                    for ($i=0; $i < count($list); $i++) {
+                        if ($val[$i] == $_POST['month']) { 
+                          $select = 'selected="selected"'; 
+                        }
+                        else { 
+                          $select = ''; 
+                        }
+                        echo '<option value="'.$i.'" '.$select.'>'.$list[$i].'</option>';
+                    }
+                ?>
+            </select>
+            <input type='hidden' name='projectId' value='. $row["projectId"] .'>
+        </form>
+      </div>
+
+      <div style="float: right">
+        <script>
+            $(document).ready(function(){ /* PREPARE THE SCRIPT */
+                $("#year").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */
+                    document.getElementById('jsform2').submit();
+                });
+                generateOptionsRange('year', 2019, 2030);
+            });
+        </script>
+
+        <form id="jsform2" action="" method="POST">
+            <select name="year" id="year">
+            </select>
+        </form>
+      </div>
+
       <div style="float: right">
         <script>
             $(document).ready(function(){ /* PREPARE THE SCRIPT */
@@ -192,7 +241,7 @@
 
     echo '<p>No of projects: ' . mysqli_num_rows($projectOverview).'</p>';
 
-    echo '<table border="2">';
+    echo '<table id="myTable" border="2">';
     echo '<h2><tr><th>No</th>
         <th>Project Name</th>
             <th>Person In Charge</th>
@@ -202,7 +251,16 @@
             <th>Delete</th>
             </tr></h2>';
 
-    $list = getList();
+            $list = getList();
+            if(isset($_POST['month'])){
+              $list = getList1();
+            }
+            else if(isset($_POST['year'])){
+              $list = getList2();
+            }
+            else{
+              $list = getList();
+            }
     $count=1;
     while($row = mysqli_fetch_assoc($list)) {
      
@@ -214,14 +272,14 @@
         echo '<td>' . $row['projectCategory'] . "</td>";
         echo '<td>' . $row['estimatedDateEnd'] . "</td>";
         echo '<td>';
-          echo '<form action="differentDestinationPageAdmin.php" method="post" >';
+          echo '<form action="differentDestinationPageAdmin.php" method="post">';
           echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToView'>";
           echo $row['projectId'];
           echo '<input type="submit" name="viewProjectButton" value="Details">';
           echo '</form>';
         echo '</td>';
         echo '<td>';
-          echo '<form action="adminButtonProcesses.php" method="post">';
+          echo '<form action="adminButtonProcesses.php" method="post" onsubmit="return warn(event)">';
           echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToDelete'>";
           echo '<input type="submit" name="deleteProjectButton" value="X">';
           echo '</form>';
@@ -230,16 +288,60 @@
       }
       echo '</table>';
 
-      
-
   ?>
+
+  <script>
+  function myFunction() {
+    // Declare variables
+    var input, filter, table, tr, td, i, j, txtValue, txtValue2;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.rows;
+
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      td2 = tr[i].getElementsByTagName("td")[2];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        txtValue2 = td2.textContent || td2.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+  </script>
+
+  <script>
+    function warn(e) {
+      if (confirm('Are you sure to delete?'))
+        e.returnValue = true;
+      else
+        e.returnValue = false;
+    }
+  </script>
+
+  <script>
+    function generateOptionsRange(parentId, start, end){
+      var parent = document.querySelector('#' + parentId);
+
+      for(i=0; i<=(end-start); i++){
+        var option = document.createElement('option');
+        option.textContent = start + i;
+        parent.appendChild(option);
+      }
+    }
+  </script>
+
   </div>
   <?php
     //function delete project
 
     function deleteProject()
     {
-      confirm("Are u sure?");
       //create connection
       $con = mysqli_connect('localhost','web2','web2','mispms');
       if (mysqli_connect_errno())     //check connection is establish

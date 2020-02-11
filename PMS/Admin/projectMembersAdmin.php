@@ -122,7 +122,6 @@
       //display data
       while($row=mysqli_fetch_assoc($projectMembers))//repeat for each record
         {
-            //echo "<br> - " . $row['userId'] . " ";
             echo '<tr>';
             echo '<td>'.$count."</td>";
             echo '<td>' . $row['userId'] . "</td>";

@@ -162,7 +162,7 @@
     </div>
 
     <div class="topnav">
-      <input type="text" placeholder="Search..">
+      <input type="text" onkeyup="myFunction()" placeholder="Search.." id="myInput">
     </div><br><br>
 
     <?php
@@ -187,7 +187,7 @@
 
       echo '<p>No of projects: ' . mysqli_num_rows($projectOverview).'</p>';
 
-      echo '<table border="2">';
+      echo '<table id="myTable" border="2">';
       echo '<h2><tr><th>No</th>
           <th>Project Name</th>
               <th>Person In Charge</th>
@@ -217,4 +217,29 @@
         echo '</table>';
     ?>
   </div>
+
+  <script>
+  function myFunction() {
+    // Declare variables
+    var input, filter, table, tr, td, i, j, txtValue, txtValue2;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.rows;
+
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      td2 = tr[i].getElementsByTagName("td")[2];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        txtValue2 = td2.textContent || td2.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+  </script>
 </html>

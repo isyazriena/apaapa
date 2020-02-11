@@ -102,7 +102,7 @@
       </style>
   </head>
 
-  <div class="header">
+  <div class="header"> <!--go to home when clicked-->
     <a href="projectPageAdmin.php" class="logo"><img src='logosahaja.png'>
     <h4>Project Monitoring System</h4>
     <h5>Management Information System</h5></a>
@@ -117,25 +117,22 @@
     echo $projectToView;
   ?>
 
-  <form action='dashboardProjectPageAdmin.php' method='post'>
+  <form action='dashboardProjectPageAdmin.php' method='post'> <!--tab dashboard-->
     <input type='submit' value='Dashboard'>
     <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
   </form>
 
-  <form action='logListPageAdmin.php' method='post'>
+  <form action='logListPageAdmin.php' method='post'> <!--tab log-->
     <input type='submit' value='Log'>
     <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
   </form>
 
-  <form action='datePageAdmin.php' method='post'>
+  <form action='datePageAdmin.php' method='post'> <!--tab dates-->
     <input type='submit' value='Dates'>
     <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
   </form>
 
   <div style="text-align:center; margin:50px;">
-    <div class="topnav">
-      <input type="text" placeholder="Search..">
-    </div><br><br>
 
     <?php
       $dateOverview = getOverviewOfDate();
@@ -177,7 +174,7 @@
           echo '<td>' . $row['nameId'] . "</td>";
           echo '<td>' . $row['logId'] . "</td>";
           echo '<td>';
-          echo '<form action="adminButtonProcesses.php" method="post">';
+          echo '<form action="adminButtonProcesses.php" method="post" onsubmit="return warn(event)">';
           echo "<input type='hidden' value=" . $row['logId'] . " name='dateToDelete'>";
           echo '<input type="submit" name="deleteDateButton" value="X">';
           echo '</form>';
@@ -186,6 +183,14 @@
         }
       echo '</table>';
     ?>
+    <script>
+    function warn(e) {
+      if (confirm('Are you sure to delete?'))
+        e.returnValue = true;
+      else
+        e.returnValue = false;
+    }
+  </script>
     <?php
     //function delete log
     function deleteDate()

@@ -14,11 +14,11 @@
         
     if($count == 1){
         $_SESSION['projectToView'] = $projectToView;
-		header('Location: dashboardProjectPageAdmin.php');
+		header('Location: dashboardProjectPageAdmin.php'); //creator of project
 	}
 
 	else{
 		$_SESSION['projectToView'] = $projectToView;
-		header('Location: dashboardOtherProjectPageAdmin.php');
+		header('Location: dashboardOtherProjectPageAdmin.php'); //non-creator of project
 	}
 ?>

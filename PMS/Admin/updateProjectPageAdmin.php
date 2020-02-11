@@ -77,6 +77,41 @@
 		</div>
 	</div>
 
+	<?php
+		session_start();
+		$getOldData = getOldData();
+
+		function getOldData(){
+			$con = mysqli_connect('localhost','web2','web2','mispms');
+			if (mysqli_connect_errno())     //check connection is establish
+			{
+			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			exit;   //terminate the script
+			}
+			$projectId=$_POST['projectId'];
+			$sql3="select * from project where projectId='".$projectId."'";
+			$qry = mysqli_query($con,$sql3);
+			return $qry;
+		}
+
+		function getOldDataAttachment(){
+			$con = mysqli_connect('localhost','web2','web2','mispms');
+			if (mysqli_connect_errno())     //check connection is establish
+			{
+			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			exit;   //terminate the script
+			}
+			$projectId=$_POST['projectId'];
+			$sql4="select * from attachmentproject where projectId='".$projectId."'";
+			$qry = mysqli_query($con,$sql4);
+			return $qry;
+		}
+
+		$row=mysqli_fetch_assoc(getOldData());
+		$row2=mysqli_fetch_assoc(getOldDataAttachment());
+
+	?>
+
 	<br><pre><h1>	Enter Project Update Details: </h1></pre>
 
 	<div class="container">
@@ -84,21 +119,30 @@
 			<form action='adminButtonProcesses.php' method='post' enctype='multipart/form-data'>
 
 				Project Name:
-				<input type='text' name='projectName'><br><br>
+				<input type='text' name='projectName' value = "<?php echo $row['projectName']?>"><br><br>
 
 				Report Owner:
-				<input type='text' name='reportOwner'><br><br>
+				<input type='text' name='reportOwner' value = "<?php echo $row['reportOwner']?>"><br><br>
 
 				System Custodian:
-				<input type='text' name='systemCustodian'><br><br>
+				<input type='text' name='systemCustodian' value = "<?php echo $row['systemCustodian']?>"><br><br>
 
 				Project Description:
-				<input type='text' name='projectDescription'><br><br>
+				<input type='text' name='projectDescription' value = "<?php echo $row['projectDescription']?>"><br><br>
 
 				Attachment:
-				<input type="file" name="myfile"/><br><br>
+				<input type="file" name="myfile" value = "<?php echo $row2['attachmentName']?>"><br><br>
 				<?php
+					echo '<ol>';
+					$dbh = new PDO("mysql:host=localhost;dbname=mispms", "web2", "web2");
 					$projectId=$_POST['projectId'];
+					$stat = $dbh->prepare('select * from attachmentproject where projectId ="'.$projectId.'"');
+					$stat->execute();
+					while($row = $stat->fetch()){
+						echo "<li><a target='_blank' href='viewProjectAttachmentAdmin.php?attachmentId=".$row['attachmentId']."'>".$row['attachmentName']."</a></li>";
+					}
+					$projectId=$_POST['projectId'];
+					echo '</ol>';
 					echo "<input type='submit' value='Done' name='updateProjectButton'>";
 					echo "<input type='hidden' value='$projectId' name='projectId'>";
 				?>

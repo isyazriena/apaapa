@@ -137,7 +137,6 @@
       }
       
       $row=mysqli_fetch_assoc($projectDetails);
-      //$row2=mysqli_fetch_assoc($projectMembers);
       
       echo "<br>Project Code: ";
       echo "  " . $projectToView . " ";

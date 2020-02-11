@@ -135,10 +135,6 @@
 
   <div style="text-align:center; margin:50px;">
 
-    <div class="topnav">
-      <input type="text" placeholder="Search..">
-    </div><br><br>
-
     <?php
       $dateOverview = getOverviewOfDate();
 
@@ -172,11 +168,9 @@
         {
           echo '<tr>';
           echo '<td>'.$count."</td>";
-          //echo '<td>' . $row['projectName'] . "</td>"; kena query untuk dapatkan projectname
           echo '<td>' . $row['dateOfInitiation'] . "</td>";
           echo '<td>' . $row['estimatedDateEnd'] . "</td>";
           echo '<td>' . $row['dateOfUpdate'] . "</td>";
-          //echo '<td>' . $row['nameId'] . "</td>"; task 9 belum settle masukkan nama editor dalam table (admin&user)
           echo '<td>' . $row['nameId'] . "</td>";
           echo '<td>' . $row['logId'] . "</td>";
           $count++;

@@ -79,11 +79,10 @@
       </style>
   </head>
 
-  <div class="header">
+  <div class="header"> <!--go to home when clicked-->
     <a href="projectPageAdmin.php" class="logo"><img src='logosahaja.png'>
     <h4>Project Monitoring System</h4>
     <h5>Management Information System</h5></a>
-
     <div class="header-right">
       <a href="projectPageAdmin.php">Back</a>
     </div>
@@ -96,17 +95,17 @@
   ?>
 
   <div style="margin:25px">
-    <form action='dashboardProjectPageAdmin.php' method='post'>
+    <form action='dashboardProjectPageAdmin.php' method='post'> <!--tab dashboard-->
       <input type='submit' value='Dashboard'>
       <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
     </form>
 
-    <form action='logListPageAdmin.php' method='post'>
+    <form action='logListPageAdmin.php' method='post'> <!--tab log-->
       <input type='submit' value='Log'>
       <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
     </form>
 
-    <form action='datePageAdmin.php' method='post'>
+    <form action='datePageAdmin.php' method='post'> <!--tab dates-->
       <input type='submit' value='Dates'>
       <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
     </form>
@@ -150,7 +149,6 @@
       echo $projectToView;
       
       $row=mysqli_fetch_assoc($projectDetails);
-      //$row2=mysqli_fetch_assoc($projectMembers);
 
       echo "<br>Project Code: ";
       echo "  " . $projectToView . " ";

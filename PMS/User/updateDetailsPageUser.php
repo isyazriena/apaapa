@@ -95,9 +95,20 @@
 
 		$row=mysqli_fetch_assoc(getOldData());
 
+		function passValueStatus($value) {
+
+			$row=mysqli_fetch_assoc(getOldData());
+			if ($row['projectStatusValue'] == $value){
+				return 'checked="true"';
+			} 
+			else 
+			return '';
+		}
+
 		function passValueCategory($value) {
-			
-			if ($row['projectStatus'] == $value){
+
+			$row=mysqli_fetch_assoc(getOldData());
+			if ($row['projectCategoryValue'] == $value){
 				return 'checked="true"';
 			} 
 			else 
@@ -113,29 +124,29 @@
 			<form action='userButtonProcesses.php' method='post' enctype='multipart/form-data'>
 
 				Date of Initiation:
-				<input  type="date" name="dateOfInitiation"><br><br>
+				<input  type="date" name="dateOfInitiation" value="<?php echo $row['dateOfInitiation']?>" ><br><br>
 				
 				Estimated Date End:
-				<input  type="date" name="estimatedDateEnd"><br><br>
+				<input  type="date" name="estimatedDateEnd" value="<?php echo $row['estimatedDateEnd']?>"><br><br>
 
 				Remarks:
-				<input <?php echo 'value="'.$row['remarks'].'"'; ?> type="text" name="remarks"><br><br>
+				<input type="text" name="remarks"><br><br>
 
 				Category: <br>
-				<input  type="radio" name="category" <?php if (isset($category) && $category=="running") echo "checked";?> value="running">Running <br>
-				<input  type="radio" name="category" <?php if (isset($category) && $category=="completed") echo "checked";?> value="completed">Completed <br>
-				<input  type="radio" name="category" <?php if (isset($category) && $category=="terminated") echo "checked";?> value="terminated">Terminated <br><br>
+				<input  type="radio" name="category" <?php echo passValueCategory(2); if (isset($category) && $category=="running") echo "checked";?> value="running">Running <br>
+				<input  type="radio" name="category" <?php echo passValueCategory(3); if (isset($category) && $category=="completed") echo "checked";?> value="completed">Completed <br>
+				<input  type="radio" name="category" <?php echo passValueCategory(4); if (isset($category) && $category=="terminated") echo "checked";?> value="terminated">Terminated <br><br>
 
 				Status: <br>
-				<input  type="radio" name="status" <?php echo passValueCategory(1); if (isset($status) && $status=="seacapp") echo "checked";?> value="seacapp">SEAC Approve <br>
-				<input  type="radio" name="status" <?php echo passValueCategory(2); ?> <?php if (isset($status) && $status=="ur") echo "checked";?> value="ur">User Requirement <br>
-				<input  type="radio" name="status" <?php echo passValueCategory(3); ?> <?php if (isset($status) && $status=="dev") echo "checked";?> value="dev">Development <br>
-				<input  type="radio" name="status" <?php echo passValueCategory(4); ?> <?php if (isset($status) && $status=="uat") echo "checked";?> value="uat">UAT <br>
-				<input  type="radio" name="status" <?php echo passValueCategory(5); ?> <?php if (isset($status) && $status=="sit") echo "checked";?> value="sit">SIT <br>
-				<input  type="radio" name="status" <?php echo passValueCategory(6); ?> <?php if (isset($status) && $status=="dep") echo "checked";?> value="dep">Deployment <br>
+				<input  type="radio" name="status" value="seacapp" <?php echo passValueStatus(1); if (isset($status) && $status=="seacapp") echo "checked";?> >SEAC Approve <br>
+				<input  type="radio" name="status" value="ur" <?php echo passValueStatus(2); if (isset($status) && $status=="ur") echo "checked";?> >User Requirement <br>
+				<input  type="radio" name="status" value="dev" <?php echo passValueStatus(3); if (isset($status) && $status=="dev") echo "checked";?> >Development <br>
+				<input  type="radio" name="status" value="uat" <?php echo passValueStatus(4); if (isset($status) && $status=="uat") echo "checked";?> >UAT <br>
+				<input  type="radio" name="status" value="sit" <?php echo passValueStatus(5); if (isset($status) && $status=="sit") echo "checked";?> >SIT <br>
+				<input  type="radio" name="status" value="dep" <?php echo passValueStatus(6); if (isset($status) && $status=="dep") echo "checked";?> >Deployment <br><br>
 
 				Attachment:
-				<input type="file" name="myfile"/><br>
+				<input type="file" name="myfile"/><br><br>
 
 				<?php
 					$projectId=$_POST['projectId'];

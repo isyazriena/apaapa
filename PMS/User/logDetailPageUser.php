@@ -76,7 +76,7 @@
       <?php
         session_start();
         $projectToView = $_POST['projectToView'];
-        echo '<form action="differentDestinationPageUser.php" method="post" >';
+        echo '<form action="logListPageUser.php" method="post" >';
         echo "<input type='hidden' value=" . $projectToView . " name='projectToView'>";
         echo '<input type="submit" name="backButton" value="Back">';
         echo '</form>';

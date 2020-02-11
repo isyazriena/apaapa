@@ -67,7 +67,7 @@
       </style>
   </head>
 
-  <div class="header">
+  <div class="header"> <!--go to home when clicked-->
     <a href="projectPageAdmin.php" class="logo"><img src='logosahaja.png'>
       <h4>Project Monitoring System</h4>
       <h5>Management Information System</h5></a>
@@ -76,7 +76,7 @@
       <?php
         session_start();
         $projectToView = $_POST['projectToView'];
-        echo '<form action="differentDestinationPageAdmin.php" method="post" >';
+        echo '<form action="logListPageAdmin.php" method="post" >';
         echo "<input type='hidden' value=" . $projectToView . " name='projectToView'>";
         echo '<input type="submit" name="backButton" value="Back">';
         echo '</form>';
