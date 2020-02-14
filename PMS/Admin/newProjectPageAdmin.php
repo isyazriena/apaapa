@@ -89,26 +89,26 @@
 			<form action='adminButtonProcesses.php' method='post' enctype='multipart/form-data'>
 
 				Project Name:
-				<input type='text' name='projectName'><br><br>
+				<input type='text' name='projectName' required><br><br>
 
 				Report Owner:
-				<input type='text' name='reportOwner'><br><br>
+				<input type='text' name='reportOwner' required><br><br>
 
 				System Custodian:
-				<input type='text' name='systemCustodian'><br><br>
+				<input type='text' name='systemCustodian' required><br><br>
 
 				Date of Initiation:
-				<input type='date' name='dateOfInitiation'><br><br>
+				<input type='date' name='dateOfInitiation' required><br><br>
 
 				Estimated Date End:
-				<input type='date' name='estimatedDateEnd'><br><br>
+				<input type='date' name='estimatedDateEnd' required><br><br>
 
 				Project Description:
 				<input type='text' name='projectDescription'><br><br>
 
 				Person In Charge:
 				<div>
-					<select name="pic" id="pic">
+					<select name="pic" id="pic" required>
 						<?php 
 							$list = getNamePic();
 							while ($row = mysqli_fetch_assoc($list)){
@@ -121,9 +121,9 @@
 				Members:
 				<?php $list = getNameMembers(); ?>
 				<button type="button" id="buttonAdd">Add</button>
-				<div id="list">
+				<div id="list" required>
 					<?php
-						echo "<select name='members[]' id='members1' style='display:block;'>";						
+						echo "<select name='members[]' id='members1' style='display:block;' required>";						
 								while ($row = mysqli_fetch_assoc($list)){
 									echo '<option value="'.$row['userId'].'">'.$row['userName'].'</option>';
 								}
@@ -160,6 +160,7 @@
 				$projectDescription=$_POST['projectDescription'];
 				$personInCharge=$_POST['pic'];
 				$members=$_POST['members'];
+				$adminId = $_SESSION['adminId'];
 
 				//1.create connection
 				$con = mysqli_connect("localhost","web2","web2","mispms");
@@ -173,8 +174,8 @@
 					$sql= "insert into project(projectName,reportOwner,systemCustodian,dateOfInitiation,estimatedDateEnd,projectDescription,personInCharge, projectStatus, projectStatusValue, projectCategory, projectCategoryValue)
 						values('$projectName','$reportOwner','$systemCustodian','$dateOfInitiation','$estimatedDateEnd','$projectDescription',
 						'$personInCharge', 'seacapp', '1', 'running', '2')";
-					$sql1= "insert into log(dateOfInitiation, estimatedDateEnd, remarks, projectCategory, projectCategoryValue, dateOfUpdate)
-						values ('$dateOfInitiation','$estimatedDateEnd',' ', 'seacapp', '1', 'running', '2', CURDATE())";
+					$sql1= "insert into log(dateOfInitiation, estimatedDateEnd, remarks, projectStatus, projectStatusValue, projectCategory, projectCategoryValue, dateOfUpdate, nameId)
+						values ('$dateOfInitiation','$estimatedDateEnd','project first created by admin', 'seacapp', '1', 'running', '2', CURDATE(), '$adminId')";
 
 					echo $sql;
 					echo $sql1;

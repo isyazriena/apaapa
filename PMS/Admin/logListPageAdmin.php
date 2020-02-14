@@ -163,6 +163,7 @@
           <th>Update Date</th>
           <th>Status Project</th>
           <th>Remarks</th>
+          <th>Editor</th>
           <th>(i)</th>
           <th>Delete</th>
           </tr></h2>';
@@ -173,8 +174,9 @@
         echo '<tr>';
         echo '<td>'.$count."</td>";
         echo '<td>' . $row['dateOfUpdate'] . "</td>";
-        echo '<td> Later </td>';
+        echo '<td>' . $row['projectStatus'] . "</td>";
         echo '<td>' . $row['remarks'] . "</td>";
+        echo '<td>' . $row['nameId'] . "</td>";
         echo '<td>';
           echo '<form action="logDetailPageAdmin.php" method="post" >';
           echo "<input type='hidden' value=" . $row['logId'] . " name='logToView'>";

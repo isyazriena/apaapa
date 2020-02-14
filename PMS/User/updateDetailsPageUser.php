@@ -165,6 +165,7 @@
 				$projectCategoryValue = '0';
 				$status=$_POST['status'];
 				$projectStatusValue = '0';
+				$userId = $_SESSION['userId'];
 
 				if($category == 'running'){
 					$projectCategoryValue = '2';
@@ -208,8 +209,8 @@
 					$sql= 'update project SET dateOfInitiation = "'.$dateOfInitiation.'", estimatedDateEnd = "'.$estimatedDateEnd.'", 
 					projectCategory = "'.$category.'", projectCategoryValue = "'.$projectCategoryValue.'", projectStatus = "'.$status.'", projectStatusValue = "'.$projectStatusValue.'"
 						WHERE projectId ="'.$projectId.'"';
-					$sql1= "insert into log(dateOfInitiation, estimatedDateEnd, remarks, projectCategory, projectCategoryValue, dateOfUpdate, projectStatus, projectStatusValue)
-						values ('$dateOfInitiation','$estimatedDateEnd','$remarks', '$category', '$projectCategoryValue', CURDATE(), '$status', '$projectStatusValue')";
+					$sql1= "insert into log(dateOfInitiation, estimatedDateEnd, remarks, projectCategory, projectCategoryValue, dateOfUpdate, projectStatus, projectStatusValue, nameId)
+						values ('$dateOfInitiation','$estimatedDateEnd','$remarks', '$category', '$projectCategoryValue', CURDATE(), '$status', '$projectStatusValue', '$userId')";
 					
 					echo $sql;
 					echo $sql1;
@@ -232,11 +233,18 @@
 							$stmt->execute();
 						}
 						$sql2 = "insert into projectlog(projectId, logId) values('$projectId', '$last_id')";
-						$sql4= "insert into dates(projectId, logId, dateOfInitiation, estimatedDateEnd, dateOfUpdate, nameId) 
-								values('$projectId', '$last_id', '$dateOfInitiation', '$estimatedDateEnd', CURDATE(), '$userId')";
 						$qry=mysqli_query($con,$sql2);
-						$qry=mysqli_query($con,$sql4);
-						return $qry;
+
+						$row=mysqli_fetch_assoc(getOldData());
+						if ($dateOfInitiation == $row['dateOfInitiation'] || $estimatedDateEnd == $row['estimatedDateEnd']){
+							return;
+						}
+						else{
+							$sql4= "insert into dates(projectId, logId, dateOfInitiation, estimatedDateEnd, dateOfUpdate, nameId) 
+									values('$projectId', '$last_id', '$dateOfInitiation', '$estimatedDateEnd', CURDATE(), '$userId')";
+							$qry=mysqli_query($con,$sql4);
+							return $qry;
+						}
 					}
 					else{
 						echo "Error: " .$sql. "<br>" .$con->error;

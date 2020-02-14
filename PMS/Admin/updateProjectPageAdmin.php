@@ -106,9 +106,23 @@
 			$qry = mysqli_query($con,$sql4);
 			return $qry;
 		}
+		
+		function getFirstLog(){
+			$con = mysqli_connect('localhost','web2','web2','mispms');
+			if (mysqli_connect_errno())     //check connection is establish
+			{
+			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			exit;   //terminate the script
+			}
+			$projectId=$_POST['projectId'];
+			$sql5="select * from log a inner join projectlog b on a.logId=b.logId and b.projectId='".$projectId."' order by a.logId asc limit 1";
+			$qry = mysqli_query($con,$sql5);
+			return $qry;
+		}
 
 		$row=mysqli_fetch_assoc(getOldData());
 		$row2=mysqli_fetch_assoc(getOldDataAttachment());
+		$row3=mysqli_fetch_assoc(getFirstLog());
 
 	?>
 
@@ -158,6 +172,7 @@
 				$reportOwner=$_POST['reportOwner'];
 				$systemCustodian=$_POST['systemCustodian'];
 				$projectDescription=$_POST['projectDescription'];
+				$adminId = $_SESSION['adminId'];
 
 				//1.create connection
 				$con = mysqli_connect("localhost","web2","web2","mispms");
@@ -175,20 +190,17 @@
 					$qry = mysqli_query($con,$sql);
 					echo $sql;
 
-					$sql1= "insert into log(remarks, dateOfUpdate)
-						values ('admin updated project details', CURDATE())";
+					$sql1= 'update log SET remarks = "admin updated project details", dateOfUpdate = CURDATE(), nameId = "'.$adminId.'"
+					WHERE logId ="'.$row3['logId'].'"';
 
 					if($con->query($sql1)==TRUE){
 						$projectId=$_POST['projectId'];
 						$last_id2 = $con->insert_id; //logId
 						$sql2 = "insert into projectlog(projectId, logId) values('$projectId', '$last_id2')";
-						$sql4= "update dates SET dateOfUpdate = CURDATE() where projectId ='".$projectId."'";
 						$qry = mysqli_query($con,$sql2);
-						$qry = mysqli_query($con,$sql4);
 
 						echo $sql1;
 						echo $sql2;
-						echo $sql4;
 
 					}
 					else{

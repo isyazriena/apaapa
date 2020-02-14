@@ -12,12 +12,13 @@
 		addNewProject(); //call function kept in newProjectPageAdmin when button clicked
 		echo '<script type="text/javascript"> document.location="projectPageAdmin.php"; </script>';
 	}
-	else if(isset($_POST['deleteProjectButton'])){
+	else if(isset($_POST['deleteProjectButton'])){ //from projectPageAdmin
 		deleteProject(); //call function kept in ProjectPageAdmin when button clicked
 		echo '<script type="text/javascript"> document.location="projectPageAdmin.php"; </script>';
 	}
-	else if(isset($_POST['deleteLogButton'])){
+	else if(isset($_POST['deleteLogButton'])){ //from logListPageAdmin
 		deleteLog(); //call function kept in logListPageAdmin when button clicked
+		$projectToView=$_POST['projectToView'];
 		echo '<script type="text/javascript"> document.location="logListPageAdmin.php"; </script>';
 	}
 	else if(isset($_POST['deleteDateButton'])){
