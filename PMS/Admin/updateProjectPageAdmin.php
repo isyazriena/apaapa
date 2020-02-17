@@ -191,7 +191,7 @@
 					echo $sql;
 
 					$sql1= 'update log SET remarks = "admin updated project details", dateOfUpdate = CURDATE(), nameId = "'.$adminId.'"
-					WHERE logId ="'.$row3['logId'].'"';
+					WHERE logId ="'.$row3['logId'].'"'; //HERE WEIRD
 
 					if($con->query($sql1)==TRUE){
 						$projectId=$_POST['projectId'];
