@@ -1,20 +1,25 @@
 <html lang="en">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="csstable/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="csstable/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="csstable/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="csstable/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="csstable/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="csstable/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="csstable/css/util.css">
+	<link rel="stylesheet" type="text/css" href="csstable/css/main.css">
+<!--===============================================================================================-->
       <style>
-        * {box-sizing: border-box;}
-
-        body { 
-          margin: 0;
-          font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .header {
-          overflow: hidden;
-          background-color: #f1f1f1;
-          padding: 20px 10px;
-        }
 
         .header a {
           float: left;
@@ -117,8 +122,6 @@
     <?php
       session_start(); 
       include 'getDataAdmin.php';
-      include 'getDataAdmin5.php';
-      //include 'getDataAdmin6.php';
     ?>
 
     <div class="header-right">
@@ -133,60 +136,17 @@
     <p><b>Welcome to Management Information System</b></p>
   </div>
 
-  <div class="container">
-
     <div style="text-align:center">
       <img src='logopenuh.png'><br>
     </div>
 
+    <div class="limiter">
+		<div class="container-table100" style="padding:50px;">
+			<div class="wrap-table100">
+				<div class="table100">
+
     <div class="topnav">
       <input type="text" onkeyup="myFunction()" placeholder="Search.." id="myInput">
-
-      <div style="float: right">
-        <script>
-            $(document).ready(function(){ /* PREPARE THE SCRIPT */
-                $("#month").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */
-                    document.getElementById('jsform1').submit();
-                });
-            });
-        </script>
-
-        <form id="jsform1" action="" method="POST">
-            <select name="month" id="month">
-                <?php 
-                    $list = ['Month', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                    $val = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-
-                    for ($i=0; $i < count($list); $i++) {
-                        if ($val[$i] == $_POST['month']) { 
-                          $select = 'selected="selected"'; 
-                        }
-                        else { 
-                          $select = ''; 
-                        }
-                        echo '<option value="'.$i.'" '.$select.'>'.$list[$i].'</option>';
-                    }
-                ?>
-            </select>
-            <input type='hidden' name='projectId' value='. $row["projectId"] .'>
-        </form>
-      </div>
-
-      <div style="float: right">
-        <script>
-            $(document).ready(function(){ /* PREPARE THE SCRIPT */
-                $("#year").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */
-                    document.getElementById('jsform2').submit();
-                });
-                generateOptionsRange('year', 2019, 2030);
-            });
-        </script>
-
-        <form id="jsform2" action="" method="POST">
-            <select name="year" id="year">
-            </select>
-        </form>
-      </div>
 
       <div style="float: right">
         <script>
@@ -240,16 +200,20 @@
     echo 'User ID: ' .$_SESSION['adminId']. '<br>';
 
     echo '<p>No of projects: ' . mysqli_num_rows($projectOverview).'</p>';
+    ?>
 
+
+
+    <?php
     echo '<table id="myTable" border="2">';
-    echo '<h2><tr><th>No</th>
-        <th>Project Name</th>
-            <th>Person In Charge</th>
-            <th>Status</th>
-            <th>Estimated Date End</th>
-            <th>(i)</th>
-            <th>Delete</th>
-            </tr></h2>';
+    echo '<thead><h2><tr class="table100-head"><th class="column1">No</th>
+        <th class="column2">Project Name</th>
+            <th class="column3">Person In Charge</th>
+            <th class="column4">Status</th>
+            <th class="column5">Estimated Date End</th>
+            <th class="column6">(i)</th>
+            <th class="column7">Delete</th>
+            </tr></h2></thead>';
 
             $list = getList();
             if(isset($_POST['month'])){
@@ -265,20 +229,20 @@
     while($row = mysqli_fetch_assoc($list)) {
      
       //display data
-        echo '<tr>';
-        echo '<td>'.$count."</td>";
-        echo '<td>' . $row['projectName'] . "</td>"; //display regNumber
-        echo '<td>' . $row['personInCharge'] . "</td>";
-        echo '<td>' . $row['projectCategory'] . "</td>";
-        echo '<td>' . $row['estimatedDateEnd'] . "</td>";
-        echo '<td>';
+        echo '<tbody><tr>';
+        echo '<td class="column1">'.$count."</td>";
+        echo '<td class="column2">' . $row['projectName'] . "</td>"; //display regNumber
+        echo '<td class="column3">' . $row['personInCharge'] . "</td>";
+        echo '<td class="column4">' . $row['projectCategory'] . "</td>";
+        echo '<td class="column5">' . $row['estimatedDateEnd'] . "</td>";
+        echo '<td class="column6">';
           echo '<form action="differentDestinationPageAdmin.php" method="post">';
           echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToView'>";
           echo $row['projectId'];
           echo '<input type="submit" name="viewProjectButton" value="Details">';
           echo '</form>';
         echo '</td>';
-        echo '<td>';
+        echo '<td class="column7">';
           echo '<form action="adminButtonProcesses.php" method="post" onsubmit="return warn(event)">';
           echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToDelete'>";
           echo '<input type="submit" name="deleteProjectButton" value="X">';
@@ -286,9 +250,12 @@
         echo '</td>';
         $count++;
       }
-      echo '</table>';
-
+      echo '</tbody></table>';
   ?>
+  </div>
+			</div>
+		</div>
+	</div>
 
   <script>
   function myFunction() {
@@ -336,7 +303,7 @@
     }
   </script>
 
-  </div>
+  
   <?php
     //function delete project
 
@@ -369,4 +336,15 @@
       $qry = mysqli_query($con,$sql7);
     } 
   ?>
+
+  
+    <!--===============================================================================================-->	
+	<script src="csstable/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="csstable/vendor/bootstrap/js/popper.js"></script>
+	<script src="csstable/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="csstable/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="csstable/js/main.js"></script>
 </html>
