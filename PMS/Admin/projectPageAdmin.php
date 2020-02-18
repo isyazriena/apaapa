@@ -1,9 +1,8 @@
 <html lang="en">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->	
+<!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="csstable/images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="csstable/vendor/bootstrap/css/bootstrap.min.css">
@@ -20,6 +19,18 @@
 	<link rel="stylesheet" type="text/css" href="csstable/css/main.css">
 <!--===============================================================================================-->
       <style>
+        * {box-sizing: border-box;}
+
+        body { 
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .header {
+          overflow: hidden;
+          background-color: #f1f1f1;
+          padding: 20px 10px;
+        }
 
         .header a {
           float: left;
@@ -98,19 +109,6 @@
           border: 1px solid #ccc;  
         }
       }
-
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-
-      th, td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-      }
-
-      tr:hover {background-color:#f5f5f5;}
     </style>
   </head>
   
@@ -136,14 +134,11 @@
     <p><b>Welcome to Management Information System</b></p>
   </div>
 
+  <div class="container">
+
     <div style="text-align:center">
       <img src='logopenuh.png'><br>
     </div>
-
-    <div class="limiter">
-		<div class="container-table100" style="padding:50px;">
-			<div class="wrap-table100">
-				<div class="table100">
 
     <div class="topnav">
       <input type="text" onkeyup="myFunction()" placeholder="Search.." id="myInput">
@@ -201,19 +196,23 @@
 
     echo '<p>No of projects: ' . mysqli_num_rows($projectOverview).'</p>';
     ?>
+<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
 
-
-
+				<div class="table100 ver3 m-b-110">
+					<div class="table100-head">
     <?php
-    echo '<table id="myTable" border="2">';
-    echo '<thead><h2><tr class="table100-head"><th class="column1">No</th>
-        <th class="column2">Project Name</th>
-            <th class="column3">Person In Charge</th>
-            <th class="column4">Status</th>
-            <th class="column5">Estimated Date End</th>
-            <th class="column6">(i)</th>
-            <th class="column7">Delete</th>
-            </tr></h2></thead>';
+
+    echo '<table id="myTable" border="2"><thead>';
+    echo '<h2><tr class="row100 head"><th class="cell100 column1">No</th>
+        <th class="cell100 column2">Project Name</th>
+            <th class="cell100 column3">Person In Charge</th>
+            <th class="cell100 column4">Status</th>
+            <th class="cell100 column5">Estimated Date End</th>
+            <th class="cell100 column6">(i)</th>
+            <th class="cell100 column7">Delete</th>
+            </h2></tr></thead></table></div>';
 
             $list = getList();
             if(isset($_POST['month'])){
@@ -229,20 +228,20 @@
     while($row = mysqli_fetch_assoc($list)) {
      
       //display data
-        echo '<tbody><tr>';
-        echo '<td class="column1">'.$count."</td>";
-        echo '<td class="column2">' . $row['projectName'] . "</td>"; //display regNumber
-        echo '<td class="column3">' . $row['personInCharge'] . "</td>";
-        echo '<td class="column4">' . $row['projectCategory'] . "</td>";
-        echo '<td class="column5">' . $row['estimatedDateEnd'] . "</td>";
-        echo '<td class="column6">';
+        echo '<div class="table100-body js-pscroll"><table><tbody><tr class="row100 body">';
+        echo '<td class="cell100 column1">'.$count."</td>";
+        echo '<td class="cell100 column2">' . $row['projectName'] . "</td>"; //display regNumber
+        echo '<td class="cell100 column3">' . $row['personInCharge'] . "</td>";
+        echo '<td class="cell100 column4">' . $row['projectCategory'] . "</td>";
+        echo '<td class="cell100 column5">' . $row['estimatedDateEnd'] . "</td>";
+        echo '<td class="cell100 column6">';
           echo '<form action="differentDestinationPageAdmin.php" method="post">';
           echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToView'>";
           echo $row['projectId'];
           echo '<input type="submit" name="viewProjectButton" value="Details">';
           echo '</form>';
         echo '</td>';
-        echo '<td class="column7">';
+        echo '<td class="cell100 column7">';
           echo '<form action="adminButtonProcesses.php" method="post" onsubmit="return warn(event)">';
           echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToDelete'>";
           echo '<input type="submit" name="deleteProjectButton" value="X">';
@@ -250,13 +249,14 @@
         echo '</td>';
         $count++;
       }
-      echo '</tbody></table>';
+      echo '</tbody></table></div>';
+
   ?>
-  </div>
+</div>
+				</div>
 			</div>
 		</div>
 	</div>
-
   <script>
   function myFunction() {
     // Declare variables
@@ -303,7 +303,7 @@
     }
   </script>
 
-  
+  </div>
   <?php
     //function delete project
 
@@ -336,15 +336,26 @@
       $qry = mysqli_query($con,$sql7);
     } 
   ?>
-
-  
-    <!--===============================================================================================-->	
+  <!--===============================================================================================-->	
 	<script src="csstable/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="csstable/vendor/bootstrap/js/popper.js"></script>
 	<script src="csstable/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="csstable/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="csstable/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+			
+		
+	</script>
 <!--===============================================================================================-->
 	<script src="csstable/js/main.js"></script>
 </html>
