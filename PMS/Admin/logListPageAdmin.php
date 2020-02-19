@@ -113,7 +113,7 @@
 
   <?php
     session_start();
-    $projectToView=$_POST['projectToView'];
+    $projectToView=$_SESSION['projectToView'];
     echo $projectToView;
   ?>
 
@@ -150,7 +150,7 @@
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
         exit;   //terminate the script
       }
-      $projectToView=$_POST['projectToView'];
+      $projectToView=$_SESSION['projectToView'];
       $sql = "SELECT * FROM log INNER JOIN projectlog ON projectlog.logId=log.logId AND projectlog.projectId='".$projectToView."'";
         
       $qry = mysqli_query($con,$sql);  //run query
@@ -195,7 +195,7 @@
         $count++;
       }
       echo '</table>';
-
+      echo $_SESSION['projectToView'];
   ?>
   <script>
     function warn(e) {

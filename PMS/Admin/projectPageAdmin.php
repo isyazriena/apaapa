@@ -120,6 +120,7 @@
     <?php
       session_start(); 
       include 'getDataAdmin.php';
+      $_SESSION['projectToView'] = $projectToView;
     ?>
 
     <div class="header-right">
@@ -141,7 +142,7 @@
     </div>
 
     <div class="topnav">
-      <input type="text" onkeyup="myFunction()" placeholder="Search.." id="myInput">
+      <input type="text" placeholder="Search.." id="searchId" onkeyup="searchList(this.id)">
 
       <div style="float: right">
         <script>
@@ -204,7 +205,7 @@
 					<div class="table100-head">
     <?php
 
-    echo '<table id="myTable" border="2"><thead>';
+    echo '<table id="list" border="2"><thead>';
     echo '<h2><tr class="row100 head"><th class="cell100 column1">No</th>
         <th class="cell100 column2">Project Name</th>
             <th class="cell100 column3">Person In Charge</th>
@@ -212,7 +213,7 @@
             <th class="cell100 column5">Estimated Date End</th>
             <th class="cell100 column6">(i)</th>
             <th class="cell100 column7">Delete</th>
-            </h2></tr></thead></table></div>';
+            </h2></tr></thead></div>';
 
             $list = getList();
             if(isset($_POST['month'])){
@@ -228,7 +229,7 @@
     while($row = mysqli_fetch_assoc($list)) {
      
       //display data
-        echo '<div class="table100-body js-pscroll"><table><tbody><tr class="row100 body">';
+        echo '<div class="table100-body js-pscroll"><tbody><tr class="row100 body">';
         echo '<td class="cell100 column1">'.$count."</td>";
         echo '<td class="cell100 column2">' . $row['projectName'] . "</td>"; //display regNumber
         echo '<td class="cell100 column3">' . $row['personInCharge'] . "</td>";
@@ -256,30 +257,28 @@
 				</div>
 			</div>
 		</div>
-	</div>
-  <script>
-  function myFunction() {
-    // Declare variables
-    var input, filter, table, tr, td, i, j, txtValue, txtValue2;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("myTable");
-    tr = table.rows;
 
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[1];
-      td2 = tr[i].getElementsByTagName("td")[2];
-      if (td) {
-        txtValue = td.textContent || td.innerText;
-        txtValue2 = td2.textContent || td2.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
+  <script>
+  function searchList(searchId) {
+    var table = document.getElementById('list');
+    var tbody = table.getElementsByTagName('tbody');
+    var tr = tbody[0].getElementsByTagName('tr');
+
+    let input = document.querySelector('#'+searchId).value.toUpperCase();
+
+    for(i=0; i<tr.length; i++) {
+        let td = tr[i].getElementsByTagName('td');
+        tr[i].style.display = 'none';
+
+        for(j=0; j<td.length-1; j++) {
+            if (td[j].innerHTML.toUpperCase().indexOf(input) > -1) {
+                tr[i].style.display = '';
+                continue;
+            }
         }
-      }
     }
-  }
+}
+//console.log();
   </script>
 
   <script>

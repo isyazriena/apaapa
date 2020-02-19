@@ -113,7 +113,7 @@
 
   <?php
     session_start();
-    $projectToView=$_POST['projectToView'];
+    $projectToView=$_SESSION['projectToView'];
     echo $projectToView;
   ?>
 
@@ -145,7 +145,7 @@
           echo "Failed to connect to MySQL: " . mysqli_connect_error();
           exit;   //terminate the script
           }
-        $projectToView=$_POST['projectToView'];
+          $projectToView=$_SESSION['projectToView'];
         $sql='select * from dates where projectId ="'.$projectToView.'"'; //tengok balik
         
         $qry = mysqli_query($con,$sql);  //run query
@@ -176,6 +176,7 @@
           echo '<td>';
           echo '<form action="adminButtonProcesses.php" method="post" onsubmit="return warn(event)">';
           echo "<input type='hidden' value=" . $row['logId'] . " name='dateToDelete'>";
+          echo "<input type='hidden' value=" . $projectToView . " name='projectToView'>";
           echo '<input type="submit" name="deleteDateButton" value="X">';
           echo '</form>';
         echo '</td>';

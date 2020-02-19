@@ -206,6 +206,9 @@
 					echo "database connected";
 					$projectId=$_POST['projectId'];
 
+					$row=mysqli_fetch_assoc(getOldData());
+					if ($dateOfInitiation != $row['dateOfInitiation'] || $estimatedDateEnd != $row['estimatedDateend'] || $category != $row['projectCategory'] || $status != $row['projectStatus'] || $remarks != null){
+
 					$sql= 'update project SET dateOfInitiation = "'.$dateOfInitiation.'", estimatedDateEnd = "'.$estimatedDateEnd.'", 
 					projectCategory = "'.$category.'", projectCategoryValue = "'.$projectCategoryValue.'", projectStatus = "'.$status.'", projectStatusValue = "'.$projectStatusValue.'"
 						WHERE projectId ="'.$projectId.'"';
@@ -235,19 +238,16 @@
 						$sql2 = "insert into projectlog(projectId, logId) values('$projectId', '$last_id')";
 						$qry=mysqli_query($con,$sql2);
 
-						/* $row=mysqli_fetch_assoc(getOldData());
-						if ($dateOfInitiation == $row['dateOfInitiation'] && $estimatedDateEnd == $row['estimatedDateEnd']){
-							return;
-						}
-						else{ */
+						$row=mysqli_fetch_assoc(getOldData());
+						if ($dateOfInitiation != $row['dateOfInitiation'] || $estimatedDateEnd != $row['estimatedDateEnd']){
 							$sql4= "insert into dates(projectId, logId, dateOfInitiation, estimatedDateEnd, dateOfUpdate, nameId) 
 									values('$projectId', '$last_id', '$dateOfInitiation', '$estimatedDateEnd', CURDATE(), '$userId')";
 							$qry=mysqli_query($con,$sql4);
-							return $qry;
-						//}
+						}
 					}
 					else{
 						echo "Error: " .$sql. "<br>" .$con->error;
+					}
 					}
 				} 
 			}

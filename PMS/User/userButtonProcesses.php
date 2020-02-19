@@ -5,7 +5,7 @@
 	
 	if(isset($_POST["updateDetailsButton"])){
 		updateDetails();
-		echo '<script type="text/javascript"> document.location="logListPageUser.php"; </script>';
+		//echo '<script type="text/javascript"> document.location="logListPageUser.php"; </script>';
 	}
 	else if(isset($_POST["addUser"])){
 		addUser();

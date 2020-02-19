@@ -56,7 +56,7 @@
                     </form>
 
                     <div style="text-align:center">
-                        <br><a href="../User/loginPageUser.php">Admin Login</a>
+                        <br><a href="../Admin/loginPageAdmin.php">Admin Login</a>
 
                         <br><a href="">User Manual</a>
                     </div>

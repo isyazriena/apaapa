@@ -80,6 +80,7 @@
 	<?php
 		session_start();
 		$getOldData = getOldData();
+		
 
 		function getOldData(){
 			$con = mysqli_connect('localhost','web2','web2','mispms');
@@ -124,6 +125,8 @@
 		$row2=mysqli_fetch_assoc(getOldDataAttachment());
 		$row3=mysqli_fetch_assoc(getFirstLog());
 
+		$_SESSION['logId']=$row3['logId'];
+
 	?>
 
 	<br><pre><h1>	Enter Project Update Details: </h1></pre>
@@ -147,6 +150,7 @@
 				Attachment:
 				<input type="file" name="myfile" value = "<?php echo $row2['attachmentName']?>"><br><br>
 				<?php
+					echo $row3['logId'];
 					echo '<ol>';
 					$dbh = new PDO("mysql:host=localhost;dbname=mispms", "web2", "web2");
 					$projectId=$_POST['projectId'];
@@ -173,6 +177,7 @@
 				$systemCustodian=$_POST['systemCustodian'];
 				$projectDescription=$_POST['projectDescription'];
 				$adminId = $_SESSION['adminId'];
+				$logId = $_SESSION['logId'];
 
 				//1.create connection
 				$con = mysqli_connect("localhost","web2","web2","mispms");
@@ -191,7 +196,7 @@
 					echo $sql;
 
 					$sql1= 'update log SET remarks = "admin updated project details", dateOfUpdate = CURDATE(), nameId = "'.$adminId.'"
-					WHERE logId ="'.$row3['logId'].'"'; //HERE WEIRD
+					WHERE logId ="'.$logId.'"'; //HERE CHECK BALIK
 
 					if($con->query($sql1)==TRUE){
 						$projectId=$_POST['projectId'];

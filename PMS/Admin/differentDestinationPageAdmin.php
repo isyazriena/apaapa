@@ -1,6 +1,7 @@
 <?php
     session_start();
 	$projectToView=$_POST['projectToView'];
+	
 
     $con=mysqli_connect("localhost","web2","web2","mispms");
 		if(!$con){

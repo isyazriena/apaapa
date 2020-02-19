@@ -18,12 +18,13 @@
 	}
 	else if(isset($_POST['deleteLogButton'])){ //from logListPageAdmin
 		deleteLog(); //call function kept in logListPageAdmin when button clicked
-		$projectToView=$_POST['projectToView'];
 		echo '<script type="text/javascript"> document.location="logListPageAdmin.php"; </script>';
+		$_SESSION['projectToView']=$_POST['projectToView'];
 	}
 	else if(isset($_POST['deleteDateButton'])){
 		deleteDate(); //call function kept in datePageAdmin when button clicked
 		echo '<script type="text/javascript"> document.location="datePageAdmin.php"; </script>';
+		$_SESSION['projectToView']=$_POST['projectToView'];
 	}
 	else if(isset($_POST['updateProjectButton'])){
 		updateProject(); //call function kept in updateProjectPageAdmin when button clicked
