@@ -99,7 +99,7 @@
   <div class='header'>
     <a href="projectPageAdmin.php" class="logo"><img src='logosahaja.png'>
     <h4>Project Monitoring System</h4>
-    <h5>Management Information System</h5></a>
+    <h5>Management Information System wtf</h5></a>
     
     <?php
       session_start(); 

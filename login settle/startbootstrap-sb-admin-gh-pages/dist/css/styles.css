@@ -67,7 +67,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  /*background-color: #fff;*/
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -4379,7 +4379,6 @@ input[type=button].btn-block {
 }
 
 .card-header {
-  padding: 0.75rem 1.25rem;
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
@@ -6068,7 +6067,10 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #000000 !important;
+  /*background-color: #000000 !important;*/
+  background-image: url("backgroundbankrakyat.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -7600,7 +7602,7 @@ button.bg-dark:focus {
 
 .mt-5,
 .my-5 {
-  margin-top: 3rem !important;
+  margin-top: 2rem !important;
 }
 
 .mr-5,
@@ -9985,11 +9987,11 @@ body {
 #layoutAuthentication {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 50vh;
 }
 #layoutAuthentication #layoutAuthentication_content {
   min-width: 0;
-  flex-grow: 1;
+  flex-grow: 0.3;
 }
 #layoutAuthentication #layoutAuthentication_footer {
   min-width: 0;
@@ -10095,7 +10097,7 @@ body {
 
 .sb-topnav {
   padding-left: 0;
-  height: 56px;
+  /*height: 56px;*/
   z-index: 1039;
 }
 .sb-topnav .navbar-brand {
