@@ -2,22 +2,6 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="csstable/images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="csstable/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="csstable/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="csstable/vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="csstable/vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="csstable/vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="csstable/css/util.css">
-	<link rel="stylesheet" type="text/css" href="csstable/css/main.css">
-<!--===============================================================================================-->
       <style>
         * {box-sizing: border-box;}
 
@@ -197,52 +181,37 @@
 
     echo '<p>No of projects: ' . mysqli_num_rows($projectOverview).'</p>';
     ?>
-<div class="limiter">
-		<div class="container-table100">
-			<div class="wrap-table100">
-
-				<div class="table100 ver3 m-b-110">
-					<div class="table100-head">
     <?php
 
     echo '<table id="list" border="2"><thead>';
-    echo '<h2><tr class="row100 head"><th class="cell100 column1">No</th>
-        <th class="cell100 column2">Project Name</th>
-            <th class="cell100 column3">Person In Charge</th>
-            <th class="cell100 column4">Status</th>
-            <th class="cell100 column5">Estimated Date End</th>
-            <th class="cell100 column6">(i)</th>
-            <th class="cell100 column7">Delete</th>
-            </h2></tr></thead></div>';
+    echo '<h2><tr><th>No</th>
+        <th>Project Name</th>
+            <th>Person In Charge</th>
+            <th>Status</th>
+            <th>Estimated Date End</th>
+            <th>(i)</th>
+            <th>Delete</th>
+            </h2></tr></thead>';
+    $list = getList();
 
-            $list = getList();
-            if(isset($_POST['month'])){
-              $list = getList1();
-            }
-            else if(isset($_POST['year'])){
-              $list = getList2();
-            }
-            else{
-              $list = getList();
-            }
     $count=1;
     while($row = mysqli_fetch_assoc($list)) {
      
       //display data
-        echo '<div class="table100-body js-pscroll"><tbody><tr class="row100 body">';
-        echo '<td class="cell100 column1">'.$count."</td>";
-        echo '<td class="cell100 column2">' . $row['projectName'] . "</td>"; //display regNumber
-        echo '<td class="cell100 column3">' . $row['personInCharge'] . "</td>";
-        echo '<td class="cell100 column4">' . $row['projectCategory'] . "</td>";
-        echo '<td class="cell100 column5">' . $row['estimatedDateEnd'] . "</td>";
-        echo '<td class="cell100 column6">';
+        echo '<tbody><tr>';
+        echo '<td>'.$count."</td>";
+        echo '<td>' . $row['projectName'] . "</td>"; //display regNumber
+        echo '<td>' . $row['personInCharge'] . "</td>";
+        echo '<td>' . $row['projectCategory'] . "</td>";
+        echo '<td>' . $row['estimatedDateEnd'] . "</td>";
+        echo '<td>';
           echo '<form action="differentDestinationPageAdmin.php" method="post">';
           echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToView'>";
           echo $row['projectId'];
           echo '<input type="submit" name="viewProjectButton" value="Details">';
           echo '</form>';
         echo '</td>';
-        echo '<td class="cell100 column7">';
+        echo '<td>';
           echo '<form action="adminButtonProcesses.php" method="post" onsubmit="return warn(event)">';
           echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToDelete'>";
           echo '<input type="submit" name="deleteProjectButton" value="X">';
@@ -250,13 +219,9 @@
         echo '</td>';
         $count++;
       }
-      echo '</tbody></table></div>';
+      echo '</tbody></table>';
 
   ?>
-</div>
-				</div>
-			</div>
-		</div>
 
   <script>
   function searchList(searchId) {
