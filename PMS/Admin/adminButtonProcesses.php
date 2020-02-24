@@ -6,7 +6,7 @@
 	include "datePageAdmin.php";
 	include "updateProjectPageAdmin.php";
 	include "dashboardProjectPageAdmin.php";
-	include "projectMembersAdmin.php";
+	//include "projectMembersAdmin.php";
 
 	if(isset($_POST["addProjectButton"])){
 		addNewProject(); //call function kept in newProjectPageAdmin when button clicked
@@ -30,10 +30,10 @@
 		updateProject(); //call function kept in updateProjectPageAdmin when button clicked
 		echo '<script type="text/javascript"> document.location="dashboardProjectPageAdmin.php"; </script>';
 	}
-	else if(isset($_POST['viewMembersButton'])){
+	/* else if(isset($_POST['viewMembersButton'])){
 		displayMembersList(); //call function kept in dashboardProjectPageAdmin when button clicked
-		echo '<script type="text/javascript"> document.location="projectMembersAdmin.php"; </script>';
-	}
+		//echo '<script type="text/javascript"> document.location="projectMembersAdmin.php"; </script>';
+	} */
 	else if(isset($_POST['deleteUserButton'])){
 		deleteUser(); //call function kept in projectMembersAdmin when button clicked
 		echo '<script type="text/javascript"> document.location="projectMembersAdmin.php"; </script>';
