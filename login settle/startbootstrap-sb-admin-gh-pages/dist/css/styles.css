@@ -571,6 +571,7 @@ pre code {
 
 .container-fluid, .container-xl, .container-lg, .container-md, .container-sm {
   width: 100%;
+  padding-top: 2rem;
   padding-right: 0.75rem;
   padding-left: 0.75rem;
   margin-right: auto;
@@ -2922,7 +2923,7 @@ fieldset:disabled a.btn {
 
 .btn-sm, .btn-group-sm > .btn {
   padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
+  font-size: 1.5rem;
   line-height: 1.5;
   border-radius: 0.2rem;
 }
@@ -3983,8 +3984,8 @@ input[type=button].btn-block {
 }
 .navbar-brand {
   display: inline-block;
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
+  /*padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;*/
   margin-right: 1rem;
   font-size: 1.25rem;
   line-height: inherit;
@@ -9975,7 +9976,6 @@ body {
 }
 
 .container,
-.container-fluid,
 .container-sm,
 .container-md,
 .container-lg,
@@ -10101,7 +10101,7 @@ body {
   z-index: 1039;
 }
 .sb-topnav .navbar-brand {
-  width: 225px;
+  width: 330px;
   padding-left: 1rem;
   padding-right: 1rem;
   margin: 0;

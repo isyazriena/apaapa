@@ -159,7 +159,6 @@
               <th>Estimated Date End</th>
               <th>Date of Update</th>
               <th>Edited By</th>
-              <th>Log Id</th>
               <th>Delete</th>
               </tr></h2>';
       $count=1;
@@ -172,10 +171,9 @@
           echo '<td>' . $row['estimatedDateEnd'] . "</td>";
           echo '<td>' . $row['dateOfUpdate'] . "</td>";
           echo '<td>' . $row['nameId'] . "</td>";
-          echo '<td>' . $row['logId'] . "</td>";
           echo '<td>';
           echo '<form action="adminButtonProcesses.php" method="post" onsubmit="return warn(event)">';
-          echo "<input type='hidden' value=" . $row['logId'] . " name='dateToDelete'>";
+          echo "<input type='hidden' value=" . $row['dateId'] . " name='dateToDelete'>";
           echo "<input type='hidden' value=" . $projectToView . " name='projectToView'>";
           echo '<input type="submit" name="deleteDateButton" value="X">';
           echo '</form>';
@@ -205,7 +203,7 @@
         }
         $dateToDelete= $_POST['dateToDelete'];
 
-        $sql="delete from dates where logId='".$dateToDelete."'";
+        $sql="delete from dates where dateId='".$dateToDelete."'";
         $qry = mysqli_query($con,$sql);  //run query
         return $qry;
       } 

@@ -187,12 +187,15 @@
     echo '<h2><tr><th>No</th>
         <th>Project Name</th>
             <th>Person In Charge</th>
-            <th>Status</th>
+            <th>
+            Status';
+            echo '</th>
             <th>Estimated Date End</th>
             <th>(i)</th>
             <th>Delete</th>
             </h2></tr></thead>';
-    $list = getList();
+      $list = getList();
+
 
     $count=1;
     while($row = mysqli_fetch_assoc($list)) {

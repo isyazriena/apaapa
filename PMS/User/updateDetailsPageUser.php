@@ -121,13 +121,7 @@
 
 	<div class="container">
 		<div class="grid-container">
-			<form action='userButtonProcesses.php' method='post' enctype='multipart/form-data'>
-
-				Date of Initiation:
-				<input  type="date" name="dateOfInitiation" value="<?php echo $row['dateOfInitiation']?>" ><br><br>
-				
-				Estimated Date End:
-				<input  type="date" name="estimatedDateEnd" value="<?php echo $row['estimatedDateEnd']?>"><br><br>
+			<form action='userButtonProcesses.php' method='post'>
 
 				Remarks:
 				<input type="text" name="remarks"><br><br>
@@ -158,8 +152,6 @@
 			<?php
 			
 			function updateDetails(){
-				$dateOfInitiation=$_POST['dateOfInitiation'];
-				$estimatedDateEnd=$_POST['estimatedDateEnd'];
 				$remarks=$_POST['remarks'];
 				$category=$_POST['category'];
 				$projectCategoryValue = '0';
@@ -207,13 +199,11 @@
 					$projectId=$_POST['projectId'];
 
 					$row=mysqli_fetch_assoc(getOldData());
-					if ($dateOfInitiation != $row['dateOfInitiation'] || $estimatedDateEnd != $row['estimatedDateend'] || $category != $row['projectCategory'] || $status != $row['projectStatus'] || $remarks != null){
 
-					$sql= 'update project SET dateOfInitiation = "'.$dateOfInitiation.'", estimatedDateEnd = "'.$estimatedDateEnd.'", 
-					projectCategory = "'.$category.'", projectCategoryValue = "'.$projectCategoryValue.'", projectStatus = "'.$status.'", projectStatusValue = "'.$projectStatusValue.'"
+					$sql= 'update project SET projectCategory = "'.$category.'", projectCategoryValue = "'.$projectCategoryValue.'", projectStatus = "'.$status.'", projectStatusValue = "'.$projectStatusValue.'"
 						WHERE projectId ="'.$projectId.'"';
-					$sql1= "insert into log(dateOfInitiation, estimatedDateEnd, remarks, projectCategory, projectCategoryValue, dateOfUpdate, projectStatus, projectStatusValue, nameId)
-						values ('$dateOfInitiation','$estimatedDateEnd','$remarks', '$category', '$projectCategoryValue', CURDATE(), '$status', '$projectStatusValue', '$userId')";
+					$sql1= "insert into log(remarks, projectCategory, projectCategoryValue, dateOfUpdate, projectStatus, projectStatusValue, nameId)
+						values ('$remarks', '$category', '$projectCategoryValue', CURDATE(), '$status', '$projectStatusValue', '$userId')";
 					
 					echo $sql;
 					echo $sql1;
@@ -236,19 +226,12 @@
 							$stmt->execute();
 						}
 						$sql2 = "insert into projectlog(projectId, logId) values('$projectId', '$last_id')";
-						$qry=mysqli_query($con,$sql2);
-
-						$row=mysqli_fetch_assoc(getOldData());
-						if ($dateOfInitiation != $row['dateOfInitiation'] || $estimatedDateEnd != $row['estimatedDateEnd']){
-							$sql4= "insert into dates(projectId, logId, dateOfInitiation, estimatedDateEnd, dateOfUpdate, nameId) 
-									values('$projectId', '$last_id', '$dateOfInitiation', '$estimatedDateEnd', CURDATE(), '$userId')";
-							$qry=mysqli_query($con,$sql4);
-						}
+						$qry=mysqli_query($con,$sql2);								
 					}
 					else{
 						echo "Error: " .$sql. "<br>" .$con->error;
 					}
-					}
+					
 				} 
 			}
 			?>

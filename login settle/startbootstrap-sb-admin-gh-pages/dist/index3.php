@@ -13,7 +13,7 @@
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index3.php"><img class='logoa' src='logosahaja2.png' style="length:65px; width:65px; float:left;"><h5>Project Monitoring System</h5><h6>Management Information System</h6></a>
+            <a class="navbar-brand" href="index3.php"><img src='logosahaja2.png' style="length:65px; width:65px; float:left;"><h5>Project Monitoring System</h5><h6>Management Information System</h6></a>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">

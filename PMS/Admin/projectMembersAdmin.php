@@ -77,7 +77,8 @@
       <?php
         session_start();
         include "getDataAdmin4.php";
-        $projectToView = $_SESSION['projectToView'];
+        $projectMembers = displayMembersList();
+        $projectToView=$_POST['projectToView'];
         echo '<form action="differentDestinationPageAdmin.php" method="post" >';
         echo "<input type='hidden' value=" . $projectToView . " name='projectToView'>";
         echo '<input type="submit" name="backButton" value="Back">';
@@ -92,11 +93,7 @@
   <div class="container">
     <?php
     session_start();
-
-    $projectMembers = displayMembersList();
-    $projectToView=$_SESSION['projectToView'];
-    echo $projectToView;
-
+    
     function displayMembersList(){
         //create connection
         $con = mysqli_connect('localhost','web2','web2','mispms');

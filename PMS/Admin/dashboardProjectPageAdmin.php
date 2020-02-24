@@ -115,6 +115,7 @@
     <?php
       $projectDetails = getDetailsOfProject();
       $projectMembers = getDetailsOfMembers();
+      $projectDates = getDetailsOfDates();
 
       function getDetailsOfProject(){
 
@@ -146,9 +147,25 @@
         return $qry;
       }
 
+      function getDetailsOfDates(){
+
+        //create connection
+        $con = mysqli_connect('localhost','web2','web2','mispms');
+        if (mysqli_connect_errno())     //check connection is establish
+        {
+          echo "Failed to connect to MySQL: " . mysqli_connect_error();
+          exit;   //terminate the script
+        }
+        $projectToView=$_SESSION['projectToView'];
+        $sql2="select * from dates where projectId='".$projectToView."' order by dateOfUpdate desc limit 1";
+        $qry = mysqli_query($con,$sql2);
+        return $qry;
+      }
+
       echo $projectToView;
       
       $row=mysqli_fetch_assoc($projectDetails);
+      $row3=mysqli_fetch_assoc($projectDates);
 
       echo "<br>Project Code: ";
       echo "  " . $projectToView . " ";
@@ -163,15 +180,15 @@
       echo "  " . $row['systemCustodian'] . " ";
 
       echo '<br><br>Date of Initiation: ';
-      echo "  " . $row['dateOfInitiation'] . " ";
+      echo "  " . $row3['dateOfInitiation'] . " ";
 
       echo '<br><br>Estimated Date End: ';
-      echo "  " . $row['estimatedDateEnd'] . " ";
+      echo "  " . $row3['estimatedDateEnd'] . " ";
 
       echo '<br><br>Person In Charge: ';
       echo "  " . $row['personInCharge'] . " ";
 
-      echo '<form action="adminButtonProcesses.php" method="post">';
+      echo '<form action="projectMembersAdmin.php" method="post">';
       echo '<br><br><input type="submit" name="viewMembersButton" class="btn-link" value="Members:">';
       echo "<input type='hidden' value=" . $projectToView . " name='projectToView'>";
       echo '</form>';

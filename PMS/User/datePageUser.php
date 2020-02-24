@@ -160,7 +160,6 @@
               <th>Estimated Date End</th>
               <th>Date of Update</th>
               <th>Edited By</th>
-              <th>Log Id</th>
               </tr></h2>';
       $count=1;
       //display data
@@ -172,7 +171,6 @@
           echo '<td>' . $row['estimatedDateEnd'] . "</td>";
           echo '<td>' . $row['dateOfUpdate'] . "</td>";
           echo '<td>' . $row['nameId'] . "</td>";
-          echo '<td>' . $row['logId'] . "</td>";
           $count++;
         }
       echo '</table>';
