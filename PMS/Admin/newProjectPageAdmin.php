@@ -174,8 +174,8 @@
 					$sql= "insert into project(projectName,reportOwner,systemCustodian,dateOfInitiation,estimatedDateEnd,projectDescription,personInCharge, projectStatus, projectStatusValue, projectCategory, projectCategoryValue)
 						values('$projectName','$reportOwner','$systemCustodian','$dateOfInitiation','$estimatedDateEnd','$projectDescription',
 						'$personInCharge', 'seacapp', '1', 'running', '2')";
-					$sql1= "insert into log(dateOfInitiation, estimatedDateEnd, remarks, projectStatus, projectStatusValue, projectCategory, projectCategoryValue, dateOfUpdate, nameId)
-						values ('$dateOfInitiation','$estimatedDateEnd','project first created by admin', 'seacapp', '1', 'running', '2', CURDATE(), '$adminId')";
+					$sql1= "insert into log(remarks, projectStatus, projectStatusValue, projectCategory, projectCategoryValue, dateOfUpdate, nameId)
+						values ('project first created by admin', 'seacapp', '1', 'running', '2', CURDATE(), '$adminId')";
 
 					echo $sql;
 					echo $sql1;
@@ -210,8 +210,8 @@
 						$adminId = $_SESSION['adminId'];
 						$last_id2 = $con->insert_id; //logId
 						$sql2 = "insert into projectlog(projectId, logId) values('$last_id', '$last_id2')";
-						$sql4= "insert into dates(projectId, logId, dateOfInitiation, estimatedDateEnd, dateOfUpdate, nameId) 
-						values('$last_id', '$last_id2', '$dateOfInitiation', '$estimatedDateEnd', CURDATE(), '$adminId')";
+						$sql4= "insert into dates(projectId, dateOfInitiation, estimatedDateEnd, dateOfUpdate, nameId) 
+						values('$last_id', '$dateOfInitiation', '$estimatedDateEnd', CURDATE(), '$adminId')";
 						$qry = mysqli_query($con,$sql2);
 						$qry = mysqli_query($con,$sql4);
 					}

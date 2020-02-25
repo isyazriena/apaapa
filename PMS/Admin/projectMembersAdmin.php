@@ -78,6 +78,7 @@
         session_start();
         include "getDataAdmin4.php";
         $projectMembers = displayMembersList();
+        $projectPic = getProjectPic();
         $projectToView=$_POST['projectToView'];
         echo '<form action="differentDestinationPageAdmin.php" method="post" >';
         echo "<input type='hidden' value=" . $projectToView . " name='projectToView'>";
@@ -109,6 +110,22 @@
         echo $sql;
     } 
 
+    function getProjectPic(){
+      $con = mysqli_connect('localhost','web2','web2','mispms');
+        if (mysqli_connect_errno())     //check connection is establish
+        {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        exit;   //terminate the script
+        }
+        $projectToView=$_SESSION['projectToView'];
+        $sql="select * from project where projectId ='".$projectToView."'";
+        $qry = mysqli_query($con,$sql);
+        return $qry;
+        echo $sql;
+    }
+
+    $row2 = mysqli_fetch_assoc($projectPic);
+    echo '<p>Person In Charge: ' . $row2['personInCharge'];
     echo '<p>No of members: ' . mysqli_num_rows($projectMembers).'</p>';
       echo '<table border="2">';
       echo '<h2><tr><th>No</th>
