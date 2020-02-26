@@ -3,14 +3,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
-    <div class="header">
-		<a href="projectPageUser.php" class="logo"><img src='logosahaja.png'>
-		<h4>Project Monitoring System</h4>
-		<h5>Management Information System</h5></a>
-		<div class="header-right">
-			<a href="dashboardProjectPageUser.php">Back</a>
-		</div>
-	</div>
   <?php
 		session_start();
     $getOldDate = getOldDate();

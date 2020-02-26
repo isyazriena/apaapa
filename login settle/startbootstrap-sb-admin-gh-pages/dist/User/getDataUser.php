@@ -10,16 +10,15 @@
             exit;
         }
         if ($status == '0' || $status == null) {
-            $sql="select * from project"; //all projects
+            $sql="select * from project";
         }
         else if ($status == '1'){
-            $sql = "SELECT * FROM project INNER JOIN created ON created.adminId='".$_SESSION['adminId'] ."' AND created.projectId=project.projectId"; //projects for the creator logged in
+            $sql = "SELECT * FROM project INNER JOIN assigned ON assigned.userId='".$_SESSION['userId'] ."' AND assigned.projectId=project.projectId";
         }
-        else { 
-            $sql="select * from project where projectCategoryValue = '".$status."'"; //running or terminated projects
+        else {
+            $sql="select * from project where projectCategoryValue = '".$status."'"; 
         }
         $qry = mysqli_query($con,$sql);
         return $qry;
     }
-    
 ?>

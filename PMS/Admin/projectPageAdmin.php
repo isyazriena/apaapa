@@ -2,133 +2,18 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-      <style>
-        * {box-sizing: border-box;}
-
-        body { 
-          margin: 0;
-          font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .header {
-          overflow: hidden;
-          background-color: #f1f1f1;
-          padding: 20px 10px;
-        }
-
-        .header a {
-          float: left;
-          color: black;
-          text-align: center;
-          padding: 12px;
-          text-decoration: none;
-          font-size: 18px; 
-          line-height: 25px;
-          border-radius: 4px;
-        }
-
-        .header a.logo {
-          font-size: 25px;
-          font-weight: bold;
-        }
-
-        .header a:hover {
-          background-color: #ddd;
-          color: black;
-        }
-
-        .header a.active {
-          background-color: dodgerblue;
-          color: white;
-        }
-
-        .header-right {
-          float: right;
-        }
-
-        @media screen and (max-width: 500px) {
-          .header a {
-            float: none;
-            display: block;
-            text-align: left;
-          }
-          
-          .header-right {
-            float: none;
-          }
-        }
-
-        .container{
-          background-color: lightgrey;
-          /* width: 300px; */
-          border: 1px solid white;
-          padding: 50px;
-          margin: 50px;
-        }
-
-        .topnav {
-        overflow: hidden;
-      }
-
-      .topnav input[type=text] {
-        float: center;
-        padding: 6px;
-        margin-top: 8px;
-        margin-right: 16px;
-        border: none;
-        font-size: 17px;
-      }
-
-      @media screen and (max-width: 600px) {
-        .topnav input[type=text] {
-          float: none;
-          display: block;
-          text-align: left;
-          width: 100%;
-          margin: 0;
-          padding: 14px;
-        }
-        
-        .topnav input[type=text] {
-          border: 1px solid #ccc;  
-        }
-      }
-    </style>
   </head>
-  
-  <div class='header'>
-    <a href="projectPageAdmin.php" class="logo"><img src='logosahaja.png'>
-    <h4>Project Monitoring System</h4>
-    <h5>Management Information System wtf</h5></a>
-    
+
     <?php
       session_start(); 
       include 'getDataAdmin.php';
       $_SESSION['projectToView'] = $projectToView;
     ?>
 
-    <div class="header-right">
-      <a class="active" href="projectPageAdmin.php">Home</a>
-      <a href="newProjectPageAdmin.php">Add Project</a>
-      <a href="logoutPageAdmin.php">Logout</a>
-    </div>
-  </div>
-
-  <div style="padding-left:20px; text-align:center;">
-    <br><br>
-    <p><b>Welcome to Management Information System</b></p>
-  </div>
-
   <div class="container">
 
-    <div style="text-align:center">
-      <img src='logopenuh.png'><br>
-    </div>
-
     <div class="topnav">
-      <input type="text" placeholder="Search.." id="searchId" onkeyup="searchList(this.id)">
-
-      <div style="float: right">
+     
         <script>
             $(document).ready(function(){ /* PREPARE THE SCRIPT */
                 $("#projects").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */
@@ -227,29 +112,6 @@
   ?>
 
   <script>
-  function searchList(searchId) {
-    var table = document.getElementById('list');
-    var tbody = table.getElementsByTagName('tbody');
-    var tr = tbody[0].getElementsByTagName('tr');
-
-    let input = document.querySelector('#'+searchId).value.toUpperCase();
-
-    for(i=0; i<tr.length; i++) {
-        let td = tr[i].getElementsByTagName('td');
-        tr[i].style.display = 'none';
-
-        for(j=0; j<td.length-1; j++) {
-            if (td[j].innerHTML.toUpperCase().indexOf(input) > -1) {
-                tr[i].style.display = '';
-                continue;
-            }
-        }
-    }
-}
-//console.log();
-  </script>
-
-  <script>
     function warn(e) {
       if (confirm('Are you sure to delete?'))
         e.returnValue = true;
@@ -258,19 +120,6 @@
     }
   </script>
 
-  <script>
-    function generateOptionsRange(parentId, start, end){
-      var parent = document.querySelector('#' + parentId);
-
-      for(i=0; i<=(end-start); i++){
-        var option = document.createElement('option');
-        option.textContent = start + i;
-        parent.appendChild(option);
-      }
-    }
-  </script>
-
-  </div>
   <?php
     //function delete project
 
@@ -303,26 +152,5 @@
       $qry = mysqli_query($con,$sql7);
     } 
   ?>
-  <!--===============================================================================================-->	
-	<script src="csstable/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="csstable/vendor/bootstrap/js/popper.js"></script>
-	<script src="csstable/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="csstable/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="csstable/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-	<script>
-		$('.js-pscroll').each(function(){
-			var ps = new PerfectScrollbar(this);
-
-			$(window).on('resize', function(){
-				ps.update();
-			})
-		});
-			
-		
-	</script>
-<!--===============================================================================================-->
-	<script src="csstable/js/main.js"></script>
+ 
 </html>

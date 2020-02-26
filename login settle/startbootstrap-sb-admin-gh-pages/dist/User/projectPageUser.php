@@ -53,7 +53,11 @@
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
                             ></a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="layout-static.html">Static Navigation</a><a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a></nav>
+                                <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">My Projects</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Running Projects</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Completed Projects</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Terminated Projects</a></nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"></a>
                         </div>
@@ -69,9 +73,13 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
+                        <div style="text-align:center">
+                            <img src='logopenuh2.png'><br>
+                        </div>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
+                        
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
@@ -92,7 +100,6 @@
                             $list = getList();
                         ?>
                         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable Example</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -105,7 +112,6 @@
                                                 <th>EstimatedDateEnd</th>
                                                 <th>Last Update</th>
                                                 <th>(i)</th>
-                                                <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -117,7 +123,6 @@
                                                 <th>EstimatedDateEnd</th>
                                                 <th>Last Update</th>
                                                 <th>(i)</th>
-                                                <th>Delete</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -139,13 +144,6 @@
                                                         echo '<input type="submit" name="viewProjectButton" value="Details">';
                                                         echo '</form>';
                                                       echo '</td>';
-                                                      echo '<td>';
-                                                        echo '<form action="adminButtonProcesses.php" method="post" onsubmit="return warn(event)">';
-                                                        echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToDelete'>";
-                                                        echo '<input type="submit" name="deleteProjectButton" value="X">';
-                                                        echo '</form>';
-                                                      echo '</td>';
-                                                      $count++;
                                                     }
                                             ?>
                                         </tbody>
