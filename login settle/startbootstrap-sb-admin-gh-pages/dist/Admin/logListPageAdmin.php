@@ -62,18 +62,18 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading"></div>
-                            <a class="nav-link" href="index.php"
+                            <a class="nav-link" href="projectPageAdmin.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Back</a> <!--here how to pass ID-->
                                 <div class="sb-sidenav-menu-heading">Core</div>
-                                <a class="nav-link" href="charts.html"
+                                <a class="nav-link" href="differentDestinationPageAdmin2.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Dashboard</a
-                            ><a class="nav-link" href="tables.html"
+                            ><a class="nav-link" href="#"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Log</a
                             >
-                            <a class="nav-link" href="tables.html"
+                            <a class="nav-link" href="datePageAdmin.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Dates</a>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"></a>
@@ -139,7 +139,6 @@
                                                     echo '</form>';
                                                     echo "$projectToView";
                                                   echo '</td>';
-                                                  $count++;
                                                 }
                                             ?>
                                         </tbody>

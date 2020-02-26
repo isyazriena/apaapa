@@ -45,6 +45,6 @@
 	}
 	else if(isset($_POST['updateAccountAdminButton'])){
 		updateAccountAdmin(); //call function kept in projectMembersAdmin when button clicked
-		//echo '<script type="text/javascript"> document.location="projectPageAdmin.php"; </script>';
+		echo '<script type="text/javascript"> document.location="projectPageAdmin.php"; </script>';
 	}
 ?>

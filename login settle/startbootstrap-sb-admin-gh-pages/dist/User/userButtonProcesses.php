@@ -7,14 +7,16 @@
 	
 	if(isset($_POST["updateDetailsButton"])){
 		updateDetails();
-		//echo '<script type="text/javascript"> document.location="logListPageUser.php"; </script>';
+		echo '<script type="text/javascript"> document.location="logListPageUser.php"; </script>';
 	}
 	else if(isset($_POST["addUser"])){
 		addUser();
-		header('Location: loginPageUser.php');
+		//header('Location: loginPageUser.php');
+		echo '<script type="text/javascript"> document.location="loginPageUser.php"; </script>';
 	}
 	else if(isset($_POST["updateDateButton"])){
 		updateDate();
+		echo '<script type="text/javascript"> document.location="datePageUser.php"; </script>';
 		//header('Location: loginPageUser.php');
 	}
 	else if(isset($_POST['updateAccountUserButton'])){

@@ -97,16 +97,18 @@
                                 ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Back</a>
                                 <div class="sb-sidenav-menu-heading">Core</div>
-                                <a class="nav-link" href="#"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Dashboard</a
-                            ><a class="nav-link" href="tables.html"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Log</a
-                            >
-                            <a class="nav-link" href="tables.html"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Dates</a>
+                            <a class="nav-link" href="#">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Dashboard
+                            </a>
+                            <a class="nav-link" href="logListPageAdmin.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Log
+                            </a>
+                            <a class="nav-link" href="datePageAdmin.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Dates
+                            </a>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"></a>
                         </div>
                     </div>

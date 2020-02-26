@@ -1,5 +1,6 @@
 <?php
 	session_start();
+
 	$userId=$_POST['userId']; 
 	$userPassword=$_POST['userPassword'];  
 
@@ -8,6 +9,7 @@
 	function validatePassword($userId,$userPassword)
 	{
 		$con=mysqli_connect("localhost","web2","web2","mispms");
+		
 		if(!$con){
 			echo  mysqli_connect_error(); 
 			exit;

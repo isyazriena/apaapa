@@ -13,7 +13,7 @@
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.php"><img src='logosahaja2.png' style="width:63px; float:left;"><h5>Project Monitoring System</h5><h6 style="font-family: sans-serif;">Management Information System</h6></a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <a class="navbar-brand" href="projectPageUser.php"><img src='logosahaja2.png' style="width:63px; float:left;"><h5>Project Monitoring System</h5><h6 style="font-family: sans-serif;">Management Information System</h6></a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">
@@ -21,6 +21,7 @@
                         <?php
                             session_start();
                             echo "Hello, " .$_SESSION['userId'];
+                            $projectToView=$_SESSION['projectToView'];
                             $projectDetails = getDetailsOfProject();
                                         $projectMembers = getDetailsOfMembers();
                                         $projectDates = getDetailsOfDates();
@@ -80,7 +81,7 @@
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="editAccountUser.php">Edit Account</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="logoutPageUser.php">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -92,18 +93,18 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading"></div>
-                            <a class="nav-link" href="index.php"
+                            <a class="nav-link" href="projectPageUser.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Back</a>
                                 <div class="sb-sidenav-menu-heading">Core</div>
-                                <a class="nav-link" href="charts.html"
+                                <a class="nav-link" href="#"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Dashboard</a
-                            ><a class="nav-link" href="tables.html"
+                            ><a class="nav-link" href="logListPageUser.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Log</a
                             >
-                            <a class="nav-link" href="tables.html"
+                            <a class="nav-link" href="datePageUser.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Dates</a>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"></a>
@@ -124,9 +125,7 @@
                         <div class="card mb-4">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <?php
-                                        echo $projectToView;
-                                        
+                                    <?php                                        
                                         $row=mysqli_fetch_assoc($projectDetails);
                                         $row3=mysqli_fetch_assoc($projectDates);
 
@@ -177,11 +176,16 @@
                                         }
                                         echo "</ol>";
 
-                                        echo "<form action='updateProjectPageUser.php' method='post'>";
+                                        echo "<form action='updateDatePageUser.php' method='post'>";
                                         echo "<input type='hidden' value=" . $projectToView . " name='projectId'>";
-                                        echo "<input type='submit' value='Update'>";
+                                        echo "<input type='submit' value='Update Date'>";
+                                        echo "</form><br>";
+
+                                        echo "<form action='updateDetailsPageUser.php' method='post'>";
+                                        echo "<input type='hidden' value=" . $projectToView . " name='projectId'>";
+                                        echo "<input type='submit' value='Update Project'>";
+                                        echo "</form>";
                                         ?>
-                                        </form>
                                 </div>
                             </div>
                         </div>

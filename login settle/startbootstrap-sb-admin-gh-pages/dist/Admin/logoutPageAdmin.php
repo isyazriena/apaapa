@@ -1,6 +1,7 @@
 <html>
     <?php
         session_destroy();
+        
     ?>
     <form action='loginPageAdmin.php' method='post'>
         <h1>You are logged out<h1>

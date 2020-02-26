@@ -26,7 +26,7 @@
                                     <div class="card-body">
                                         <form action='adminValidatePassword.php' method='post'>
                                             <div class="form-group">
-                                                <label class="small mb-1" >Admin ID:</label>
+                                                <label class="small mb-1">Admin ID:</label>
                                                 <input class="form-control py-4"  type="text" placeholder="Enter Admin Id" name="adminId" />
                                             </div>
                                             <div class="form-group">
@@ -39,7 +39,9 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">
-                                        <div class="small"><a href="../User/loginPageUser.php">User Login</a></div>
+                                        <div class="small">
+                                            <a href="../User/loginPageUser.php">User Login</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

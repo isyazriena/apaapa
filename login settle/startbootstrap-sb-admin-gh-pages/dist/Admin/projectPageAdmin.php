@@ -131,7 +131,7 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                            <th>Project Name</th>
+                                                <th>Project Name</th>
                                                 <th>Person In Charge</th>
                                                 <th>Status</th>
                                                 <th>DateOfInitiation</th>
