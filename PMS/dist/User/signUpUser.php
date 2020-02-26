@@ -24,28 +24,42 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Create User Account</h3></div>
                                     <div class="card-body">
-                                        <form>
+                                        <form action='userButtonProcesses.php' method='post'>
                                             <div class="form-row">
                                                 <div class="col-md-6">
-                                                    <div class="form-group"><label class="small mb-1" for="inputFirstName">UserId</label><input class="form-control py-4" id="inputFirstName" type="text" placeholder="Enter staff no" /></div>
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="inputFirstName">User Id</label>
+                                                        <input class="form-control py-4" type="text" placeholder="Enter staff no" name="userId" />
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <div class="form-group"><label class="small mb-1" for="inputLastName">Name</label><input class="form-control py-4" id="inputLastName" type="text" placeholder="Enter name" /></div>
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="inputLastName">Name</label>
+                                                        <input class="form-control py-4" type="text" placeholder="Enter name" name="userName"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-6">
-                                                    <div class="form-group"><label class="small mb-1" for="inputPassword">Password</label><input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" /></div>
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="inputPassword">Password</label>
+                                                        <input class="form-control py-4" type="password" placeholder="Enter password" name="userPassword"/>
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <div class="form-group"><label class="small mb-1" for="inputConfirmPassword">Confirm Password</label><input class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="Confirm password" /></div>
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="inputConfirmPassword">Confirm Password</label>
+                                                        <input class="form-control py-4" type="password" placeholder="Confirm password" name="userPassword" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="login.html">Create Account</a></div>
+                                            <div class="form-group mt-4 mb-0">
+                                                <input type='submit' name='addUser' class="btn btn-primary btn-block" value="Create Account">
+                                            </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">
-                                        <div class="small"><a href="register.html">Have an account? Go to login</a></div>
+                                        <div class="small"><a href="loginPageUser.php">Have an account? Go to login</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -54,6 +68,26 @@
                 </main><br><br><br>
             </div>
             <div id="layoutAuthentication_footer">
+            <?php
+                function addUser(){
+                    $userId=$_POST['userId'];
+                    $userPassword=$_POST['userPassword'];
+                    $userName=$_POST['userName'];
+
+                    //1.create connection
+                    $con = mysqli_connect("localhost","web2","web2","mispms");
+                    if(mysqli_connect_errno()){
+                        echo 'connection error.<br>';
+                        echo mysqli_connect_error();
+                    }
+                    else{
+                        echo "database connected";
+                        $sql= "insert into user(userId, userPassword, userName) values ('$userId', '$userPassword', '$userName')";
+                        $qry = mysqli_query($con,$sql);
+                        return $qry;
+                    }
+                }
+            ?>
                 <footer class="py-4 bg-dark mt-auto">
                     <div class="container-fluid" style="padding-top:0.05rem;">
                         <div class="d-flex align-items-center justify-content-between small">

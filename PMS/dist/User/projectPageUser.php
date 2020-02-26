@@ -10,6 +10,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -58,10 +59,10 @@
                             ></a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="layout-static.html">My Projects</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">Running Projects</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">Completed Projects</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">Terminated Projects</a></nav>
+                                <a class="nav-link" href="projectPageUserMyProject.php">My Projects</a>
+                                <a class="nav-link" href="projectPageUserRunningProject.php">Running Projects</a>
+                                <a class="nav-link" href="projectPageUserCompletedProject.php">Completed Projects</a>
+                                <a class="nav-link" href="projectPageUserTerminatedProject.php">Terminated Projects</a></nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"></a>
                         </div>
@@ -99,12 +100,30 @@
                             </div>
                         </div>
                         <?php
-                            include 'getDataUser.php';
-                            $list = getList();
+                            //include 'getDataUser.php';
+
+                            $projectOverview = getOverviewOfProject();
+
+                            function getOverviewOfProject(){
+                                //create connection
+                                $con = mysqli_connect('localhost','web2','web2','mispms');
+
+                                if (mysqli_connect_errno())     //check connection is establish
+                                {
+                                echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                                exit;   //terminate the script
+                                }
+
+                                $sql="select * from project";
+                                $qry = mysqli_query($con,$sql);  //run query
+                                return $qry;
+                            } 
+                            
                         ?>
                         <div class="card mb-4">
                             <div class="card-body">
                                 <div class="table-responsive">
+
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
@@ -130,6 +149,7 @@
                                         </tfoot>
                                         <tbody>
                                             <?php
+                                                $list = getOverviewOfProject();
                                                 while($row = mysqli_fetch_assoc($list)) {
                                                     //display data
                                                       echo '<tr>';
@@ -148,6 +168,7 @@
                                                       echo '</td>';
                                                     }
                                             ?>
+                                            <br>
                                         </tbody>
                                     </table>
                                 </div>

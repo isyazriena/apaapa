@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
+        <title>Dashboard - SB User</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
@@ -14,14 +14,19 @@
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="projectPageAdmin.php"><img src='logosahaja2.png' style="width:63px; float:left;"><h5>Project Monitoring System</h5><h6 style="font-family: sans-serif;">Management Information System</h6></a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <a class="navbar-brand" href="projectPageUser.php">
+                <img src='logosahaja2.png' style="width:63px; float:left;">
+                <h5>Project Monitoring System</h5>
+                <h6 style="font-family: sans-serif;">Management Information System</h6>
+            </a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['adminId'];
+                            echo "Hello, " .$_SESSION['userId'];
                         ?>
                     </div>
                 </div>
@@ -31,8 +36,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="editAccountAdmin.php">Edit Account</a>
-                        <a class="dropdown-item" href="logoutPageAdmin.php">Logout</a>
+                        <a class="dropdown-item" href="editAccountUser.php">Edit Account</a>
+                        <a class="dropdown-item" href="logoutPageUser.php">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -44,7 +49,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="projectPageAdmin.php"
+                            <a class="nav-link" href="projectPageUser.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard</a>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
@@ -54,10 +59,10 @@
                             ></a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="projectPageAdminMyProject.php">My Projects</a>
-                                <a class="nav-link" href="projectPageAdminRunningProject.php">Running Projects</a>
-                                <a class="nav-link" href="projectPageAdminCompletedProject.php">Completed Projects</a>
-                                <a class="nav-link" href="projectPageAdminTerminatedProject.php">Terminated Projects</a></nav>
+                                <a class="nav-link" href="projectPageUserMyProject.php">My Projects</a>
+                                <a class="nav-link" href="projectPageUserRunningProject.php">Running Projects</a>
+                                <a class="nav-link" href="projectPageUserCompletedProject.php">Completed Projects</a>
+                                <a class="nav-link" href="projectPageUserTerminatedProject.php">Terminated Projects</a></nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"></a>
                         </div>
@@ -65,7 +70,7 @@
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         <?php
-                            echo $_SESSION['adminId'];
+                            echo $_SESSION['userId'];
                         ?>
                     </div>
                 </nav>
@@ -95,7 +100,7 @@
                             </div>
                         </div>
                         <?php
-                            //include 'getDataAdmin.php';
+                            //include 'getDataUser.php';
 
                             $projectOverview = getOverviewOfProject();
 
@@ -109,27 +114,26 @@
                                 exit;   //terminate the script
                                 }
 
-                                $sql="select * from project";
+                                $sql="select * from project where projectCategoryValue = 2"; 
                                 $qry = mysqli_query($con,$sql);  //run query
                                 return $qry;
                             } 
+                            
                         ?>
                         <div class="card mb-4">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                
-                                <a href="newProjectPageAdmin.php" style="float:right">Add Project</a>
+
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Project Name</th>
+                                            <th>Project Name</th>
                                                 <th>Person In Charge</th>
                                                 <th>Status</th>
                                                 <th>DateOfInitiation</th>
                                                 <th>EstimatedDateEnd</th>
                                                 <th>Last Update</th>
                                                 <th>(i)</th>
-                                                <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -141,7 +145,6 @@
                                                 <th>EstimatedDateEnd</th>
                                                 <th>Last Update</th>
                                                 <th>(i)</th>
-                                                <th>Delete</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -158,19 +161,14 @@
                                                       echo '<td>' . $row['estimatedDateEnd'] . "</td>";
                                                       echo '<td> Later </td>';
                                                       echo '<td>';
-                                                        echo '<form action="differentDestinationPageAdmin.php" method="post">';
+                                                        echo '<form action="differentDestinationPageUser.php" method="post">';
                                                         echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToView'>";
                                                         echo '<input type="submit" name="viewProjectButton" value="Details">';
                                                         echo '</form>';
                                                       echo '</td>';
-                                                      echo '<td>';
-                                                        echo '<form action="adminButtonProcesses.php" method="post" onsubmit="return warn(event)">';
-                                                        echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToDelete'>";
-                                                        echo '<input type="submit" name="deleteProjectButton" value="X">';
-                                                        echo '</form>';
-                                                      echo '</td>';
                                                     }
                                             ?>
+                                            <br>
                                         </tbody>
                                     </table>
                                 </div>
@@ -178,46 +176,6 @@
                         </div>
                     </div>
                 </main>
-                <script>
-                    function warn(e) {
-                    if (confirm('Are you sure to delete?'))
-                        e.returnValue = true;
-                    else
-                        e.returnValue = false;
-                    }
-                </script>
-                <?php
-                    //function delete project
-
-                    function deleteProject()
-                    {
-                    //create connection
-                    $con = mysqli_connect('localhost','web2','web2','mispms');
-                    if (mysqli_connect_errno())     //check connection is establish
-                    {
-                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                        exit;   //terminate the script
-                    }
-                    $projectToDelete= $_POST['projectToDelete'];
-                    $sql="delete from project where projectId='".$projectToDelete."'";
-                    $sql1="delete from attachmentproject where projectId='".$projectToDelete."'";
-                    $sql2 = "DELETE log FROM log INNER JOIN projectlog ON projectlog.logId=log.logId AND projectlog.projectId='".$projectToDelete."'";
-                    $sql3 = "DELETE attachmentlog FROM attachmentlog INNER JOIN projectlog ON projectlog.logId=attachmentlog.logId AND projectlog.projectId='".$projectToDelete."'";
-                    $sql4="delete from projectlog where projectId='".$projectToDelete."'";
-                    $sql5="delete from created where projectId='".$projectToDelete."'";
-                    $sql6="delete from assigned where projectId='".$projectToDelete."'";
-                    $sql7="delete from dates where projectId='".$projectToDelete."'";
-
-                    $qry = mysqli_query($con,$sql);  //run query
-                    $qry = mysqli_query($con,$sql1); 
-                    $qry = mysqli_query($con,$sql2);
-                    $qry = mysqli_query($con,$sql3);
-                    $qry = mysqli_query($con,$sql4);
-                    $qry = mysqli_query($con,$sql5);
-                    $qry = mysqli_query($con,$sql6);
-                    $qry = mysqli_query($con,$sql7);
-                    } 
-                    ?>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
