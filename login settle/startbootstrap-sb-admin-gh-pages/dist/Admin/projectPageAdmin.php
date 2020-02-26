@@ -30,7 +30,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Edit Account</a>
+                        <a class="dropdown-item" href="editAccountAdmin.php">Edit Account</a>
                         <a class="dropdown-item" href="logoutPageAdmin.php">Logout</a>
                     </div>
                 </li>
@@ -95,23 +95,6 @@
                         </div>
                         <?php
                             include 'getDataAdmin.php';
-                            $_SESSION['projectToView'] = $projectToView;
-
-                            /* $projectOverview = getOverviewOfProject();
-                            function getOverviewOfProject(){
-                            //create connection
-                            $con = mysqli_connect('localhost','web2','web2','mispms');
-
-                            if (mysqli_connect_errno())     //check connection is establish
-                            {
-                            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                            exit;   //terminate the script
-                            }
-
-                            $sql="select * from project";
-                            $qry = mysqli_query($con,$sql);  //run query
-                            return $qry;
-                            }  */
                         ?>
                         <div class="card mb-4">
                             <div class="card-body">

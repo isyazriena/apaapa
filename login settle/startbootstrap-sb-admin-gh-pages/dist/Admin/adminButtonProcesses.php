@@ -6,6 +6,7 @@
 	include "datePageAdmin.php";
 	include "updateProjectPageAdmin.php";
 	include "dashboardProjectPageAdmin.php";
+	include "editAccountAdmin.php";
 	//include "projectMembersAdmin.php";
 
 	if(isset($_POST["addProjectButton"])){
@@ -41,5 +42,9 @@
 	else if(isset($_POST['editMembersButton'])){
 		editAssignedUser(); //call function kept in projectMembersAdmin when button clicked
 		echo '<script type="text/javascript"> document.location="projectMembersAdmin.php"; </script>';
+	}
+	else if(isset($_POST['updateAccountAdminButton'])){
+		updateAccountAdmin(); //call function kept in projectMembersAdmin when button clicked
+		//echo '<script type="text/javascript"> document.location="projectPageAdmin.php"; </script>';
 	}
 ?>

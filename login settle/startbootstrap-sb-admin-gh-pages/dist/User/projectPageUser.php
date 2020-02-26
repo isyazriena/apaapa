@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
+        <title>Dashboard - SB User</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
@@ -21,7 +21,7 @@
                         <?php
                             session_start();
                             
-                            echo "Hello, " .$_SESSION['adminId'];
+                            echo "Hello, " .$_SESSION['userId'];
                         ?>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Edit Account</a>
+                        <a class="dropdown-item" href="editAccountUser.php">Edit Account</a>
                         <a class="dropdown-item" href="login.html">Logout</a>
                     </div>
                 </li>
@@ -65,7 +65,7 @@
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         <?php
-                            echo $_SESSION['adminId'];
+                            echo $_SESSION['userId'];
                         ?>
                     </div>
                 </nav>
@@ -96,7 +96,7 @@
                         </div>
                         <?php
                             session_start();
-                            include 'getDataAdmin.php';
+                            include 'getDataUser.php';
                             $list = getList();
                         ?>
                         <div class="card mb-4">
@@ -138,7 +138,7 @@
                                                       echo '<td>' . $row['estimatedDateEnd'] . "</td>";
                                                       echo '<td> Later </td>';
                                                       echo '<td>';
-                                                        echo '<form action="differentDestinationPageAdmin.php" method="post">';
+                                                        echo '<form action="differentDestinationPageUser.php" method="post">';
                                                         echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToView'>";
                                                         echo $row['projectId'];
                                                         echo '<input type="submit" name="viewProjectButton" value="Details">';

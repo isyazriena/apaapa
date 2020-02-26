@@ -21,6 +21,7 @@
                         <?php
                             session_start();
                             echo "Hello, " .$_SESSION['adminId'];
+                            $projectToView=$_SESSION['projectToView'];
                             $projectDetails = getDetailsOfProject();
                                         $projectMembers = getDetailsOfMembers();
                                         $projectDates = getDetailsOfDates();
@@ -79,7 +80,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Edit Account</a>
+                        <a class="dropdown-item" href="editAccountAdmin.php">Edit Account</a>
                         <a class="dropdown-item" href="logoutPageAdmin.php">Logout</a>
                     </div>
                 </li>
@@ -96,7 +97,7 @@
                                 ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Back</a>
                                 <div class="sb-sidenav-menu-heading">Core</div>
-                                <a class="nav-link" href="charts.html"
+                                <a class="nav-link" href="#"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Dashboard</a
                             ><a class="nav-link" href="tables.html"
@@ -125,8 +126,6 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <?php
-                                        echo $projectToView;
-      
                                         $row=mysqli_fetch_assoc($projectDetails);
                                         $row3=mysqli_fetch_assoc($projectDates);
                                   

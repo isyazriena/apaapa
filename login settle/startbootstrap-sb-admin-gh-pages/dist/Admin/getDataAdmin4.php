@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    //session_start();
     function getNameMembersOthers(){
 
         $con = mysqli_connect('localhost','web2','web2','mispms');

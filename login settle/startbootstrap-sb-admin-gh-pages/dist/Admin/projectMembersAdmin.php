@@ -13,7 +13,7 @@
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.php"><img src='logosahaja2.png' style="width:63px; float:left;"><h5>Project Monitoring System</h5><h6 style="font-family: sans-serif;">Management Information System</h6></a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <a class="navbar-brand" href="projectPageAdmin.php"><img src='logosahaja2.png' style="width:63px; float:left;"><h5>Project Monitoring System</h5><h6 style="font-family: sans-serif;">Management Information System</h6></a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">
@@ -30,8 +30,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Edit Account</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="editAccountAdmin.php">Edit Account</a>
+                        <a class="dropdown-item" href="logoutPageAdmin.php">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -45,7 +45,7 @@
                             <div class="sb-sidenav-menu-heading"></div>
                             <a class="nav-link" href="index.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Back</a>
+                                Back</a> <!--here how to pass ID-->
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"></a>
                         </div>
                     </div>
@@ -86,9 +86,6 @@
                                 return $qry;
                                 echo $sql;
                             }
-
-                            $row2 = mysqli_fetch_assoc($projectPic);
-                            echo '<p>Person In Charge: ' . $row2['personInCharge']; //tak sesuai here
                         ?>
                     </div>
                 </nav>
@@ -102,6 +99,10 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <?php
+                                        $row2 = mysqli_fetch_assoc($projectPic);
+                                        echo '<p>Person In Charge: ' . $row2['personInCharge']; //tak sesuai here
+                                    ?>
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -126,7 +127,6 @@
                                                     echo '<input type="submit" name="deleteUserButton" value="X">';
                                                     echo '</form>';
                                                     echo '</td>';
-                                                    $count++;
                                                 }
                                             ?>
                                         </tbody>
