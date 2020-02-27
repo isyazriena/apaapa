@@ -56,77 +56,6 @@
                             echo $_SESSION['adminId'];
                             include 'getDataAdmin2.php';
                             include 'getDataAdmin3.php';
-                            $adminId = $_SESSION['adminId'];
-
-                            function addNewProject(){
-                                $projectName=$_POST['projectName'];
-                                $reportOwner=$_POST['reportOwner'];
-                                $systemCustodian=$_POST['systemCustodian'];
-                                $dateOfInitiation=$_POST['dateOfInitiation'];
-                                $estimatedDateEnd=$_POST['estimatedDateEnd'];
-                                $projectDescription=$_POST['projectDescription'];
-                                $personInCharge=$_POST['pic'];
-                                $members=$_POST['members'];
-                                $adminId = $_SESSION['adminId'];
-
-                                //1.create connection
-                                $con = mysqli_connect("localhost","web2","web2","mispms");
-                                if(mysqli_connect_errno()){
-                                    echo 'connection error.<br>';
-                                    echo mysqli_connect_error();
-                                }
-                                else{
-                                    echo "database connected";
-
-                                    $sql= "insert into project(projectName,reportOwner,systemCustodian,dateOfInitiation,estimatedDateEnd,projectDescription,personInCharge, projectStatus, projectStatusValue, projectCategory, projectCategoryValue)
-                                        values('$projectName','$reportOwner','$systemCustodian','$dateOfInitiation','$estimatedDateEnd','$projectDescription',
-                                        '$personInCharge', 'seacapp', '1', 'running', '2')";
-                                    $sql1= "insert into log(remarks, projectStatus, projectStatusValue, projectCategory, projectCategoryValue, dateOfUpdate, nameId)
-                                        values ('project first created by admin', 'seacapp', '1', 'running', '2', CURDATE(), '$adminId')";
-
-                                    echo $sql;
-                                    echo $sql1;
-
-                                    if($con->query($sql)==TRUE){
-                                        $adminId = $_SESSION['adminId'];
-                                        $last_id = $con->insert_id; //projectId
-                                        $dbh = new PDO("mysql:host=localhost;dbname=mispms", "web2", "web2");
-                                        $name = $_FILES['myfile']['name'];
-                                        $type = $_FILES['myfile']['type'];
-                                        $data = file_get_contents($_FILES['myfile']['tmp_name']);
-                                        $stmt = $dbh->prepare("insert into attachmentproject values('',?,?,?, '$last_id')");
-                                        $stmt->bindParam(1,$name);
-                                        $stmt->bindParam(2,$type);
-                                        $stmt->bindParam(3,$data);
-                                        if($data != null){
-                                            $stmt->execute();
-                                        }
-                                        $sql3= "insert into created(adminId, projectId) values ('$adminId', '$last_id')";
-                                        $sql5= "INSERT INTO assigned(projectId, userId, position) VALUES('$last_id','$personInCharge', 'person in charge')";
-                                        $qry = mysqli_query($con,$sql3);
-                                        $qry = mysqli_query($con,$sql5);
-                                        foreach ($_POST['members'] as $key=>$value) {
-                                            $sqlmembers = "INSERT INTO assigned(projectId, userId, position) VALUES('$last_id','$value', 'members')";
-                                            $con->multi_query($sqlmembers);
-                                        }
-                                    }
-                                    else{
-                                        echo "Error: " .$sql. "<br>" .$con->error;
-                                    }
-                                    if($con->query($sql1)==TRUE){
-                                        $adminId = $_SESSION['adminId'];
-                                        $last_id2 = $con->insert_id; //logId
-                                        $sql2 = "insert into projectlog(projectId, logId) values('$last_id', '$last_id2')";
-                                        $sql4= "insert into dates(projectId, dateOfInitiation, estimatedDateEnd, dateOfUpdate, nameId) 
-                                        values('$last_id', '$dateOfInitiation', '$estimatedDateEnd', CURDATE(), '$adminId')";
-                                        $qry = mysqli_query($con,$sql2);
-                                        $qry = mysqli_query($con,$sql4);
-                                    }
-                                    else{
-                                        echo "Error: " .$sql. "<br>" .$con->error;
-                                    }
-                                }
-                            }
                         ?>
                     </div>
                 </nav>
@@ -203,6 +132,76 @@
                         </div>
                     </div>
                 </main>
+                <?php
+                    $adminId = $_SESSION['adminId'];
+
+                    function addNewProject(){
+                        $projectName=$_POST['projectName'];
+                        $reportOwner=$_POST['reportOwner'];
+                        $systemCustodian=$_POST['systemCustodian'];
+                        $dateOfInitiation=$_POST['dateOfInitiation'];
+                        $estimatedDateEnd=$_POST['estimatedDateEnd'];
+                        $projectDescription=$_POST['projectDescription'];
+                        $personInCharge=$_POST['pic'];
+                        $members=$_POST['members'];
+                        $adminId = $_SESSION['adminId'];
+
+                        //1.create connection
+                        $con = mysqli_connect("localhost","web2","web2","mispms");
+                        if(mysqli_connect_errno()){
+                            echo 'connection error.<br>';
+                            echo mysqli_connect_error();
+                        }
+                        else{
+                            echo "database connected";
+
+                            $sql= "insert into project(projectName,reportOwner,systemCustodian,dateOfInitiation,estimatedDateEnd,projectDescription,personInCharge, projectStatus, projectStatusValue, projectCategory, projectCategoryValue)
+                                values('$projectName','$reportOwner','$systemCustodian','$dateOfInitiation','$estimatedDateEnd','$projectDescription',
+                                '$personInCharge', 'seacapp', '1', 'running', '2')";
+                            $sql1= "insert into log(remarks, projectStatus, projectStatusValue, projectCategory, projectCategoryValue, dateOfUpdate, nameId)
+                                values ('project first created by admin', 'seacapp', '1', 'running', '2', CURDATE(), '$adminId')";
+
+                            if($con->query($sql)==TRUE){
+                                $adminId = $_SESSION['adminId'];
+                                $last_id = $con->insert_id; //projectId
+                                $dbh = new PDO("mysql:host=localhost;dbname=mispms", "web2", "web2");
+                                $name = $_FILES['myfile']['attachmentName'];
+                                $type = $_FILES['myfile']['attachmentType'];
+                                $data = file_get_contents($_FILES['myfile']['tmp_name']);
+                                $stmt = $dbh->prepare("insert into attachmentproject values('',?,?,?, '$last_id')");
+                                $stmt->bindParam(1,$name);
+                                $stmt->bindParam(2,$type);
+                                $stmt->bindParam(3,$data);
+                                if($data != null){
+                                    $stmt->execute();
+                                }
+                                $sql3= "insert into created(adminId, projectId) values ('$adminId', '$last_id')";
+                                $sql5= "INSERT INTO assigned(projectId, userId, position) VALUES('$last_id','$personInCharge', 'person in charge')";
+                                $qry = mysqli_query($con,$sql3);
+                                $qry = mysqli_query($con,$sql5);
+                                foreach ($_POST['members'] as $key=>$value) {
+                                    $sqlmembers = "INSERT INTO assigned(projectId, userId, position) VALUES('$last_id','$value', 'members')";
+                                    $con->multi_query($sqlmembers);
+                                }
+                            }
+                            else{
+                                echo "Error: " .$sql. "<br>" .$con->error;
+                            }
+                            if($con->query($sql1)==TRUE){
+                                $adminId = $_SESSION['adminId'];
+                                $last_id2 = $con->insert_id; //logId
+                                $sql2 = "insert into projectlog(projectId, logId) values('$last_id', '$last_id2')";
+                                $sql4= "insert into dates(projectId, dateOfInitiation, estimatedDateEnd, dateOfUpdate, nameId) 
+                                values('$last_id', '$dateOfInitiation', '$estimatedDateEnd', CURDATE(), '$adminId')";
+                                $qry = mysqli_query($con,$sql2);
+                                $qry = mysqli_query($con,$sql4);
+                            }
+                            else{
+                                echo "Error: " .$sql. "<br>" .$con->error;
+                            }
+                        }
+                    }
+                ?>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">

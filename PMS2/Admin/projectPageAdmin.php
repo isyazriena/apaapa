@@ -10,6 +10,8 @@
       $_SESSION['projectToView'] = $projectToView;
     ?>
 
+<a href="newProjectPageAdmin.php" style="float:right">Add Project</a><br><br>
+
   <div class="container">
 
     <div class="topnav">

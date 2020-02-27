@@ -118,7 +118,7 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                 
-                                <a href="newProjectPageAdmin.php" style="float:right">Add Project</a>
+                                <a href="newProjectPageAdmin.php" style="float:right">Add Project</a><br><br>
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>

@@ -62,7 +62,7 @@
                                 echo "Failed to connect to MySQL: " . mysqli_connect_error();
                                 exit;   //terminate the script
                                 }
-                                $projectId='2';
+                                $projectId=$_SESSION['projectToView'];
                                 $sql5="select * from log inner join projectlog on log.logId=projectlog.logId and projectlog.projectId='".$projectId."' order by log.logId desc limit 1";
                                 $qry = mysqli_query($con,$sql5);
                                 return $qry;
@@ -124,7 +124,7 @@
                                     <input type="file" name="myfile"/><br><br>
 
                                     <?php
-                                        $projectId='2';
+                                        $projectId=$_SESSION['projectToView'];;
                                         echo "<input type='submit' value='Done' name='updateDetailsButton'>";
                                         echo "<input type='hidden' value='$projectId' name='projectId'>";
                                     ?>
@@ -180,7 +180,7 @@
                         }
                         else{
                             echo "database connected";
-                            $projectId='2';
+                            $projectId=$_SESSION['projectToView'];;
 
                             $row=mysqli_fetch_assoc(getOldData());
 
@@ -195,7 +195,7 @@
                             $qry=mysqli_query($con,$sql);//execute qry
 
                             if($con->query($sql1)==TRUE){
-                                $projectId='2';
+                                $projectId=$_SESSION['projectToView'];;
                                 $last_id = $con->insert_id; //logId
                                 $userId = $_SESSION['userId'];
                                 $dbh = new PDO("mysql:host=localhost;dbname=mispms", "web2", "web2");
