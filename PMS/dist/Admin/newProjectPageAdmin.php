@@ -165,8 +165,8 @@
                                 $adminId = $_SESSION['adminId'];
                                 $last_id = $con->insert_id; //projectId
                                 $dbh = new PDO("mysql:host=localhost;dbname=mispms", "web2", "web2");
-                                $name = $_FILES['myfile']['attachmentName'];
-                                $type = $_FILES['myfile']['attachmentType'];
+                                $name = $_FILES['myfile']['name'];
+                                $type = $_FILES['myfile']['type'];
                                 $data = file_get_contents($_FILES['myfile']['tmp_name']);
                                 $stmt = $dbh->prepare("insert into attachmentproject values('',?,?,?, '$last_id')");
                                 $stmt->bindParam(1,$name);

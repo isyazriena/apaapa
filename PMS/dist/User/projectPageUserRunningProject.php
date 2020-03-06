@@ -132,7 +132,7 @@
                                                 <th>Status</th>
                                                 <th>DateOfInitiation</th>
                                                 <th>EstimatedDateEnd</th>
-                                                <th>Last Update</th>
+                                                <!--<th>Last Update</th>-->
                                                 <th>(i)</th>
                                             </tr>
                                         </thead>
@@ -143,7 +143,7 @@
                                                 <th>Status</th>
                                                 <th>DateOfInitiation</th>
                                                 <th>EstimatedDateEnd</th>
-                                                <th>Last Update</th>
+                                                <!--<th>Last Update</th>-->
                                                 <th>(i)</th>
                                             </tr>
                                         </tfoot>
@@ -159,7 +159,7 @@
                                                       echo '<td>' . $row['projectStatus'] . "</td>";
                                                       echo '<td>' . $row['dateOfInitiation'] . "</td>";
                                                       echo '<td>' . $row['estimatedDateEnd'] . "</td>";
-                                                      echo '<td> Later </td>';
+                                                      //echo '<td> Later </td>';
                                                       echo '<td>';
                                                         echo '<form action="differentDestinationPageUser.php" method="post">';
                                                         echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToView'>";

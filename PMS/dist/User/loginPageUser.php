@@ -57,7 +57,7 @@
                             <div class="text-white-50">
                                 <a class="text-white-50" href="#">User Manual</a>
                                 &middot;
-                                <a class="text-white-50" href="#">Sign Up</a>
+                                <a class="text-white-50" href="signUpUser.php">Sign Up</a>
                             </div>
                         </div>
                     </div>

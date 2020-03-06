@@ -102,7 +102,7 @@
                             
                             <div class="card-body">
                                 <div class="table-responsive">
-                                <form action='userButtonProcesses.php' method='post'>
+                                <form action='userButtonProcesses.php' method='post' enctype='multipart/form-data'>
 
                                     Remarks:
                                     <input type="text" name="remarks"><br><br>
