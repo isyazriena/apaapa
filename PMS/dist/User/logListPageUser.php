@@ -20,8 +20,9 @@
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['userId'];
+                            echo "Hello, " .$_SESSION['userName'];
                             $projectToView=$_SESSION['projectToView'];
+                            $projectToViewName=$_SESSION['projectToViewName'];
                             $logOverview = getOverviewOfLog();
 
                             function getOverviewOfLog()
@@ -68,7 +69,7 @@
                                 <div class="sb-sidenav-menu-heading">Core</div>
                                 <a class="nav-link" href="differentDestinationPageUser2.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Dashboard</a
+                                Project Background</a
                             ><a class="nav-link" href="#"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Log</a
@@ -93,7 +94,10 @@
                     <div class="container-fluid">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <?php
+                                    echo "  Project Name : " .$projectToViewName;
+                                ?>
+                                <div class="table-responsive"><br>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
@@ -101,7 +105,7 @@
                                                 <th>Status Project</th>
                                                 <th>Remarks</th>
                                                 <th>Editor</th>
-                                                <th>(i)</th>
+                                                <th>Details</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -110,7 +114,7 @@
                                                 <th>Status Project</th>
                                                 <th>Remarks</th>
                                                 <th>Editor</th>
-                                                <th>(i)</th>
+                                                <th>Details</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>

@@ -20,7 +20,8 @@
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['userId'];
+                            echo "Hello, " .$_SESSION['userName'];
+                            $projectToViewName=$_SESSION['projectToViewName'];
                         ?>
                     </div>
                 </div>
@@ -83,7 +84,10 @@
                             
                             <div class="card-body">
                                 <div class="table-responsive">
-                                <form action='userButtonProcesses.php' method='post'>
+                                <?php
+                                    echo "  Project Name : " .$projectToViewName;
+                                ?>
+                                <form action='userButtonProcesses.php' method='post'><br>
 
                                     Date Of Initiation:
                                     <input type="date" name="dateOfInitiation" value="<?php echo $row['dateOfInitiation']; ?>"><br><br>

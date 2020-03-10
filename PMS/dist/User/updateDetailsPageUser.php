@@ -20,7 +20,8 @@
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['userId'];
+                            echo "Hello, " .$_SESSION['userName'];
+                            $projectToViewName=$_SESSION['projectToViewName'];
                         ?>
                     </div>
                 </div>
@@ -102,7 +103,10 @@
                             
                             <div class="card-body">
                                 <div class="table-responsive">
-                                <form action='userButtonProcesses.php' method='post' enctype='multipart/form-data'>
+                                <?php
+                                    echo "  Project Name : " .$projectToViewName;
+                                ?>
+                                <form action='userButtonProcesses.php' method='post' enctype='multipart/form-data'><br>
 
                                     Remarks:
                                     <input type="text" name="remarks"><br><br>

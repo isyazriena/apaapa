@@ -20,7 +20,7 @@
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['userId'];
+                            echo "Hello, " .$_SESSION['userName'];
                             $projectToView=$_SESSION['projectToView'];
                             $projectDetails = getDetailsOfProject();
                                         $projectMembers = getDetailsOfMembers();
@@ -99,7 +99,7 @@
                                 <div class="sb-sidenav-menu-heading">Core</div>
                                 <a class="nav-link" href="#"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Dashboard</a
+                                Project Background</a
                             ><a class="nav-link" href="logListPageUser.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Log</a
@@ -128,6 +128,16 @@
                                     <?php                                        
                                         $row=mysqli_fetch_assoc($projectDetails);
                                         $row3=mysqli_fetch_assoc($projectDates);
+
+                                        echo "<form action='updateDatePageUser.php' method='post'  style='float:right'>";
+                                        echo "<input type='hidden' value=" . $projectToView . " name='projectId'>";
+                                        echo "<input type='submit' value='Update Date'>";
+                                        echo "</form>";
+
+                                        echo "<form action='updateDetailsPageUser.php' method='post' style='float:right'>";
+                                        echo "<input type='hidden' value=" . $projectToView . " name='projectId'>";
+                                        echo "<input type='submit' value='Update Project'>";
+                                        echo "</form>";
 
                                         echo "<br>Project Code: ";
                                         echo "  " . $projectToView . " ";
@@ -176,15 +186,6 @@
                                         }
                                         echo "</ol>";
 
-                                        echo "<form action='updateDatePageUser.php' method='post'>";
-                                        echo "<input type='hidden' value=" . $projectToView . " name='projectId'>";
-                                        echo "<input type='submit' value='Update Date'>";
-                                        echo "</form><br>";
-
-                                        echo "<form action='updateDetailsPageUser.php' method='post'>";
-                                        echo "<input type='hidden' value=" . $projectToView . " name='projectId'>";
-                                        echo "<input type='submit' value='Update Project'>";
-                                        echo "</form>";
                                         ?>
                                 </div>
                             </div>

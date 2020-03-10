@@ -21,7 +21,7 @@
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['adminId'];
+                            echo "Hello, " .$_SESSION['adminName'];
                         ?>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                                     </table>
                                 </div>
                                 <br>
-                            <form action="adminButtonProcesses.php" method="post">
+                            <form action="adminButtonProcesses.php" method="post" enctype='multipart/form-data'>
                             <?php $list = getNameMembersOthers(); ?>
                                         <button type="button" id="buttonAdd">Add</button>
                                         <div id="list">

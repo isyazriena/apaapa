@@ -21,7 +21,7 @@
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['adminId'];
+                            echo "Hello, " .$_SESSION['adminName'];
                         ?>
                     </div>
                 </div>
@@ -54,7 +54,6 @@
                             ></a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="projectPageAdminMyProject.php">My Projects</a>
                                 <a class="nav-link" href="projectPageAdminRunningProject.php">Running Projects</a>
                                 <a class="nav-link" href="projectPageAdminCompletedProject.php">Completed Projects</a>
                                 <a class="nav-link" href="projectPageAdminTerminatedProject.php">Terminated Projects</a></nav>
@@ -128,7 +127,7 @@
                                                 <th>DateOfInitiation</th>
                                                 <th>EstimatedDateEnd</th>
                                                 <!--<th>Last Update</th>-->
-                                                <th>(i)</th>
+                                                <th>Details</th>
                                                 <th>Delete</th>
                                             </tr>
                                         </thead>
@@ -140,7 +139,7 @@
                                                 <th>DateOfInitiation</th>
                                                 <th>EstimatedDateEnd</th>
                                                 <!--<th>Last Update</th>-->
-                                                <th>(i)</th>
+                                                <th>Details</th>
                                                 <th>Delete</th>
                                             </tr>
                                         </tfoot>
@@ -160,6 +159,7 @@
                                                       echo '<td>';
                                                         echo '<form action="differentDestinationPageAdmin.php" method="post">';
                                                         echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToView'>";
+                                                        echo "<input type='hidden' value=" . $row['projectName'] . " name='projectToViewName'>";
                                                         echo '<input type="submit" name="viewProjectButton" value="Details">';
                                                         echo '</form>';
                                                       echo '</td>';

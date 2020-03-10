@@ -20,8 +20,9 @@
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['userId'];
+                            echo "Hello, " .$_SESSION['userName'];
                             $projectToView=$_SESSION['projectToView'];
+                            $projectToViewName=$_SESSION['projectToViewName'];
                             $dateOverview = getOverviewOfDate();
 
                             function getOverviewOfDate(){
@@ -33,7 +34,24 @@
                                 exit;   //terminate the script
                                 }
                                 $projectToView=$_SESSION['projectToView'];
-                                $sql='select * from dates where projectId ="'.$projectToView.'"'; //tengok balik
+                                $sql='with base as 
+                                (select a.projectId,a.dateOfInitiation,a.estimatedDateEnd,min(b.dateOfUpdate)dateUpdate 
+                                from 
+                                (select projectId,dateOfInitiation,estimatedDateEnd 
+                                from dates 
+                                where projectId = "'.$projectToView.'"
+                                group by projectId,dateOfInitiation,estimatedDateEnd)a,
+                                dates b 
+                                where a.projectId = b.projectId and a.dateOfInitiation = b.dateOfInitiation 
+                                and a.estimatedDateEnd = b.estimatedDateEnd 
+                                group by a.projectId,a.dateOfInitiation,a.estimatedDateEnd), 
+                                name as 
+                                (select projectId,nameId,min(dateOfUpdate)dateUpdate 
+                                from dates group by projectId,nameId) 
+                                select base.*,name.nameId 
+                                from base,name 
+                                where base.projectId = name.projectId 
+                                and base.dateUpdate = name.dateUpdate'; //tengok balik
                                 
                                 $qry = mysqli_query($con,$sql);  //run query
                                 return $qry;
@@ -66,7 +84,7 @@
                                 <div class="sb-sidenav-menu-heading">Core</div>
                                 <a class="nav-link" href="differentDestinationPageUser2.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Dashboard</a
+                                Project Background</a
                             ><a class="nav-link" href="logListPageUser.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Log</a
@@ -91,7 +109,10 @@
                     <div class="container-fluid">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <?php
+                                    echo "  Project Name : " .$projectToViewName;
+                                ?>
+                                <div class="table-responsive"><br>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
@@ -116,7 +137,7 @@
                                                   echo '<tr>';
                                                   echo '<td>' . $row['dateOfInitiation'] . "</td>";
                                                   echo '<td>' . $row['estimatedDateEnd'] . "</td>";
-                                                  echo '<td>' . $row['dateOfUpdate'] . "</td>";
+                                                  echo '<td>' . $row['dateUpdate'] . "</td>";
                                                   echo '<td>' . $row['nameId'] . "</td>";
                                                 }
                                             ?>

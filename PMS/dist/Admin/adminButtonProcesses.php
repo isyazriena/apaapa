@@ -7,7 +7,7 @@
 	include "updateProjectPageAdmin.php";
 	include "dashboardProjectPageAdmin.php";
 	include "editAccountAdmin.php";
-	//include "projectMembersAdmin.php";
+	include "projectMembersAdmin.php";
 
 	if(isset($_POST["addProjectButton"])){
 		addNewProject(); //call function kept in newProjectPageAdmin when button clicked

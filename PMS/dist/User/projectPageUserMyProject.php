@@ -26,7 +26,7 @@
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['userId'];
+                            echo "Hello, " .$_SESSION['userName'];
                         ?>
                     </div>
                 </div>
@@ -130,10 +130,11 @@
                                             <th>Project Name</th>
                                                 <th>Person In Charge</th>
                                                 <th>Status</th>
+                                                <th>Project Category</th>
                                                 <th>DateOfInitiation</th>
                                                 <th>EstimatedDateEnd</th>
                                                 <!--<th>Last Update</th>-->
-                                                <th>(i)</th>
+                                                <th>Details</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -141,10 +142,11 @@
                                                 <th>Project Name</th>
                                                 <th>Person In Charge</th>
                                                 <th>Status</th>
+                                                <th>Project Category</th>
                                                 <th>DateOfInitiation</th>
                                                 <th>EstimatedDateEnd</th>
                                                 <!--<th>Last Update</th>-->
-                                                <th>(i)</th>
+                                                <th>Details</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -157,12 +159,14 @@
                                                       echo '<td>' . $row['projectName'] . "</td>"; //display regNumber
                                                       echo '<td>' . $row['personInCharge'] . "</td>";
                                                       echo '<td>' . $row['projectStatus'] . "</td>";
+                                                      echo '<td>' . $row['projectCategory'] . "</td>";
                                                       echo '<td>' . $row['dateOfInitiation'] . "</td>";
                                                       echo '<td>' . $row['estimatedDateEnd'] . "</td>";
                                                       //echo '<td> Later </td>';
                                                       echo '<td>';
                                                         echo '<form action="differentDestinationPageUser.php" method="post">';
                                                         echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToView'>";
+                                                        echo "<input type='hidden' value=" . $row['projectName'] . " name='projectToViewName'>";
                                                         echo '<input type="submit" name="viewProjectButton" value="Details">';
                                                         echo '</form>';
                                                       echo '</td>';

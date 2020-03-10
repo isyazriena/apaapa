@@ -26,7 +26,7 @@
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['userId'];
+                            echo "Hello, " .$_SESSION['userName'];
                         ?>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                                                 <th>DateOfInitiation</th>
                                                 <th>EstimatedDateEnd</th>
                                                 <!--<th>Last Update</th>-->
-                                                <th>(i)</th>
+                                                <th>Details</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -144,7 +144,7 @@
                                                 <th>DateOfInitiation</th>
                                                 <th>EstimatedDateEnd</th>
                                                 <!--<th>Last Update</th>-->
-                                                <th>(i)</th>
+                                                <th>Details</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -163,6 +163,7 @@
                                                       echo '<td>';
                                                         echo '<form action="differentDestinationPageUser.php" method="post">';
                                                         echo "<input type='hidden' value=" . $row['projectId'] . " name='projectToView'>";
+                                                        echo "<input type='hidden' value=" . $row['projectName'] . " name='projectToViewName'>";
                                                         echo '<input type="submit" name="viewProjectButton" value="Details">';
                                                         echo '</form>';
                                                       echo '</td>';

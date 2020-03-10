@@ -20,7 +20,7 @@
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['adminId'];
+                            echo "Hello, " .$_SESSION['adminName'];
                             $projectToView=$_SESSION['projectToView'];
                             $projectDetails = getDetailsOfProject();
                                         $projectMembers = getDetailsOfMembers();
@@ -99,7 +99,7 @@
                                 <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Dashboard
+                                Project Background
                             </a>
                             <a class="nav-link" href="logListPageAdmin.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -130,6 +130,11 @@
                                     <?php                                        
                                         $row=mysqli_fetch_assoc($projectDetails);
                                         $row3=mysqli_fetch_assoc($projectDates);
+
+                                        echo "<form action='updateProjectPageAdmin.php' method='post' style='float:right'>";
+                                        echo "<input type='hidden' value=" . $projectToView . " name='projectId'>";
+                                        echo "<input type='submit' value='Update'>";
+                                        echo "</form>";
 
                                         echo "<br>Project Code: ";
                                         echo "  " . $projectToView . " ";
@@ -181,11 +186,7 @@
                                         }
                                         echo "</ol>";
 
-                                        echo "<form action='updateProjectPageAdmin.php' method='post'>";
-                                        echo "<input type='hidden' value=" . $projectToView . " name='projectId'>";
-                                        echo "<input type='submit' value='Update'>";
                                         ?>
-                                        </form>
                                 </div>
                             </div>
                         </div>

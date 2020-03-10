@@ -20,7 +20,8 @@
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['adminId'];
+                            echo "Hello, " .$_SESSION['adminName'];
+                            $projectToViewName=$_SESSION['projectToViewName'];
                             $projectToView=$_SESSION['projectToView'];
                             $dateOverview = getOverviewOfDate();
 
@@ -33,7 +34,24 @@
                                 exit;   //terminate the script
                                 }
                                 $projectToView=$_SESSION['projectToView'];
-                                $sql='select * from dates where projectId ="'.$projectToView.'"'; //tengok balik
+                                $sql='with base as 
+                                (select a.dateId,a.projectId,a.dateOfInitiation,a.estimatedDateEnd,min(b.dateOfUpdate)dateUpdate 
+                                from 
+                                (select dateId,projectId,dateOfInitiation,estimatedDateEnd 
+                                from dates 
+                                where projectId = 8 
+                                group by dateId,projectId,dateOfInitiation,estimatedDateEnd)a,
+                                dates b 
+                                where a.projectId = b.projectId and a.dateOfInitiation = b.dateOfInitiation 
+                                and a.estimatedDateEnd = b.estimatedDateEnd 
+                                group by a.projectId,a.dateOfInitiation,a.estimatedDateEnd), 
+                                name as 
+                                (select projectId,nameId,min(dateOfUpdate)dateUpdate 
+                                from dates group by projectId,nameId) 
+                                select base.*,name.nameId 
+                                from base,name 
+                                where base.projectId = name.projectId 
+                                and base.dateUpdate = name.dateUpdate'; //tengok balik
                                 
                                 $qry = mysqli_query($con,$sql);  //run query
                                 return $qry;
@@ -67,7 +85,7 @@
                                 <a class="nav-link" href="differentDestinationPageAdmin2.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 <input type='hidden' <?php echo "value='$projectToView'"; ?> name='projectToView'>
-                                Dashboard</a
+                                Project Background</a
                             ><a class="nav-link" href="logListPageAdmin.php"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Log</a
@@ -92,7 +110,10 @@
                     <div class="container-fluid">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <?php
+                                    echo "Project Name : " .$projectToViewName;
+                                ?>
+                                <div class="table-responsive"><br>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
@@ -119,7 +140,7 @@
                                                   echo '<tr>';
                                                   echo '<td>' . $row['dateOfInitiation'] . "</td>";
                                                   echo '<td>' . $row['estimatedDateEnd'] . "</td>";
-                                                  echo '<td>' . $row['dateOfUpdate'] . "</td>";
+                                                  echo '<td>' . $row['dateUpdate'] . "</td>";
                                                   echo '<td>' . $row['nameId'] . "</td>";
                                                   echo '<td>';
                                                   echo '<form action="adminButtonProcesses.php" method="post" onsubmit="return warn(event)">';

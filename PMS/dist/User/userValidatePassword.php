@@ -19,8 +19,14 @@
 		$result=mysqli_query($con,$sql);
 		$count=mysqli_num_rows($result); //check how many matching record - should be 1 if correct
 
+		$row = mysqli_fetch_assoc($result);
+		$userName = $row['userName'];
+
 		if($count == 1){
 			$_SESSION['userId'] = $userId;
+			echo $_SESSION['userId'];
+			$_SESSION['userName'] = $userName;
+			echo $_SESSION['userName'];
 			header('Location: projectPageUser.php');
 			return true;//username and password is valid
 		}

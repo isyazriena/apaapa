@@ -20,7 +20,7 @@
                     <div style="color:#ffffff">
                         <?php
                             session_start();
-                            echo "Hello, " .$_SESSION['adminId'];
+                            echo "Hello, " .$_SESSION['adminName'];
                         ?>
                     </div>
                 </div>
