@@ -1,5 +1,11 @@
 <!DOCTYPE html>	
-<html lang="en">	
+<html lang="en">
+    <?php
+        session_start();
+        if ($_SESSION['userId'] == null){
+            header('Location: loginPageUser.php');
+        }
+    ?>	
     <head>	
         <meta charset="utf-8" />	
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />	
@@ -18,8 +24,7 @@
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">	
                 <div class="input-group">	
                     <div style="color:#ffffff">	
-                        <?php	
-                            session_start();	
+                        <?php		
                             echo "Hello, " .$_SESSION['userName'];	
                             $projectToView=$_SESSION['projectToView'];	
                             $projectDetails = getDetailsOfProject();	

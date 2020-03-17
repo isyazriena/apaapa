@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+    <?php
+        session_start();
+        if ($_SESSION['userId'] == null){
+            header('Location: loginPageUser.php');
+        }
+    ?>
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -19,7 +25,6 @@
                 <div class="input-group">
                     <div style="color:#ffffff">
                         <?php
-                            session_start();
                             echo "Hello, " .$_SESSION['userName'];
                             $projectToViewName=$_SESSION['projectToViewName'];
                         ?>
