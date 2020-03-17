@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
+        <title>MIS - Project Monitoring</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
@@ -36,7 +36,7 @@
                                             exit;   //terminate the script
                                             }
                                             $projectToView=$_SESSION['projectToView'];
-                                            $sql="select * from project where projectId ='".$projectToView."'";
+                                            $sql="select * from project inner join user on user.userId = project.personInCharge where projectId ='".$projectToView."'";
                                             $qry = mysqli_query($con,$sql);  //run query
                                             return $qry;
                                         }
@@ -51,7 +51,7 @@
                                             exit;   //terminate the script
                                             }
                                             $projectToView=$_SESSION['projectToView'];
-                                            $sql1="select * from assigned where projectId ='".$projectToView."' AND not position = 'person in charge'";
+                                            $sql1="select * from assigned inner join user on user.userId = assigned. userId where projectId ='".$projectToView."' AND not position = 'person in charge'";
                                             $qry = mysqli_query($con,$sql1);
                                             return $qry;
                                         }
@@ -155,7 +155,7 @@
                                         echo "  " . $row3['estimatedDateEnd'] . " ";
 
                                         echo '<br><br>Person In Charge: ';
-                                        echo "  " . $row['personInCharge'] . " ";
+                                        echo "  " . $row['userName'] . " ";
 
                                         echo '<form action="projectMembersAdmin.php" method="post">';
                                         echo '<br><br><input type="submit" name="viewMembersButton" class="btn-link" value="Members:">';
@@ -163,7 +163,7 @@
                                         echo '</form>';
                                         while($row2=mysqli_fetch_assoc($projectMembers))//repeat for each record
                                         {
-                                            echo " - " . $row2['userId'] . " <br>";
+                                            echo " - " . $row2['userName'] . " <br>";
                                         }
 
                                         echo '<br><br>Project Category: ';

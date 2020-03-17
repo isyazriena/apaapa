@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
+        <title>MIS - Project Monitoring</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
@@ -85,8 +85,8 @@
                                         Estimated Date End:
                                         <input type='date' name='estimatedDateEnd' required><br><br>
 
-                                        Project Description:
-                                        <input type='longtext' name='projectDescription'><br><br>
+                                        Project Description:<br><textarea name="projectDescription" rows="4" cols="50"></textarea><br><br>
+                                        <!-- <input type='longtext' name='projectDescription'><br><br> -->
 
                                         Person In Charge:
                                         <div>
@@ -157,9 +157,9 @@
 
                             $sql= "insert into project(projectName,reportOwner,systemCustodian,dateOfInitiation,estimatedDateEnd,projectDescription,personInCharge, projectStatus, projectStatusValue, projectCategory, projectCategoryValue)
                                 values('$projectName','$reportOwner','$systemCustodian','$dateOfInitiation','$estimatedDateEnd','$projectDescription',
-                                '$personInCharge', 'seacapp', '1', 'running', '2')";
+                                '$personInCharge', 'SEAC Approve', '1', 'Running', '2')";
                             $sql1= "insert into log(remarks, projectStatus, projectStatusValue, projectCategory, projectCategoryValue, dateOfUpdate, nameId)
-                                values ('project first created by admin', 'seacapp', '1', 'running', '2', CURDATE(), '$adminId')";
+                                values ('project first created by admin', 'SEAC Approve', '1', 'Running', '2', CURDATE(), '$adminId')";
 
                             if($con->query($sql)==TRUE){
                                 $adminId = $_SESSION['adminId'];

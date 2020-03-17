@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+    <?php
+        session_start();
+        if ($_SESSION['adminId'] == null){
+            header('Location: loginPageAdmin.php');
+        }
+    ?>
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
+        <title>MIS - Project Monitoring</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
@@ -20,7 +26,6 @@
                 <div class="input-group">
                     <div style="color:#ffffff">
                         <?php
-                            session_start();
                             echo "Hello, " .$_SESSION['adminName'];
                         ?>
                     </div>
@@ -108,7 +113,7 @@
                                 exit;   //terminate the script
                                 }
 
-                                $sql="select * from project";
+                                $sql="select * from project inner join user on user.userId = project.personInCharge";
                                 $qry = mysqli_query($con,$sql);  //run query
                                 return $qry;
                             } 
@@ -151,7 +156,7 @@
                                                       echo '<tr>';
                                                       //echo '<td>'.$count."</td>";
                                                       echo '<td>' . $row['projectName'] . "</td>"; //display regNumber
-                                                      echo '<td>' . $row['personInCharge'] . "</td>";
+                                                      echo '<td>' . $row['userName'] . "</td>";
                                                       echo '<td>' . $row['projectStatus'] . "</td>";
                                                       echo '<td>' . $row['dateOfInitiation'] . "</td>";
                                                       echo '<td>' . $row['estimatedDateEnd'] . "</td>";

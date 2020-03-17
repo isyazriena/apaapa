@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB User</title>
+        <title>MIS - Project Monitoring</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
@@ -108,21 +108,23 @@
                                 ?>
                                 <form action='userButtonProcesses.php' method='post' enctype='multipart/form-data'><br>
 
-                                    Remarks:
-                                    <input type="text" name="remarks"><br><br>
+                                    Remarks:<br><textarea name="remarks" rows="4" cols="50"></textarea><br><br>
+                                    <!--<input type="text" name="remarks"><br><br>-->
 
-                                    Category: <br>
-                                    <input  type="radio" name="category" <?php echo passValueCategory(2); if (isset($category) && $category=="running") echo "checked";?> value="running">Running <br>
-                                    <input  type="radio" name="category" <?php echo passValueCategory(3); if (isset($category) && $category=="completed") echo "checked";?> value="completed">Completed <br>
-                                    <input  type="radio" name="category" <?php echo passValueCategory(4); if (isset($category) && $category=="terminated") echo "checked";?> value="terminated">Terminated <br><br>
+                                    <!-- Category: <br>
+                                    <input  type="radio" name="category" <?php //echo passValueCategory(2); if (isset($category) && $category=="running") echo "checked";?> value="running">Running <br>
+                                    <input  type="radio" name="category" <?php //echo passValueCategory(3); if (isset($category) && $category=="completed") echo "checked";?> value="completed">Completed <br>
+                                    <input  type="radio" name="category" <?php //echo passValueCategory(4); if (isset($category) && $category=="terminated") echo "checked";?> value="terminated">Terminated <br><br> -->
 
                                     Status: <br>
-                                    <input  type="radio" name="status" value="seacapp" <?php echo passValueStatus(1); if (isset($status) && $status=="seacapp") echo "checked";?> >SEAC Approve <br>
-                                    <input  type="radio" name="status" value="ur" <?php echo passValueStatus(2); if (isset($status) && $status=="ur") echo "checked";?> >User Requirement <br>
-                                    <input  type="radio" name="status" value="dev" <?php echo passValueStatus(3); if (isset($status) && $status=="dev") echo "checked";?> >Development <br>
-                                    <input  type="radio" name="status" value="uat" <?php echo passValueStatus(4); if (isset($status) && $status=="uat") echo "checked";?> >UAT <br>
-                                    <input  type="radio" name="status" value="sit" <?php echo passValueStatus(5); if (isset($status) && $status=="sit") echo "checked";?> >SIT <br>
-                                    <input  type="radio" name="status" value="dep" <?php echo passValueStatus(6); if (isset($status) && $status=="dep") echo "checked";?> >Deployment <br><br>
+                                    <input  type="radio" name="status" value="SEAC Approve" <?php echo passValueStatus(1); if (isset($status) && $status=="SEAC Approve") echo "checked";?> >SEAC Approve <br>
+                                    <input  type="radio" name="status" value="User Requirement" <?php echo passValueStatus(2); if (isset($status) && $status=="User Requirement") echo "checked";?> >User Requirement <br>
+                                    <input  type="radio" name="status" value="Development" <?php echo passValueStatus(3); if (isset($status) && $status=="Development") echo "checked";?> >Development <br>
+                                    <input  type="radio" name="status" value="User Acceptance Test" <?php echo passValueStatus(4); if (isset($status) && $status=="User Acceptance Test") echo "checked";?> >User Acceptance Test <br>
+                                    <input  type="radio" name="status" value="System Integration Test" <?php echo passValueStatus(5); if (isset($status) && $status=="System Integration Test") echo "checked";?> >System Integration Test <br>
+                                    <input  type="radio" name="status" value="Deployment" <?php echo passValueStatus(6); if (isset($status) && $status=="Deployment") echo "checked";?> >Deployment <br><br>
+
+                                    Termination <input type="checkbox" name="category" value="Terminated"><br><br>
 
                                     Attachment:
                                     <input type="file" name="myfile"/><br><br>
@@ -141,13 +143,14 @@
 			
                     function updateDetails(){
                         $remarks=$_POST['remarks'];
-                        $category=$_POST['category'];
+                        //$category=$_POST['category'];
                         $projectCategoryValue = '0';
                         $status=$_POST['status'];
                         $projectStatusValue = '0';
                         $userId = $_SESSION['userId'];
+                        $category = $_POST['category'];
 
-                        if($category == 'running'){
+                        /* if($category == 'running'){
                             $projectCategoryValue = '2';
                         }
                         else if($category == 'completed'){			
@@ -155,25 +158,45 @@
                         }
                         else{
                             $projectCategoryValue ='4';
-                        }
+                        } */
+                        
+                        if (!empty($_POST['category'])) {
+                            $status=$_POST['status'];
+                            $category = 'Terminated';
+                            $projectCategoryValue = '4';
+                        } 
+                        else {
 
-                        if($status == 'seacapp'){
-                            $projectStatusValue = '1';
-                        }
-                        else if($status == 'ur'){
-                            $projectStatusValue = '2';
-                        }
-                        else if($status == 'dev'){
-                            $projectStatusValue = '3';
-                        }
-                        else if($status == 'uat'){
-                            $projectStatusValue = '4';
-                        }
-                        else if($status == 'sit'){
-                            $projectStatusValue = '5';
-                        }
-                        else{
-                            $projectStatusValue = '6';
+                            if($status == 'SEAC Approve'){
+                                $projectStatusValue = '1';
+                                $category = 'Running';
+                                $projectCategoryValue = '2';
+                            }
+                            else if($status == 'User Requirement'){
+                                $projectStatusValue = '2';
+                                $category = 'Running';
+                                $projectCategoryValue = '2';
+                            }
+                            else if($status == 'Development'){
+                                $projectStatusValue = '3';
+                                $category = 'Running';
+                                $projectCategoryValue = '2';
+                            }
+                            else if($status == 'User Acceptance Test'){
+                                $projectStatusValue = '4';
+                                $category = 'Running';
+                                $projectCategoryValue = '2';
+                            }
+                            else if($status == 'System Integration Test'){
+                                $projectStatusValue = '5';
+                                $category = 'Running';
+                                $projectCategoryValue = '2';
+                            }
+                            else{
+                                $projectStatusValue = '6';
+                                $category = 'Completed';
+                                $projectCategoryValue = '3';
+                            }
                         }
 
                         $con = mysqli_connect("localhost","web2","web2","mispms");

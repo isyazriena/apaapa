@@ -1,8 +1,9 @@
 <html>
     <?php
+        session_start();
         session_destroy();
-        
     ?>
+    <title>(logged out)</title>
     <form action='loginPageAdmin.php' method='post'>
         <h1>You are logged out<h1>
         <p>Login Again</p>
